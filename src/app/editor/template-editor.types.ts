@@ -17,6 +17,8 @@ export interface BlockInfo {
 
   name: string;
 
+  image?: string;
+
   description?: string;
 
   categories?: string[];
