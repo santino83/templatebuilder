@@ -1,0 +1,29 @@
+
+.te-et.label {
+  cursor: pointer;
+}
+
+.te-et.label:hover {
+  border: dashed 1px #528bff;
+}
+
+.te-et.form-control {
+  border-style: none none solid none;
+  border-radius: 0px;
+}
+
+.te-et.form-control:focus {
+  border-radius: 0.3rem;
+}
+
+.te-et.form-control.ng-invalid {
+  border-bottom-color: rgb(255, 57, 57);
+}
+
+.te-et.form-control.ng-invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 57, 57, 0.50);
+}
+
+input.te-et.ng-invalid:required {
+  box-shadow: none;
+}

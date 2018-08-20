@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "app/editor/resources/scss/froala/froala_blocks";
+@import "app/editor/resources/scss/template-editor";
+
+.fdb-block{
+  padding: 20px 0px;
+}
