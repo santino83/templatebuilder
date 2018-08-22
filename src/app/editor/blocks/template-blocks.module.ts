@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {InlineInputEditComponent} from '../components/inline-input-edit.component';
 import {TextEditComponent} from '../components/text-edit.component';
-import {CKEditorModule} from 'ng2-ckeditor';
+import {MediumEditorDirective} from 'angular2-medium-editor';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,9 @@ import {CKEditorModule} from 'ng2-ckeditor';
     InlineInputEditComponent,
     TextEditComponent,
     /** blocks **/
-    Content01Block
+    Content01Block,
+    /** directives **/
+    MediumEditorDirective
   ],
   exports: [
     Content01Block
@@ -23,7 +25,6 @@ import {CKEditorModule} from 'ng2-ckeditor';
   imports: [
     CommonModule,
     FormsModule,
-    CKEditorModule
   ]
 })
 export class TemplateBlocksModule {

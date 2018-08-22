@@ -23,7 +23,9 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     <div class="form-group" *ngIf="_editing">
       <!--<app-ngx-editor [config]="{ 'placeholder': 'Enter text ...', 'toolbar': _toolbar}" resizer="basic"
                       [(html)]="value"></app-ngx-editor>-->
-      <ckeditor [(ngModel)]="value"></ckeditor>
+      <medium-editor [(editorModel)]="value"
+                     [editorOptions]="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}">
+      </medium-editor>
       <input type="hidden" [name]="name" [ngModel]="value"/>
     </div>
   `
@@ -130,10 +132,10 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
     if (this.disabled || this._editing) {
       return;
     }
-
     this.preValue = this.value;
     this._editing = true;
     this.editing.emit(true);
+
   }
 
   /**
