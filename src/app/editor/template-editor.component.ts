@@ -52,12 +52,7 @@ import {BlockInfo} from './template-editor.types';
                          dropZone="builder-target"
                          droppableItemClass="template-editor-item"
                          [removeOnSpill]="false"
-                         [moves]="moves"
-                         (drag)="log($event)"
-                         (drop)="onDrop($event)"
-                         (over)="log($event)"
-                         (out)="log($event)"
-                         (remove)="log($event)">
+                         [moves]="moves">
 
         <ng-template let-model="model" let-template="template">
           <div class="ti-tbrd" templateBlockRendererDirective (editing)="onEdit($event)" [info]="model">
@@ -69,24 +64,23 @@ import {BlockInfo} from './template-editor.types';
 
       </ngx-dnd-container>
     </div>
-    <a (click)="test()" class="btn btn-default">test</a>
   `
 })
-export class TemplateEditorComponent implements OnInit, AfterViewInit {
+export class TemplateEditorComponent implements AfterViewInit {
 
   @ViewChildren(BlockRendererDirective) public rendered: QueryList<BlockRendererDirective>;
 
   public models: BlockInfo[] = [];
   public moves = true;
 
-  public ngOnInit(): void {
-  }
-
+  /**
+   * ONLY FOR DEBUGGING PURPOSE
+   */
   public ngAfterViewInit(): void {
     this.rendered.changes.subscribe(() => {
       this.rendered.forEach((directive) => {
         const sub = directive.changed.subscribe((dir) => {
-          console.log(dir.getBlock().getInfo());
+          console.log(dir.getBlock());
           sub.unsubscribe();
         });
       });
@@ -111,21 +105,5 @@ export class TemplateEditorComponent implements OnInit, AfterViewInit {
     this.moves = !$event.value;
   }
 
-  public onDrop(e: any) {
-  }
-
-  public log(e: any) {
-
-  }
-
-  public test() {
-    const info: BlockInfo = {
-      id: Content01Block.ID,
-      name: Content01Block.NAME,
-      params: {title: 'Title From Test'},
-      metadata: {}
-    };
-    this.models.push(info);
-  }
 
 }

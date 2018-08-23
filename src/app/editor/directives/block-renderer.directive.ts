@@ -2,7 +2,6 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -29,19 +28,19 @@ export class BlockRendererDirective implements OnInit {
   private componentRef: ComponentRef<TemplateBlock>;
 
   public constructor(private cfr: ComponentFactoryResolver,
-                     private view: ViewContainerRef,
-                     public eRef: ElementRef) {
+                     private view: ViewContainerRef) {
   }
 
   public ngOnInit(): void {
 
     const bi: { type: Type<TemplateBlock>, info: BlockInfo } = BLOCKS.get(this.info.id);
-
     const cf = this.cfr.resolveComponentFactory(bi.type);
     this.componentRef = this.view.createComponent(cf);
+    /*
     if (this.info.params) {
       this.componentRef.instance.setParams(this.info.params);
     }
+    */
     this.componentRef.instance.changed.subscribe(() => this.changed.emit(this));
     this.componentRef.instance.editing.subscribe((value) => {
       this._isEditing = value;
