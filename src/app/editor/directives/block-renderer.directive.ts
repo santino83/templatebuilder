@@ -14,7 +14,8 @@ import {TemplateBlock} from '../blocks/template.block';
 import {BlockInfo} from '../template-editor.types';
 
 @Directive({
-  selector: '[templateBlockRendererDirective]'
+  selector: '[templateBlockRendererDirective]',
+  exportAs: 'BRDirective'
 })
 export class BlockRendererDirective implements OnInit {
 

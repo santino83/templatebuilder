@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {TextEditComponent} from '../components/text-edit.component';
 import {MediumEditorDirective} from 'angular2-medium-editor';
 import {EditorRendererDirective} from '../directives/editor-renderer.directive';
+import {BlockBackgroundDirective} from '../directives/block-background.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {EditorRendererDirective} from '../directives/editor-renderer.directive';
     Content01Block,
     /** directives **/
     MediumEditorDirective,
-    EditorRendererDirective
+    EditorRendererDirective,
+    BlockBackgroundDirective
   ],
   exports: [
     Content01Block

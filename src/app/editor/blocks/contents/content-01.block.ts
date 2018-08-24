@@ -5,8 +5,9 @@ import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
-  template: `    
-    <section class="fdb-block">
+  template: `
+    <section class="fdb-block" templateBlockBackgroundDirective
+             [bgColor]="getParam('bgColor')">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
@@ -30,7 +31,8 @@ export class Content01Block extends TemplateBlock {
     description: Content01Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {
-      title: {type: 'text', def: 'Title'}
+      title: {type: 'text', def: 'Title'},
+      bgColor: {type: 'background', def: '#99ffcc'}
     }
   };
 
