@@ -12,7 +12,7 @@ import {NgxDnDModule} from '@swimlane/ngx-dnd';
   imports: [
     BrowserModule,
     NgxDnDModule,
-    TemplateEditorModule
+    TemplateEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

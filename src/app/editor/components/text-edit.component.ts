@@ -1,16 +1,12 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostListener,
   Input,
-  OnInit,
-  Output, Renderer2, ViewChild,
+  Output,
   ViewEncapsulation
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -77,38 +73,4 @@ export class TextEditComponent {
     this.editing.emit(true);
 
   }
-
-  /**
-   * stop _editing and return to original value
-
-  public cancel() {
-    this.value = this.preValue;
-    this._editing = false;
-    this.editing.emit(false);
-  }
-   */
-
-  /** FORM APIS: SERVONO?
-
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-    if (this._editing && this.disabled) {
-      this.cancel();
-    }
-  }
-
-  public writeValue(obj: any): void {
-    if (obj !== undefined) {
-      this._value = obj;
-    }
-  }
-  */
 }
