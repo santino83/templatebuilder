@@ -5,17 +5,13 @@ import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
-  template: `
+  template: `    
     <section class="fdb-block">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
-            <h1>
-              <template-text-edit
-                [toolbar]="'text'"
-                [ngModel]="getParam('title')"
-                (editing)="isEditing($event)"
-                (changed)="setParam('title',$event)"></template-text-edit>
+            <h1 [param]="getParam('title')"
+                (changed)="setParam('title',$event)">
             </h1>
           </div>
         </div>

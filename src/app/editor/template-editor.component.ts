@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
-import {Content01Block} from './blocks/contents/content-01.block';
+import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {BlockInfo} from './template-editor.types';
+import {EditorService} from './services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,15 +52,10 @@ import {BlockInfo} from './template-editor.types';
                          dropZone="builder-target"
                          droppableItemClass="template-editor-item"
                          [removeOnSpill]="false"
-                         [moves]="moves"
-                         (drag)="log($event)"
-                         (drop)="onDrop($event)"
-                         (over)="log($event)"
-                         (out)="log($event)"
-                         (remove)="log($event)">
+                         [moves]="moves">
 
         <ng-template let-model="model" let-template="template">
-          <div class="ti-tbrd" templateBlockRendererDirective (editing)="onEdit($event)" [info]="model">
+          <div class="ti-tbrd" templateBlockRendererDirective [info]="model">
             <div class="action-btns">
               <a (click)="remove(model)" class="btn" title="Remove"><em class="fa fa-trash"></em></a>
             </div>
@@ -69,28 +64,22 @@ import {BlockInfo} from './template-editor.types';
 
       </ngx-dnd-container>
     </div>
-    <a (click)="test()" class="btn btn-default">test</a>
   `
 })
-export class TemplateEditorComponent implements OnInit, AfterViewInit {
+export class TemplateEditorComponent implements OnInit {
 
-  @ViewChildren(BlockRendererDirective) public rendered: QueryList<BlockRendererDirective>;
+  @ViewChildren(BlockRendererDirective)
+  public rendered: QueryList<BlockRendererDirective>;
 
   public models: BlockInfo[] = [];
   public moves = true;
 
-  public ngOnInit(): void {
-  }
+  public constructor(private editor: EditorService) {}
 
-  public ngAfterViewInit(): void {
-    this.rendered.changes.subscribe(() => {
-      this.rendered.forEach((directive) => {
-        const sub = directive.changed.subscribe((dir) => {
-          console.log(dir.getBlock().getInfo());
-          sub.unsubscribe();
-        });
-      });
-    });
+  public ngOnInit() {
+    this.editor
+        .editing
+        .subscribe(val => this.moves = !val);
   }
 
   public remove(model: BlockInfo) {
@@ -105,27 +94,6 @@ export class TemplateEditorComponent implements OnInit, AfterViewInit {
         this.moves = false;
       }
     });
-  }
-
-  public onEdit($event: { directive: BlockRendererDirective, value: boolean }) {
-    this.moves = !$event.value;
-  }
-
-  public onDrop(e: any) {
-  }
-
-  public log(e: any) {
-
-  }
-
-  public test() {
-    const info: BlockInfo = {
-      id: Content01Block.ID,
-      name: Content01Block.NAME,
-      params: {title: 'Title From Test'},
-      metadata: {}
-    };
-    this.models.push(info);
   }
 
 }
