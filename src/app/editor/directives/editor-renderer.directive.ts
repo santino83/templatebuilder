@@ -19,11 +19,6 @@ import {TextEditComponent} from '../components/text-edit.component';
 export class EditorRendererDirective implements OnInit {
 
   @Input() public param: any;
-  @Output() public changed: EventEmitter<EditorRendererDirective> = new EventEmitter<EditorRendererDirective>();
-  @Output() public editing: EventEmitter<{ directive: EditorRendererDirective, value: boolean }> =
-    new EventEmitter<{ directive: EditorRendererDirective, value: boolean }>();
-
-  private _isEditing = false;
 
   private componentRef: ComponentRef<TextEditComponent>;
 
@@ -42,16 +37,5 @@ export class EditorRendererDirective implements OnInit {
       this.view.element.nativeElement,
       this.componentRef.injector.get(TextEditComponent).eRef.nativeElement
     );
-
-    this.componentRef.instance.changed.subscribe(() => this.changed.emit(this));
-    this.componentRef.instance.editing.subscribe((value) => {
-      this._isEditing = value;
-      this.editing.emit({directive: this, value});
-    });
   }
-
-  public isEditing(): boolean {
-    return this._isEditing;
-  }
-
 }

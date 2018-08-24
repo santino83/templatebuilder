@@ -3,10 +3,6 @@ import {BlockInfo, BlockParamsBag} from '../template-editor.types';
 
 export abstract class TemplateBlock {
 
-  @Output() public changed: EventEmitter<TemplateBlock> = new EventEmitter<TemplateBlock>();
-
-  @Output() public editing: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   private readonly info: BlockInfo;
 
   private params: BlockParamsBag;
@@ -30,11 +26,6 @@ export abstract class TemplateBlock {
 
   public setParam(paramName: string, paramValue: any) {
     this.params.setParam(paramName, paramValue);
-    this.changed.emit(this);
-  }
-
-  public isEditing(value: boolean) {
-    this.editing.emit(value);
   }
 
   protected initFromMetadata(): void {

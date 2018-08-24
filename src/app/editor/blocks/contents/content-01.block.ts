@@ -11,7 +11,6 @@ import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
             <h1 [param]="getParam('title')"
-                (editing)="isEditing($event)"
                 (changed)="setParam('title',$event)">
             </h1>
           </div>

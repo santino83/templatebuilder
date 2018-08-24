@@ -19,9 +19,6 @@ import {BlockInfo} from '../template-editor.types';
 export class BlockRendererDirective implements OnInit {
 
   @Input() public info: BlockInfo | null;
-  @Output() public changed: EventEmitter<BlockRendererDirective> = new EventEmitter<BlockRendererDirective>();
-  @Output() public editing: EventEmitter<{ directive: BlockRendererDirective, value: boolean }> =
-    new EventEmitter<{ directive: BlockRendererDirective, value: boolean }>();
 
   private _isEditing = false;
 
@@ -36,16 +33,6 @@ export class BlockRendererDirective implements OnInit {
     const bi: { type: Type<TemplateBlock>, info: BlockInfo } = BLOCKS.get(this.info.id);
     const cf = this.cfr.resolveComponentFactory(bi.type);
     this.componentRef = this.view.createComponent(cf);
-    /*
-    if (this.info.params) {
-      this.componentRef.instance.setParams(this.info.params);
-    }
-    */
-    this.componentRef.instance.changed.subscribe(() => this.changed.emit(this));
-    this.componentRef.instance.editing.subscribe((value) => {
-      this._isEditing = value;
-      this.editing.emit({directive: this, value});
-    });
   }
 
   public getBlock(): TemplateBlock {

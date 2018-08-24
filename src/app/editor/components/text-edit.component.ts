@@ -7,6 +7,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import {EditorService} from '../services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,8 +28,6 @@ export class TextEditComponent {
   /** advise everybody that value has changed **/
   @Output() changed: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output() editing: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   private toolbar = {
     'toolbar': {
       'buttons': [
@@ -37,40 +36,31 @@ export class TextEditComponent {
       ]}
   };
 
-  /** We are _editing **/
-  public _editing = false;
+  private _editing = false;
 
-  public constructor(public eRef: ElementRef) {}
+  public constructor(private editor: EditorService,
+                     public eRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
-  public clickout(event) {
+  private clickout(event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
       this.confirm();
     }
   }
 
-  /**
-   * finishing _editing, save inserted value
-   */
-  public confirm() {
+  private edit() {
+    this._editing = true;
+    this.editor.lock();
+  }
+
+  private confirm() {
     if (!this.param || 0 === this.param.trim().length) {
       return;
     }
 
     this._editing = false;
-    this.editing.emit(false);
+    this.editor.unlock();
     this.changed.emit(this.param);
   }
 
-  /**
-   * starts _editing
-   */
-  public edit() {
-    if (this._editing) {
-      return;
-    }
-    this._editing = true;
-    this.editing.emit(true);
-
-  }
 }

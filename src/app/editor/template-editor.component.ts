@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
-import {Content01Block} from './blocks/contents/content-01.block';
+import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {BlockInfo} from './template-editor.types';
+import {EditorService} from './services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -55,7 +55,7 @@ import {BlockInfo} from './template-editor.types';
                          [moves]="moves">
 
         <ng-template let-model="model" let-template="template">
-          <div class="ti-tbrd" templateBlockRendererDirective (editing)="onEdit($event)" [info]="model">
+          <div class="ti-tbrd" templateBlockRendererDirective [info]="model">
             <div class="action-btns">
               <a (click)="remove(model)" class="btn" title="Remove"><em class="fa fa-trash"></em></a>
             </div>
@@ -66,25 +66,20 @@ import {BlockInfo} from './template-editor.types';
     </div>
   `
 })
-export class TemplateEditorComponent implements AfterViewInit {
+export class TemplateEditorComponent implements OnInit {
 
-  @ViewChildren(BlockRendererDirective) public rendered: QueryList<BlockRendererDirective>;
+  @ViewChildren(BlockRendererDirective)
+  public rendered: QueryList<BlockRendererDirective>;
 
   public models: BlockInfo[] = [];
   public moves = true;
 
-  /**
-   * ONLY FOR DEBUGGING PURPOSE
-   */
-  public ngAfterViewInit(): void {
-    this.rendered.changes.subscribe(() => {
-      this.rendered.forEach((directive) => {
-        const sub = directive.changed.subscribe((dir) => {
-          console.log(dir.getBlock());
-          sub.unsubscribe();
-        });
-      });
-    });
+  public constructor(private editor: EditorService) {}
+
+  public ngOnInit() {
+    this.editor
+        .editing
+        .subscribe(val => this.moves = !val);
   }
 
   public remove(model: BlockInfo) {
@@ -100,10 +95,5 @@ export class TemplateEditorComponent implements AfterViewInit {
       }
     });
   }
-
-  public onEdit($event: { directive: BlockRendererDirective, value: boolean }) {
-    this.moves = !$event.value;
-  }
-
 
 }
