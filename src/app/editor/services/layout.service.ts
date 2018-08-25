@@ -19,5 +19,4 @@ export class LayoutService {
     return this.blockSource._getNow();
   }
 
-
 }

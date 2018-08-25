@@ -1,26 +1,21 @@
-import {Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Directive, DoCheck, ElementRef, Input} from '@angular/core';
+import {TemplateBlock} from '../blocks/template.block';
 
 @Directive({
-  selector: '[templateBlockBackgroundDirective]'
+  selector: 'section'
 })
-export class BlockBackgroundDirective implements OnInit, OnChanges {
+export class BlockBackgroundDirective implements DoCheck {
 
-  @Input() public bgColor: String | null;
+  @Input() instance: TemplateBlock;
+  private bgColor: string;
 
-  constructor(private elRef: ElementRef) {
-  }
+  constructor(private elRef: ElementRef) {}
 
-  ngOnInit(): void {
-    this.elRef.nativeElement.style.backgroundColor = this.bgColor || null;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.bgColor) {
-      this.elRef.nativeElement.style.backgroundColor = this.bgColor;
+  ngDoCheck() {
+    if (this.instance.getParam('bgColor') !== this.bgColor) {
+      this.bgColor = this.instance.getParam('bgColor');
+      this.elRef.nativeElement.style.backgroundColor = this.instance.getParam('bgColor');
+      }
     }
-
-  }
-
-
 
 }

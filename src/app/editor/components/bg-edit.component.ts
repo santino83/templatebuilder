@@ -42,6 +42,7 @@ export class BgEditComponent implements OnInit {
          this.blockToEdit = block;
          this.color = block.getParam('bgColor');
        });
+     console.log(this.blockToEdit);
   }
 
   public setColor() {

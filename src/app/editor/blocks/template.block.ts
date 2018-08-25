@@ -1,4 +1,3 @@
-import {EventEmitter, Output} from '@angular/core';
 import {BlockInfo, BlockParamsBag} from '../template-editor.types';
 
 export abstract class TemplateBlock {
