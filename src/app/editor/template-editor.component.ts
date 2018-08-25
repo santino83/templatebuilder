@@ -139,20 +139,20 @@ export class TemplateEditorComponent implements OnInit {
         .subscribe(val => this.moves = !val);
   }
 
-  public toggleBlocksSidebar() {
+  private toggleBlocksSidebar() {
     this.blocks_side = !this.blocks_side;
   }
 
-  public toggleLayoutSidebar(value: boolean) {
+  private toggleLayoutSidebar(value: boolean) {
     this.layout_side = value;
   }
 
-  public changeBg(block: TemplateBlock) {
+  private changeBg(block: TemplateBlock) {
     this.layoutService.setBlock(block);
     this.toggleLayoutSidebar(true);
   }
 
-  public remove(model: BlockInfo) {
+  private remove(model: BlockInfo) {
     this.toggleLayoutSidebar(false);
     const index = this.models.indexOf(model);
     if (index > -1) {

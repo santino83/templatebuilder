@@ -1,7 +1,6 @@
-import {Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {LayoutService} from '../services/layout.service';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -41,7 +40,6 @@ export class BgEditComponent implements OnInit {
          this.blockToEdit = block;
          this.color = block.getParam('bgColor');
        });
-     console.log(this.blockToEdit);
   }
 
   public setColor() {

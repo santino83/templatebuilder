@@ -8,9 +8,6 @@ export class LayoutService {
   private blockSource = new ReplaySubject<TemplateBlock>(1);
   public blockStream$ = this.blockSource.asObservable();
 
-  public constructor() {
-  }
-
   public setBlock(block: TemplateBlock): void {
     this.blockSource.next(block);
   }
