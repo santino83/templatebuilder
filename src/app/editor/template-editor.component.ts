@@ -125,8 +125,8 @@ export class TemplateEditorComponent implements OnInit {
   @ViewChildren(BlockRendererDirective)
   public rendered: QueryList<BlockRendererDirective>;
 
-  public blocks_side = false;
-  public layout_side = false;
+  private blocks_side = false;
+  private layout_side = false;
   public models: BlockInfo[] = [];
   public moves = true;
 
