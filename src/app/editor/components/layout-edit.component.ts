@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {LayoutService} from '../services/layout.service';
 import {Subscription} from 'rxjs/Subscription';
@@ -37,7 +37,7 @@ export class BgEditComponent implements OnInit {
   public constructor(private layoutService: LayoutService) {}
 
   public ngOnInit() {
-     this.subscription = this.layoutService.blockStream$.subscribe(
+     this.subscription = this.layoutService.blockStream.subscribe(
        block => {
          this.blockToEdit = block;
          this.color = block.getParam('bgColor');
@@ -45,6 +45,7 @@ export class BgEditComponent implements OnInit {
   }
 
   public setColor() {
+    this.layoutService.setColor(this.color);
     this.blockToEdit.setParam('bgColor', this.color);
   }
 
