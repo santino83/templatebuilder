@@ -6,8 +6,7 @@ import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
   template: `
-    <section class="fdb-block" templateBlockBackgroundDirective
-             [bgColor]="getParam('bgColor')">
+    <section class="fdb-block" [instance]="this">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
