@@ -2,10 +2,9 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
-  EventEmitter,
   Input,
   OnInit,
-  Output, Renderer2,
+  Renderer2,
   ViewContainerRef
 } from '@angular/core';
 import {TextEditComponent} from '../components/text-edit.component';

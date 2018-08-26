@@ -2,13 +2,17 @@ import {BlockInfo, BlockParamsBag} from '../template-editor.types';
 
 export abstract class TemplateBlock {
 
-  private readonly info: BlockInfo;
+  private _info: BlockInfo;
 
   private params: BlockParamsBag;
 
   protected constructor(info: BlockInfo) {
-    this.info = info;
+    this._info = info;
     this.initFromMetadata();
+  }
+
+  public get info() {
+    return this._info;
   }
 
   public setParams(params: { [key: string]: string }) {
@@ -21,6 +25,10 @@ export abstract class TemplateBlock {
 
   public getParam(paramName: string): any {
     return this.params.getParam(paramName);
+  }
+
+  public getParams(): any {
+    return this.params.getParams();
   }
 
   public setParam(paramName: string, paramValue: any) {

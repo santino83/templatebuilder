@@ -34,6 +34,9 @@ export class BlockRendererDirective implements OnInit {
     const bi: { type: Type<TemplateBlock>, info: BlockInfo } = BLOCKS.get(this.info.id);
     const cf = this.cfr.resolveComponentFactory(bi.type);
     this.componentRef = this.view.createComponent(cf);
+    if (this.info.params) {
+      this.componentRef.instance.setParams(this.info.params);
+    }
   }
 
   public getBlock(): TemplateBlock {

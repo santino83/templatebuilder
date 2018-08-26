@@ -108,12 +108,13 @@ import {TemplateBlock} from './blocks/template.block';
           <ng-template let-model="model" let-template="template">
             <div class="ti-tbrd" templateBlockRendererDirective #BRD="BRDirective" [info]="model">
               <div class="action-btns">
-               <a (click)="changeBg(BRD.getBlock())" class="btn" title="Change Background"><em class="fa fa-edit"></em></a>
+                <a (click)="changeBg(BRD.getBlock())" class="btn" title="Change Background"><em class="fa fa-edit"></em></a>
+                <a (click)="duplicate(BRD.getBlock(), model)" class="btn" title="Duplicate"><em class="fa fa-copy"></em></a>
                 <a (click)="remove(model)" class="btn" title="Remove"><em class="fa fa-trash"></em></a>
               </div>
             </div>
           </ng-template>
-
+            
           </ngx-dnd-container>
         </div>
       </div>
@@ -145,6 +146,13 @@ export class TemplateEditorComponent implements OnInit {
 
   public toggleLayoutSidebar(value: boolean) {
     this.layout_side = value;
+  }
+
+  public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
+    const start = this.models.indexOf(model);
+    const info: BlockInfo = blockToDuplicate.info;
+    info.params = blockToDuplicate.getParams();
+    this.models.splice(start, 0, info);
   }
 
   public changeBg(block: TemplateBlock) {
