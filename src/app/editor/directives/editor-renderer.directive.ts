@@ -1,9 +1,9 @@
 import {
   ComponentFactoryResolver,
   ComponentRef,
-  Directive,
+  Directive, EventEmitter,
   Input,
-  OnInit,
+  OnInit, Output,
   Renderer2,
   ViewContainerRef
 } from '@angular/core';
@@ -18,6 +18,7 @@ import {TextEditComponent} from '../components/text-edit.component';
 export class EditorRendererDirective implements OnInit {
 
   @Input() public param: any;
+  @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 
   private componentRef: ComponentRef<TextEditComponent>;
 
@@ -36,5 +37,7 @@ export class EditorRendererDirective implements OnInit {
       this.view.element.nativeElement,
       this.componentRef.injector.get(TextEditComponent).eRef.nativeElement
     );
+
+    this.componentRef.instance.changed.subscribe(elem => this.changed.emit(elem));
   }
 }
