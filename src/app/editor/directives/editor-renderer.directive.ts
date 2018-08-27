@@ -12,12 +12,12 @@ import {TextEditComponent} from '../components/text-edit.component';
 @Directive({
   selector: ` [
     h1,h2,h3,h4,h5,h6,
-    p,a
+    p
   `
 })
 export class EditorRendererDirective implements OnInit {
 
-  @Input() public param: any;
+  @Input() param: any;
   @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 
   private componentRef: ComponentRef<TextEditComponent>;

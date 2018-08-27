@@ -21,12 +21,17 @@ import {Subscription} from 'rxjs/Subscription';
                 [cpOutputFormat]="'rgba'"
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
-          <button class="btn" (click)="setColor()">Set Background</button>
+          <div>
+            <button class="btn" (click)="setColor()">Set Background</button>
+          </div><br>
+          <div>
+            <div><input type="text" [(ngModel)]="imageUrl"></div>
+            <button class="btn" (click)="setImage()">Set Image</button>
+          </div>
         </div>
-        <div *ngIf="!this.blockToEdit"> Seleziona un blocco </div>
+
       </div>
 
-      <button class="btn" (click)="setImage()">Set Image</button>
 
     </div>
   `
@@ -35,6 +40,7 @@ export class BgEditComponent implements OnInit {
 
   private blockToEdit: TemplateBlock;
   private color: string;
+  private imageUrl: string;
 
   public constructor(private layoutService: LayoutService) {}
 
@@ -51,8 +57,7 @@ export class BgEditComponent implements OnInit {
   }
 
   public setImage() {
-    this.blockToEdit.setParam('bgImage',
-      'https://www.bikramyogabayside.com.au/wp-content/uploads/2016/12/footer-background-img.jpg');
+    this.blockToEdit.setParam('bgImage', this.imageUrl);
   }
 
 

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {TemplateEditorModule} from './editor/template-editor.module';
 import {NgxDnDModule} from '@swimlane/ngx-dnd';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
