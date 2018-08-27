@@ -28,6 +28,8 @@ export class TextEditComponent {
   /** advise everybody that value has changed **/
   @Output() changed: EventEmitter<any> = new EventEmitter<any>();
 
+  private _editing = false;
+
   private toolbar = {
     'toolbar': {
       'buttons': [
@@ -36,19 +38,21 @@ export class TextEditComponent {
       ]}
   };
 
-  private _editing = false;
-
   public constructor(private editor: EditorService,
                      public eRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
-    if (!this.eRef.nativeElement.contains(event.target)) {
+    if (this.editor.isLocked() && !this.eRef.nativeElement.contains(event.target)) {
       this.confirm();
     }
   }
 
   private edit() {
+    if (this._editing) {
+      return;
+    }
+
     this._editing = true;
     this.editor.lock();
   }

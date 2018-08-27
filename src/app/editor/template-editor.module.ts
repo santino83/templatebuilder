@@ -8,6 +8,8 @@ import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {SidebarModule} from 'ng-sidebar';
 import {BgEditComponent} from './components/bg-edit.component';
 import {ColorPickerModule} from 'ngx-color-picker';
+import {EditorService} from './services/editor.service';
+import {LayoutService} from './services/layout.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,11 @@ import {ColorPickerModule} from 'ngx-color-picker';
     NgxDnDModule,
     TemplateBlocksModule,
     ColorPickerModule,
-    SidebarModule.forRoot()
+    SidebarModule.forRoot(),
+  ],
+  providers: [
+    EditorService,
+    LayoutService
   ]
 })
 export class TemplateEditorModule {

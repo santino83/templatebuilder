@@ -4,6 +4,7 @@ import {BlockInfo} from './template-editor.types';
 import {EditorService} from './services/editor.service';
 import {LayoutService} from './services/layout.service';
 import {TemplateBlock} from './blocks/template.block';
+import {ObjectUtils} from './deprecated/template-editor.utils';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -126,7 +127,7 @@ export class TemplateEditorComponent implements OnInit {
   @ViewChildren(BlockRendererDirective)
   public rendered: QueryList<BlockRendererDirective>;
 
-  private blocks_side = false;
+  private blocks_side = true;
   private layout_side = false;
   public models: BlockInfo[] = [];
   public moves = true;
@@ -137,7 +138,9 @@ export class TemplateEditorComponent implements OnInit {
   public ngOnInit() {
     this.editor
         .editing
-        .subscribe(val => this.moves = !val);
+        .subscribe(val => {
+          this.moves = !val;
+        });
   }
 
   public toggleBlocksSidebar() {
@@ -149,8 +152,8 @@ export class TemplateEditorComponent implements OnInit {
   }
 
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
-    const start = this.models.indexOf(model);
-    const info: BlockInfo = blockToDuplicate.info;
+    const start = this.models.indexOf(model) + 1;
+    const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
     info.params = blockToDuplicate.getParams();
     this.models.splice(start, 0, info);
   }
