@@ -25,6 +25,9 @@ import {Subscription} from 'rxjs/Subscription';
         </div>
         <div *ngIf="!this.blockToEdit"> Seleziona un blocco </div>
       </div>
+
+      <button class="btn" (click)="setImage()">Set Image</button>
+
     </div>
   `
 })
@@ -45,6 +48,11 @@ export class BgEditComponent implements OnInit {
 
   public setColor() {
     this.blockToEdit.setParam('bgColor', this.color);
+  }
+
+  public setImage() {
+    this.blockToEdit.setParam('bgImage',
+      'https://www.bikramyogabayside.com.au/wp-content/uploads/2016/12/footer-background-img.jpg');
   }
 
 

@@ -4,7 +4,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  Output,
+  Output, Renderer2,
   ViewEncapsulation
 } from '@angular/core';
 import {EditorService} from '../services/editor.service';
@@ -26,7 +26,7 @@ export class TextEditComponent {
   @Input() param: string;
 
   /** advise everybody that value has changed **/
-  @Output() changed: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 
   private _editing = false;
 
@@ -39,11 +39,13 @@ export class TextEditComponent {
   };
 
   public constructor(private editor: EditorService,
-                     public eRef: ElementRef) {}
+                     public eRef: ElementRef,
+                     private renderer: Renderer2) {
+  }
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
-    if (this.editor.isLocked() && !this.eRef.nativeElement.contains(event.target)) {
+    if (this._editing && !this.eRef.nativeElement.contains(event.target) ) {
       this.confirm();
     }
   }

@@ -140,6 +140,7 @@ export class TemplateEditorComponent implements OnInit {
         .editing
         .subscribe(val => {
           this.moves = !val;
+          console.log(this.moves);
         });
   }
 

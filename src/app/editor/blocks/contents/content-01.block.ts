@@ -31,7 +31,8 @@ export class Content01Block extends TemplateBlock {
     categories: [CATEGORY_CONTENT],
     metadata: {
       title: {type: 'text', def: 'Title'},
-      bgColor: {type: 'background', def: '#99ffcc'}
+      bgColor: {type: 'background', def: '#99ffcc'},
+      // bgImage: {type: 'image', def: ''}
     }
   };
 
