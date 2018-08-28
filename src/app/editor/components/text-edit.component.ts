@@ -13,7 +13,7 @@ import {EditorService} from '../services/editor.service';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
   template: `
-      <div class="te-et label" (dblclick)="edit()" *ngIf="!_editing" [innerHTML]="param"></div>
+      <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="param"></div>
       <div class="form-group" *ngIf="_editing">
         <medium-editor [(editorModel)]="param"
                        [editorOptions]="toolbar">
@@ -39,18 +39,17 @@ export class TextEditComponent {
   };
 
   public constructor(private editor: EditorService,
-                     public eRef: ElementRef,
-                     private renderer: Renderer2) {
+                     public eRef: ElementRef) {
   }
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
     if (this._editing && !this.eRef.nativeElement.contains(event.target) ) {
-      this.confirm();
+      this.onConfirm();
     }
   }
 
-  private edit() {
+  private onEdit() {
     if (this._editing) {
       return;
     }
@@ -59,7 +58,7 @@ export class TextEditComponent {
     this.editor.lock();
   }
 
-  private confirm() {
+  private onConfirm() {
     if (!this.param || 0 === this.param.trim().length) {
       return;
     }

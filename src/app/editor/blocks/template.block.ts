@@ -1,10 +1,16 @@
 import {BlockInfo, BlockParamsBag} from '../template-editor.types';
+import {HostListener} from '@angular/core';
 
 export abstract class TemplateBlock {
 
   private _info: BlockInfo;
 
   private params: BlockParamsBag;
+
+  @HostListener('click', ['$event'])
+  onClick(event) {
+    event.preventDefault();
+  }
 
   protected constructor(info: BlockInfo) {
     this._info = info;
