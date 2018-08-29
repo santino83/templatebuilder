@@ -1,6 +1,6 @@
-import {Directive, DoCheck, ElementRef, Input, OnInit} from '@angular/core';
+import {Directive, DoCheck, ElementRef, Input} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
-import {LayoutService} from '../services/layout.service';
+import {EditorService} from '../services/editor.service';
 
 @Directive({
   selector: 'section'
@@ -11,7 +11,8 @@ export class BlockBackgroundDirective implements DoCheck {
   private bgColor: string;
   private bgImage: string;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef,
+              private editor: EditorService) {}
 
   public ngDoCheck() {
     if (this.instance.getParam('bgColor') !== this.bgColor) {

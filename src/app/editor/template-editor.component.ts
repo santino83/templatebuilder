@@ -1,8 +1,7 @@
-import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {BlockInfo} from './template-editor.types';
 import {EditorService} from './services/editor.service';
-import {LayoutService} from './services/layout.service';
 import {TemplateBlock} from './blocks/template.block';
 import {ObjectUtils} from './deprecated/template-editor.utils';
 
@@ -125,15 +124,22 @@ import {ObjectUtils} from './deprecated/template-editor.utils';
 export class TemplateEditorComponent implements OnInit {
 
   @ViewChildren(BlockRendererDirective)
-  public rendered: QueryList<BlockRendererDirective>;
+  private rendered: QueryList<BlockRendererDirective>;
+
+  @ViewChild('BRD')
+  private brd: BlockRendererDirective;
 
   private blocks_side = true;
   private layout_side = false;
-  public models: BlockInfo[] = [];
-  public moves = true;
+  private models: BlockInfo[] = [];
+  private moves = true;
 
-  public constructor(private editor: EditorService,
-                     private layoutService: LayoutService) {}
+  @HostListener('dblclick')
+  private onClick() {
+    this.editor.setBlock(this.brd.getBlock());
+  }
+
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
     this.editor
@@ -151,6 +157,7 @@ export class TemplateEditorComponent implements OnInit {
     this.layout_side = value;
   }
 
+  /* bugged on duplicate of duplicate */
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
     const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
@@ -159,7 +166,7 @@ export class TemplateEditorComponent implements OnInit {
   }
 
   public changeBg(block: TemplateBlock) {
-    this.layoutService.setBlock(block);
+    this.editor.setBlock(block);
     this.toggleLayoutSidebar(true);
   }
 
@@ -177,5 +184,4 @@ export class TemplateEditorComponent implements OnInit {
       }
     });
   }
-
 }

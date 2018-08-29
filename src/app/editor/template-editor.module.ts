@@ -9,7 +9,6 @@ import {SidebarModule} from 'ng-sidebar';
 import {BgEditComponent} from './components/bg-edit.component';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {EditorService} from './services/editor.service';
-import {LayoutService} from './services/layout.service';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
@@ -32,7 +31,6 @@ import {FormsModule} from '@angular/forms';
   ],
   providers: [
     EditorService,
-    LayoutService
   ]
 })
 export class TemplateEditorModule {

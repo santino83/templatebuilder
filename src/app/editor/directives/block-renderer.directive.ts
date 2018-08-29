@@ -2,10 +2,8 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
-  EventEmitter,
   Input,
   OnInit,
-  Output,
   ViewContainerRef
 } from '@angular/core';
 import {BLOCKS} from '../blocks';
@@ -46,5 +44,4 @@ export class BlockRendererDirective implements OnInit {
   public isEditing(): boolean {
     return this._isEditing;
   }
-
 }

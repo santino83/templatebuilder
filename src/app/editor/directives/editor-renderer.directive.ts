@@ -18,26 +18,22 @@ import {TextEditComponent} from '../components/text-edit.component';
 export class EditorRendererDirective implements OnInit {
 
   @Input() param: any;
-  @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 
   private componentRef: ComponentRef<TextEditComponent>;
 
   public constructor(private cfr: ComponentFactoryResolver,
                      private view: ViewContainerRef,
-                     private renderer: Renderer2) {
-  }
+                     private renderer: Renderer2) {}
 
   public ngOnInit(): void {
-
     const factory = this.cfr.resolveComponentFactory(TextEditComponent);
     this.componentRef = this.view.createComponent(factory);
-    this.componentRef.instance.param = this.param;
+    this.componentRef.instance.name = this.param.name;
+    this.componentRef.instance.value = this.param.value;
 
     this.renderer.appendChild(
       this.view.element.nativeElement,
       this.componentRef.injector.get(TextEditComponent).eRef.nativeElement
     );
-
-    this.componentRef.instance.changed.subscribe(elem => this.changed.emit(elem));
   }
 }

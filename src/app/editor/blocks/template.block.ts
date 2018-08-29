@@ -33,6 +33,14 @@ export abstract class TemplateBlock {
     return this.params.getParam(paramName);
   }
 
+  public getFullParam(paramName: string): any {
+    return {
+      name: paramName,
+      value: this.params.getParam(paramName)
+    };
+  }
+
+
   public getParams(): any {
     return this.params.getParams();
   }

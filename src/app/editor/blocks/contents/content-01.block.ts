@@ -1,4 +1,4 @@
-import {Component, HostListener, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
 
@@ -10,9 +10,7 @@ import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
-            <h1 [param]="getParam('title')"
-                (changed)="setParam('title',$event)">
-            </h1>
+            <h1 [param]="getFullParam('title')"></h1>
           </div>
         </div>
       </div>
@@ -31,10 +29,6 @@ export class Content01Block extends TemplateBlock {
     categories: [CATEGORY_CONTENT],
     metadata: {
       title: {type: 'text', def: 'Title'},
-      titlea: {type: 'text', def: 'Title a'},
-      titleb: {type: 'text', def: 'Title b'},
-      titlec: {type: 'text', def: 'Title c'},
-      titled: {type: 'text', def: 'Title d'},
       bgColor: {type: 'background', def: '#99ffcc'},
       bgImage: {type: 'image', def: ''}
     }
