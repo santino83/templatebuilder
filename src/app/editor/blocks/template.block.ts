@@ -7,6 +7,8 @@ export abstract class TemplateBlock implements AfterViewInit {
 
   private params: BlockParamsBag;
 
+  private readonly _info: BlockInfo;
+
   @ViewChild(BlockBackgroundDirective) private bgDirective: BlockBackgroundDirective;
 
   protected constructor(info: BlockInfo,
@@ -14,8 +16,6 @@ export abstract class TemplateBlock implements AfterViewInit {
     this._info = info;
     this.initFromMetadata();
   }
-
-  private _info: BlockInfo;
 
   public get info() {
     return this._info;

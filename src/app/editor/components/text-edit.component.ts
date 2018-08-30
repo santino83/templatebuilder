@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {TemplateBlock} from '../blocks/template.block';
 
@@ -7,18 +7,19 @@ import {TemplateBlock} from '../blocks/template.block';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
   template: `
-    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="value | sanitizeHtml"></div>
+    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
     <div class="form-group" *ngIf="_editing">
-      <medium-editor [(editorModel)]="value"
-                     [editorOptions]="toolbar">
+      <medium-editor [(editorModel)]="_value"
+                     [editorOptions]="_toolbar">
       </medium-editor>
     </div>
   `
 })
 export class TextEditComponent implements OnInit {
 
-  public name: string;
-  public value: string;
+  private _toolbar: {};
+  private _name: string;
+  private _value: string;
 
   private preValue: string;
 
@@ -26,21 +27,12 @@ export class TextEditComponent implements OnInit {
 
   private _editing = false;
 
-  private toolbar = {
-    'toolbar': {
-      'buttons': [
-        'bold', 'italic', 'underline', 'anchor',
-        'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
-      ]
-    }
-  };
-
   public constructor(private editor: EditorService,
                      public eRef: ElementRef) {
   }
 
   public ngOnInit() {
-    this.preValue = this.value;
+    this.preValue = this._value;
     this.editor
       .blockStream$
       .subscribe(block => this.block = block);
@@ -71,20 +63,43 @@ export class TextEditComponent implements OnInit {
   }
 
   private onConfirm() {
-    if (!this.value || 0 === this.value.trim().length) {
+    if (!this._value || 0 === this._value.trim().length) {
       return;
     }
 
-    this.block.setParam(this.name, this.value);
-    this.preValue = this.value;
+    this.block.setParam(this._name, this._value);
+    this.preValue = this._value;
     this._editing = false;
     this.editor.unlock();
   }
 
   private cancel(): void {
-    this.value = this.preValue;
+    this._value = this.preValue;
     this._editing = false;
     this.editor.unlock();
   }
 
+  public get name(): string {
+    return this._name;
+  }
+
+  public set name(name: string) {
+    this._name = name;
+  }
+
+  public get value(): string {
+    return this._value
+  }
+
+  public set value(value: string) {
+    this._value = value;
+  }
+
+  public get toolbar(): {} {
+    return this._toolbar;
+  }
+
+  public set toolbar(toolbar: {}) {
+    this._toolbar = toolbar;
+  }
 }

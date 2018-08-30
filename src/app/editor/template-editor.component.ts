@@ -135,7 +135,7 @@ export class TemplateEditorComponent implements OnInit {
 
   public ngOnInit() {
     this.editor
-        .editing
+        .editing$
         .subscribe(val => {
           this.moves = !val;
         });

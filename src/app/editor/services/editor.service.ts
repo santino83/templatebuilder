@@ -6,10 +6,17 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 export class EditorService {
 
   private blockSource = new ReplaySubject<TemplateBlock>(1);
+  private readonly blockStream = this.blockSource.asObservable();
 
-  public editing: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private editing: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public blockStream$ = this.blockSource.asObservable();
+  get blockStream$() {
+    return this.blockStream;
+  }
+
+  get editing$() {
+    return this.editing;
+  }
 
   public setBlock(block: TemplateBlock): void {
     this.blockSource.next(block);

@@ -58,7 +58,7 @@ export class InlineInputEditComponent implements ControlValueAccessor, OnInit {
   @Input() label = '';
   /** Type of input control **/
   @Input() type = 'text';
-  /** Input value required **/
+  /** Input _value required **/
   @Input() required = false;
   /** Input control is disabled **/
   @Input() disabled = false;
@@ -76,17 +76,17 @@ export class InlineInputEditComponent implements ControlValueAccessor, OnInit {
   @Output() changed: EventEmitter<any> = new EventEmitter();
   /** We are _editing **/
   public editing = false;
-  /** Callback when the value is changing **/
+  /** Callback when the _value is changing **/
   public onChange: any = Function.prototype;
   /** Callback when the input is accessed **/
   public onTouched: any = Function.prototype;
-  /** value prior to _editing **/
+  /** _value prior to _editing **/
   private preValue = '';
 
   public constructor(private eRef: ElementRef) {
   }
 
-  /** private value of input **/
+  /** private _value of input **/
   private _value = '';
 
   public get value(): any {
