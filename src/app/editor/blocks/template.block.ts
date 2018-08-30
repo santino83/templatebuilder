@@ -1,12 +1,25 @@
 import {BlockInfo, BlockParamsBag} from '../template-editor.types';
-import {HostListener} from '@angular/core';
+import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {EditorService} from '../services/editor.service';
+import {BlockBackgroundDirective} from '../directives/block-background.directive';
 
-export abstract class TemplateBlock {
+export abstract class TemplateBlock implements AfterViewInit {
+
+  private params: BlockParamsBag;
+
+  @ViewChild(BlockBackgroundDirective) private bgDirective: BlockBackgroundDirective;
+
+  protected constructor(info: BlockInfo,
+                        private editor: EditorService) {
+    this._info = info;
+    this.initFromMetadata();
+  }
 
   private _info: BlockInfo;
 
-  private params: BlockParamsBag;
+  public get info() {
+    return this._info;
+  }
 
   @HostListener('click', ['$event'])
   onClick(event) {
@@ -16,16 +29,6 @@ export abstract class TemplateBlock {
   @HostListener('dblclick', ['$event'])
   setBlock() {
     this.editor.setBlock(this);
-  }
-
-  protected constructor(info: BlockInfo,
-                        private editor: EditorService) {
-    this._info = info;
-    this.initFromMetadata();
-  }
-
-  public get info() {
-    return this._info;
   }
 
   public setParams(params: { [key: string]: string }) {
@@ -53,6 +56,10 @@ export abstract class TemplateBlock {
 
   public setParam(paramName: string, paramValue: any) {
     this.params.setParam(paramName, paramValue);
+  }
+
+  public ngAfterViewInit(): void {
+    this.bgDirective.setInstance(this);
   }
 
   protected initFromMetadata(): void {

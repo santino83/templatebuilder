@@ -19,7 +19,7 @@ import {FormsModule} from '@angular/forms';
     BlockRendererDirective
   ],
   exports: [
-    TemplateEditorComponent,
+    TemplateEditorComponent
   ],
   imports: [
     FormsModule,

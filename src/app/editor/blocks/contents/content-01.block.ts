@@ -7,15 +7,16 @@ import {EditorService} from '../../services/editor.service';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
   template: `
-    <section class="fdb-block" [instance]="this">
+    <section class="fdb-block">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
             <h1 [param]="getFullParam('title')"></h1>
+            <a class="btn btn-default" [param]="getFullParam('pulsante')"></a>
           </div>
         </div>
       </div>
-    </section>    
+    </section>
   `
 })
 export class Content01Block extends TemplateBlock {
@@ -29,9 +30,10 @@ export class Content01Block extends TemplateBlock {
     description: Content01Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {
-      title: {type: 'text', def: 'Title'},
+      title: {type: 'text', def: '<h3><span style="color:white">Title</span> <a href="https://www.google.it">Google</a></h3>'},
       bgColor: {type: 'background', def: '#99ffcc'},
-      bgImage: {type: 'image', def: ''}
+      bgImage: {type: 'image', def: ''},
+      pulsante: {type: 'text', def: 'Google'}
     }
   };
 

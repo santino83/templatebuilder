@@ -1,20 +1,13 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input, OnInit,
-  Output,
-  ViewEncapsulation
-} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {TemplateBlock} from '../blocks/template.block';
+
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
   template: `
-    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="value"></div>
+    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="value | sanitizeHtml"></div>
     <div class="form-group" *ngIf="_editing">
       <medium-editor [(editorModel)]="value"
                      [editorOptions]="toolbar">
@@ -37,8 +30,9 @@ export class TextEditComponent implements OnInit {
     'toolbar': {
       'buttons': [
         'bold', 'italic', 'underline', 'anchor',
-        'h1', 'h2', 'h3', 'h4'
-      ]}
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+      ]
+    }
   };
 
   public constructor(private editor: EditorService,
@@ -54,7 +48,7 @@ export class TextEditComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
-    if (this._editing && !this.eRef.nativeElement.contains(event.target) ) {
+    if (this._editing && !this.eRef.nativeElement.contains(event.target)) {
       this.onConfirm();
     }
   }

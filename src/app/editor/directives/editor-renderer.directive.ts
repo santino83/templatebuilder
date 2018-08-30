@@ -31,6 +31,8 @@ export class EditorRendererDirective implements OnInit {
     this.componentRef.instance.name = this.param.name;
     this.componentRef.instance.value = this.param.value;
 
+    console.log(this.view.element.nativeElement as HTMLElement);
+
     this.renderer.appendChild(
       this.view.element.nativeElement,
       this.componentRef.injector.get(TextEditComponent).eRef.nativeElement

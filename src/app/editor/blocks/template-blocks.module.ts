@@ -6,6 +6,7 @@ import {TextEditComponent} from '../components/text-edit.component';
 import {MediumEditorDirective} from 'angular2-medium-editor';
 import {EditorRendererDirective} from '../directives/editor-renderer.directive';
 import {BlockBackgroundDirective} from '../directives/block-background.directive';
+import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import {BlockBackgroundDirective} from '../directives/block-background.directive
     /** directives **/
     MediumEditorDirective,
     EditorRendererDirective,
-    BlockBackgroundDirective
+    BlockBackgroundDirective,
+    /** pipes **/
+    SanitizeHtmlPipe
   ],
   exports: [
     Content01Block
