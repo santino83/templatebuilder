@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {EditorService} from '../services/editor.service';
 
@@ -13,7 +13,7 @@ import {EditorService} from '../services/editor.service';
   template: `
     <div class="container">
       <div class="row" class="cont-style">
-        <div *ngIf="this.blockToEdit" class="text-center">
+        <div class="text-center">
           <h3> LAYOUT OPTIONS </h3>
           <span [(colorPicker)]="color"
                 [style.background]="color"
@@ -21,21 +21,16 @@ import {EditorService} from '../services/editor.service';
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
           <div>
-            <button class="btn" (click)="setColor()">Set Background</button>
-          </div><br>
-          <div>
-            <div><input type="text" [(ngModel)]="imageUrl"></div>
-            <button class="btn" (click)="setImage()">Set Image</button>
+              <input type="text" [(ngModel)]="imageUrl"> <br>
+              <button class="btn" (click)="setImage()">Set Image</button>
           </div>
         </div>
 
       </div>
-
-
     </div>
   `
 })
-export class BgEditComponent implements OnInit {
+export class BgEditComponent implements OnInit, DoCheck {
 
   private blockToEdit: TemplateBlock;
   private color: string;
@@ -51,13 +46,16 @@ export class BgEditComponent implements OnInit {
        });
   }
 
-  public setColor() {
-    this.blockToEdit.setParam('bgColor', this.color);
+  public ngDoCheck() {
+    if (this.blockToEdit && this.color !== this.blockToEdit.getParam('bgColor')) {
+      this.blockToEdit.setParam('bgColor', this.color);
+    }
   }
 
   public setImage() {
     this.blockToEdit.setParam('bgImage', this.imageUrl);
   }
+
 
 
 }
