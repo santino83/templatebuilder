@@ -40,7 +40,6 @@ export abstract class TemplateBlock {
     };
   }
 
-
   public getParams(): any {
     return this.params.getParams();
   }

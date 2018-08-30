@@ -19,6 +19,7 @@ export class BlockBackgroundDirective implements DoCheck {
       this.bgColor = this.instance.getParam('bgColor');
       this.elRef.nativeElement.style.backgroundColor = this.bgColor;
       }
+
     if (this.instance.getParam('bgImage') !== this.bgImage) {
       this.bgImage = this.instance.getParam('bgImage');
       this.elRef.nativeElement.style.backgroundImage = 'url(' + this.bgImage + ')';

@@ -1,12 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
+import {EditorService} from '../../services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
   template: `
-    <section class="fdb-block" [instance]="this">
+    <section class="fdb-block" [instance]="this" (dblclick)="setBlock(this)">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
@@ -34,8 +35,12 @@ export class Content01Block extends TemplateBlock {
     }
   };
 
-  constructor() {
+  constructor(private ediService: EditorService) {
     super(Content01Block.INFO);
+  }
+
+  private setBlock(block: TemplateBlock) {
+    this.ediService.setBlock(block);
   }
 
 }

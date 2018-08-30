@@ -126,19 +126,11 @@ export class TemplateEditorComponent implements OnInit {
   @ViewChildren(BlockRendererDirective)
   private rendered: QueryList<BlockRendererDirective>;
 
-  @ViewChild('BRD')
-  private brd: BlockRendererDirective;
-
   private blocks_side = true;
   private layout_side = false;
   private models: BlockInfo[] = [];
   private moves = true;
-
-  @HostListener('dblclick')
-  private onClick() {
-    this.editor.setBlock(this.brd.getBlock());
-  }
-
+  
   public constructor(private editor: EditorService) {}
 
   public ngOnInit() {

@@ -22,7 +22,7 @@ import {TemplateBlock} from '../blocks/template.block';
     </div>
   `
 })
-export class TextEditComponent implements OnInit{
+export class TextEditComponent implements OnInit {
 
   public name: string;
   public value: string;
@@ -30,7 +30,6 @@ export class TextEditComponent implements OnInit{
   private blockToEdit: TemplateBlock;
 
   private _editing = false;
-
 
   private toolbar = {
     'toolbar': {
@@ -71,9 +70,9 @@ export class TextEditComponent implements OnInit{
       return;
     }
 
+    this.blockToEdit.setParam(this.name, this.value);
     this._editing = false;
     this.editor.unlock();
-    this.blockToEdit.setParam(this.name, this.value);
   }
 
 }

@@ -28,6 +28,7 @@ export class EditorRendererDirective implements OnInit {
   public ngOnInit(): void {
     const factory = this.cfr.resolveComponentFactory(TextEditComponent);
     this.componentRef = this.view.createComponent(factory);
+    console.log(this.componentRef.instance);
     this.componentRef.instance.name = this.param.name;
     this.componentRef.instance.value = this.param.value;
 
