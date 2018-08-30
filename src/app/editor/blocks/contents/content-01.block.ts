@@ -1,4 +1,4 @@
-import {Component, HostListener, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
