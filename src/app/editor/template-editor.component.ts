@@ -130,7 +130,7 @@ export class TemplateEditorComponent implements OnInit {
   private layout_side = false;
   private models: BlockInfo[] = [];
   private moves = true;
-  
+
   public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
@@ -149,7 +149,6 @@ export class TemplateEditorComponent implements OnInit {
     this.layout_side = value;
   }
 
-  /* bugged on duplicate of duplicate */
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
     const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);

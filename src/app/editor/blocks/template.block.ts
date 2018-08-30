@@ -1,5 +1,6 @@
 import {BlockInfo, BlockParamsBag} from '../template-editor.types';
 import {HostListener} from '@angular/core';
+import {EditorService} from '../services/editor.service';
 
 export abstract class TemplateBlock {
 
@@ -12,7 +13,13 @@ export abstract class TemplateBlock {
     event.preventDefault();
   }
 
-  protected constructor(info: BlockInfo) {
+  @HostListener('dblclick', ['$event'])
+  setBlock() {
+    this.editor.setBlock(this);
+  }
+
+  protected constructor(info: BlockInfo,
+                        private editor: EditorService) {
     this._info = info;
     this.initFromMetadata();
   }
