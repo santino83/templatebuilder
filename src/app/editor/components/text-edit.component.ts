@@ -27,7 +27,9 @@ export class TextEditComponent implements OnInit {
   public name: string;
   public value: string;
 
-  private blockToEdit: TemplateBlock;
+  private preValue: string;
+
+  private block: TemplateBlock;
 
   private _editing = false;
 
@@ -44,15 +46,24 @@ export class TextEditComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.preValue = this.value;
     this.editor
-        .blockStream$
-        .subscribe(block => this.blockToEdit = block);
+      .blockStream$
+      .subscribe(block => this.block = block);
   }
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
     if (this._editing && !this.eRef.nativeElement.contains(event.target) ) {
       this.onConfirm();
+    }
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  private handleEscEvent(event: KeyboardEvent) {
+    const key = event.keyCode;
+    if (this._editing && key === 27) {
+      this.cancel();
     }
   }
 
@@ -70,7 +81,14 @@ export class TextEditComponent implements OnInit {
       return;
     }
 
-    this.blockToEdit.setParam(this.name, this.value);
+    this.block.setParam(this.name, this.value);
+    this.preValue = this.value;
+    this._editing = false;
+    this.editor.unlock();
+  }
+
+  private cancel(): void {
+    this.value = this.preValue;
     this._editing = false;
     this.editor.unlock();
   }
