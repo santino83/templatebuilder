@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {TemplateBlock} from '../blocks/template.block';
-import {LayoutService} from '../services/layout.service';
-=======
 import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {EditorService} from '../services/editor.service';
->>>>>>> all-in-one
 
 @Component({
   encapsulation: ViewEncapsulation.None,

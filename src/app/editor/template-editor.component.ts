@@ -149,10 +149,7 @@ export class TemplateEditorComponent implements OnInit {
     this.layout_side = value;
   }
 
-<<<<<<< HEAD
-  private changeBg(block: TemplateBlock) {
-    this.layoutService.setBlock(block);
-=======
+
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
     const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
@@ -162,7 +159,6 @@ export class TemplateEditorComponent implements OnInit {
 
   public changeBg(block: TemplateBlock) {
     this.editor.setBlock(block);
->>>>>>> all-in-one
     this.toggleLayoutSidebar(true);
   }
 
