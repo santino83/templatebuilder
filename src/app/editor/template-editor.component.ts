@@ -1,9 +1,9 @@
-import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {BlockInfo} from './template-editor.types';
 import {EditorService} from './services/editor.service';
-import {LayoutService} from './services/layout.service';
 import {TemplateBlock} from './blocks/template.block';
+import {ObjectUtils} from './deprecated/template-editor.utils';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -108,12 +108,13 @@ import {TemplateBlock} from './blocks/template.block';
           <ng-template let-model="model" let-template="template">
             <div class="ti-tbrd" templateBlockRendererDirective #BRD="BRDirective" [info]="model">
               <div class="action-btns">
-               <a (click)="changeBg(BRD.getBlock())" class="btn" title="Change Background"><em class="fa fa-edit"></em></a>
+                <a (click)="changeBg(BRD.getBlock())" class="btn" title="Change Background"><em class="fa fa-edit"></em></a>
+                <a (click)="duplicate(BRD.getBlock(), model)" class="btn" title="Duplicate"><em class="fa fa-copy"></em></a>
                 <a (click)="remove(model)" class="btn" title="Remove"><em class="fa fa-trash"></em></a>
               </div>
             </div>
           </ng-template>
-
+            
           </ngx-dnd-container>
         </div>
       </div>
@@ -123,20 +124,21 @@ import {TemplateBlock} from './blocks/template.block';
 export class TemplateEditorComponent implements OnInit {
 
   @ViewChildren(BlockRendererDirective)
-  public rendered: QueryList<BlockRendererDirective>;
+  private rendered: QueryList<BlockRendererDirective>;
 
-  private blocks_side = false;
+  private blocks_side = true;
   private layout_side = false;
-  public models: BlockInfo[] = [];
-  public moves = true;
+  private models: BlockInfo[] = [];
+  private moves = true;
 
-  public constructor(private editor: EditorService,
-                     private layoutService: LayoutService) {}
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
     this.editor
-        .editing
-        .subscribe(val => this.moves = !val);
+        .editing$
+        .subscribe(val => {
+          this.moves = !val;
+        });
   }
 
   private toggleBlocksSidebar() {
@@ -147,8 +149,20 @@ export class TemplateEditorComponent implements OnInit {
     this.layout_side = value;
   }
 
+<<<<<<< HEAD
   private changeBg(block: TemplateBlock) {
     this.layoutService.setBlock(block);
+=======
+  public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
+    const start = this.models.indexOf(model) + 1;
+    const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
+    info.params = blockToDuplicate.getParams();
+    this.models.splice(start, 0, info);
+  }
+
+  public changeBg(block: TemplateBlock) {
+    this.editor.setBlock(block);
+>>>>>>> all-in-one
     this.toggleLayoutSidebar(true);
   }
 
@@ -166,5 +180,4 @@ export class TemplateEditorComponent implements OnInit {
       }
     });
   }
-
 }

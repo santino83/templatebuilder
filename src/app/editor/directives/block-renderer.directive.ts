@@ -1,11 +1,9 @@
 import {
   ComponentFactoryResolver,
   ComponentRef,
-  Directive,
-  EventEmitter,
+  Directive, HostListener,
   Input,
   OnInit,
-  Output,
   ViewContainerRef
 } from '@angular/core';
 import {BLOCKS} from '../blocks';
@@ -34,6 +32,9 @@ export class BlockRendererDirective implements OnInit {
     const bi: { type: Type<TemplateBlock>, info: BlockInfo } = BLOCKS.get(this.info.id);
     const cf = this.cfr.resolveComponentFactory(bi.type);
     this.componentRef = this.view.createComponent(cf);
+    if (this.info.params) {
+      this.componentRef.instance.setParams(this.info.params);
+    }
   }
 
   public getBlock(): TemplateBlock {
@@ -43,5 +44,4 @@ export class BlockRendererDirective implements OnInit {
   public isEditing(): boolean {
     return this._isEditing;
   }
-
 }

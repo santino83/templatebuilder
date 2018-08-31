@@ -19,12 +19,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     `
   ],
   template: `
-    <div [ngClass]="{'te-et label': !disabled}" (dblclick)="edit()" *ngIf="!_editing" [innerHTML]="value"></div>
+    <div [ngClass]="{'te-et label': !disabled}" (dblclick)="edit()" *ngIf="!_editing" [innerHTML]="_value"></div>
     <div class="form-group" *ngIf="_editing">
-      <!--<app-ngx-editor [config]="{ 'placeholder': 'Enter text ...', 'toolbar': _toolbar}" resizer="basic"
-                      [(html)]="value"></app-ngx-editor>-->
-      <ckeditor [(ngModel)]="value"></ckeditor>
-      <input type="hidden" [name]="name" [ngModel]="value"/>
+      _value
+      <ckeditor [(ngModel)]="_value"></ckeditor>
+      <input type="hidden" [name]="name" [ngModel]="_value"/>
     </div>
   `
 })
@@ -33,13 +32,13 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
   /** Input control is disabled **/
   @Input() disabled = false;
 
-  /** Input control name **/
+  /** Input control _name **/
   @Input() name = '';
 
-  /** a value is required when _editing **/
+  /** a _value is required when _editing **/
   @Input() required = true;
 
-  /** advise everybody that value has changed **/
+  /** advise everybody that _value has changed **/
   @Output() changed: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() editing: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -47,12 +46,12 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
   /** We are _editing **/
   public _editing = false;
 
-  /** Callback when the value is changing **/
+  /** Callback when the _value is changing **/
   public onChange: any = Function.prototype;
 
   /** Callback when the input is accessed **/
   public onTouched: any = Function.prototype;
-  /** value prior to _editing **/
+  /** _value prior to _editing **/
   private preValue = '';
 
   public constructor(private eRef: ElementRef) {
@@ -89,7 +88,7 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  /** private value of input **/
+  /** private _value of input **/
   private _value = '';
 
   public get value(): any {
@@ -111,7 +110,7 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * finishing _editing, save inserted value
+   * finishing _editing, save inserted _value
    */
   public confirm() {
     if (this.required && (!this.value || 0 === this.value.trim().length)) {
@@ -137,10 +136,10 @@ export class TextEditComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * stop _editing and return to original value
+   * stop _editing and return to original _value
    */
   public cancel() {
-    this.value = this.preValue;
+    this._value = this.preValue;
     this._editing = false;
     this.editing.emit(false);
   }

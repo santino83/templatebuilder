@@ -1,18 +1,17 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
+import {EditorService} from '../../services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-01',
   template: `
-    <section class="fdb-block" [instance]="this">
+    <section class="fdb-block">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
-            <h1 [param]="getParam('title')"
-                (changed)="setParam('title',$event)">
-            </h1>
+            <h1 [param]="getFullParam('title')"></h1>
           </div>
         </div>
       </div>
@@ -31,12 +30,14 @@ export class Content01Block extends TemplateBlock {
     categories: [CATEGORY_CONTENT],
     metadata: {
       title: {type: 'text', def: 'Title'},
-      bgColor: {type: 'background', def: '#99ffcc'}
+      bgColor: {type: 'background', def: '#99ffcc'},
+      bgImage: {type: 'image', def: ''},
+      pulsante: {type: 'text', def: 'Google'}
     }
   };
 
-  constructor() {
-    super(Content01Block.INFO);
+  constructor(editor: EditorService) {
+    super(Content01Block.INFO, editor);
   }
 
 }

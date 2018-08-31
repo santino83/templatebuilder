@@ -4,8 +4,10 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TextEditComponent} from '../components/text-edit.component';
 import {MediumEditorDirective} from 'angular2-medium-editor';
-import {EditorRendererDirective} from '../directives/editor-renderer.directive';
+import {HeadingEditorDirective} from '../directives/editors/heading-editor.directive';
 import {BlockBackgroundDirective} from '../directives/block-background.directive';
+import {ParagraphEditorDirective} from '../directives/editors/paragraph-editor.directive';
+import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,14 @@ import {BlockBackgroundDirective} from '../directives/block-background.directive
     Content01Block,
     /** directives **/
     MediumEditorDirective,
-    EditorRendererDirective,
-    BlockBackgroundDirective
+    HeadingEditorDirective,
+    ParagraphEditorDirective,
+    BlockBackgroundDirective,
+    /** pipes **/
+    SanitizeHtmlPipe
   ],
   exports: [
-    Content01Block
+    Content01Block,
   ],
   entryComponents: [
     Content01Block,

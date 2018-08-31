@@ -1,4 +1,4 @@
-import {Directive, DoCheck, ElementRef, Input} from '@angular/core';
+import {Directive, DoCheck, ElementRef} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 
 @Directive({
@@ -6,16 +6,27 @@ import {TemplateBlock} from '../blocks/template.block';
 })
 export class BlockBackgroundDirective implements DoCheck {
 
-  @Input() instance: TemplateBlock;
-  private bgColor: string;
+  private instance: TemplateBlock;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef) {
+  }
 
-  ngDoCheck() {
-    if (this.instance.getParam('bgColor') !== this.bgColor) {
-      this.bgColor = this.instance.getParam('bgColor');
-      this.elRef.nativeElement.style.backgroundColor = this.instance.getParam('bgColor');
-      }
+  public ngDoCheck() {
+
+    if (!this.instance) {
+      return;
     }
+
+    this.elRef.nativeElement.style.backgroundColor = this.instance.getParam('bgColor');
+
+    this.elRef.nativeElement.style.backgroundImage = 'url(' + this.instance.getParam('bgImage') + ')';
+  }
+
+  public setInstance(instance: TemplateBlock): void {
+    this.instance = instance;
+    this.ngDoCheck();
+
+  }
+
 
 }

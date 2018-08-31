@@ -1,66 +1,105 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-  ViewEncapsulation
-} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
+import {TemplateBlock} from '../blocks/template.block';
+
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
   template: `
-      <div class="te-et label" (dblclick)="edit()" *ngIf="!_editing" [innerHTML]="param"></div>
-      <div class="form-group" *ngIf="_editing">
-        <medium-editor [(editorModel)]="param"
-                       [editorOptions]="toolbar">
-        </medium-editor>
-      </div>
+    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
+    <div class="form-group" *ngIf="_editing">
+      <medium-editor [(editorModel)]="_value"
+                     [editorOptions]="_toolbar">
+      </medium-editor>
+    </div>
   `
 })
-export class TextEditComponent {
+export class TextEditComponent implements OnInit {
 
-  @Input() param: string;
+  private _toolbar: {};
+  private _name: string;
+  private _value: string;
 
-  /** advise everybody that value has changed **/
-  @Output() changed: EventEmitter<any> = new EventEmitter<any>();
+  private preValue: string;
 
-  private toolbar = {
-    'toolbar': {
-      'buttons': [
-        'bold', 'italic', 'underline', 'anchor',
-        'h1', 'h2', 'h3', 'h4'
-      ]}
-  };
+  private block: TemplateBlock;
 
   private _editing = false;
 
   public constructor(private editor: EditorService,
-                     public eRef: ElementRef) {}
+                     public eRef: ElementRef) {
+  }
+
+  public ngOnInit() {
+    this.preValue = this._value;
+    this.editor
+      .blockStream$
+      .subscribe(block => this.block = block);
+  }
 
   @HostListener('document:click', ['$event'])
   private clickout(event) {
-    if (!this.eRef.nativeElement.contains(event.target)) {
-      this.confirm();
+    if (this._editing && !this.eRef.nativeElement.contains(event.target)) {
+      this.onConfirm();
     }
   }
 
-  private edit() {
+  @HostListener('document:keyup', ['$event'])
+  private handleEscEvent(event: KeyboardEvent) {
+    const key = event.keyCode;
+    if (this._editing && key === 27) {
+      this.cancel();
+    }
+  }
+
+  private onEdit() {
+    if (this._editing) {
+      return;
+    }
+
     this._editing = true;
     this.editor.lock();
   }
 
-  private confirm() {
-    if (!this.param || 0 === this.param.trim().length) {
+  private onConfirm() {
+    if (!this._value || 0 === this._value.trim().length) {
       return;
     }
 
+    this.block.setParam(this._name, this._value);
+    this.preValue = this._value;
     this._editing = false;
     this.editor.unlock();
-    this.changed.emit(this.param);
   }
 
+  private cancel(): void {
+    this._value = this.preValue;
+    this._editing = false;
+    this.editor.unlock();
+  }
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public set name(name: string) {
+    this._name = name;
+  }
+
+  public get value(): string {
+    return this._value
+  }
+
+  public set value(value: string) {
+    this._value = value;
+  }
+
+  public get toolbar(): {} {
+    return this._toolbar;
+  }
+
+  public set toolbar(toolbar: {}) {
+    this._toolbar = toolbar;
+  }
 }

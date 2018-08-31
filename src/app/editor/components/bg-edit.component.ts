@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {LayoutService} from '../services/layout.service';
+=======
+import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
+import {TemplateBlock} from '../blocks/template.block';
+import {EditorService} from '../services/editor.service';
+>>>>>>> all-in-one
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -13,38 +19,49 @@ import {LayoutService} from '../services/layout.service';
   template: `
     <div class="container">
       <div class="row" class="cont-style">
-        <div *ngIf="this.blockToEdit" class="text-center">
+        <div class="text-center">
           <h3> LAYOUT OPTIONS </h3>
           <span [(colorPicker)]="color"
                 [style.background]="color"
                 [cpOutputFormat]="'rgba'"
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
-          <button class="btn" (click)="setColor()">Set Background</button>
+          <div>
+              <input type="text" [(ngModel)]="imageUrl"> <br>
+              <button class="btn" (click)="setImage()">Set Image</button>
+          </div>
         </div>
-        <div *ngIf="!this.blockToEdit"> Seleziona un blocco </div>
+
       </div>
     </div>
   `
 })
-export class BgEditComponent implements OnInit {
+export class BgEditComponent implements OnInit, DoCheck {
 
   private blockToEdit: TemplateBlock;
   private color: string;
+  private imageUrl: string;
 
-  public constructor(private layoutService: LayoutService) {}
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
-      this.layoutService.blockStream$.subscribe(
+      this.editor.blockStream$.subscribe(
        block => {
          this.blockToEdit = block;
          this.color = block.getParam('bgColor');
        });
   }
 
-  public setColor() {
-    this.blockToEdit.setParam('bgColor', this.color);
+  public ngDoCheck() {
+    if (this.blockToEdit && this.color !== this.blockToEdit.getParam('bgColor')) {
+      this.blockToEdit.setParam('bgColor', this.color);
+    }
   }
+
+  public setImage() {
+    this.blockToEdit.setParam('bgImage', this.imageUrl);
+  }
+
 
 
 }
