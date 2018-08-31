@@ -87,13 +87,24 @@ import {ObjectUtils} from './deprecated/template-editor.utils';
                   position="right">
         <template-bg-edit></template-bg-edit>
       </ng-sidebar>
+
+      <ng-sidebar class="sidebar"
+                  [(opened)]="button_side"
+                  mode="push"
+                  position="right">
+        <template-button-edit></template-button-edit>
+      </ng-sidebar>
       
       <div ng-sidebar-content>
         <button class="btn btn-blocks" (click)="toggleBlocksSidebar()" title="apri/chiudi pannello">
           <em class="fa fa-bars"></em>
         </button>
         
-        <button class="btn btn-layout" *ngIf="layout_side" (click)="toggleLayoutSidebar(false)" title="apri/chiudi layout">
+        <button class="btn btn-layout" *ngIf="layout_side" (click)="toggleLayoutSidebar(false)" title="chiudi pannello">
+          <em class="fa fa-remove"></em>
+        </button>
+
+        <button class="btn btn-layout" *ngIf="button_side" (click)="toggleButtonSidebar(false)" title="chiudi pannello">
           <em class="fa fa-remove"></em>
         </button>
 
@@ -128,6 +139,7 @@ export class TemplateEditorComponent implements OnInit {
 
   private blocks_side = true;
   private layout_side = false;
+  private button_side = false;
   private models: BlockInfo[] = [];
   private moves = true;
 
@@ -139,6 +151,10 @@ export class TemplateEditorComponent implements OnInit {
         .subscribe(val => {
           this.moves = !val;
         });
+
+    this.editor.elementName$.subscribe(() => {
+      this.toggleButtonSidebar(true);
+    });
   }
 
   private toggleBlocksSidebar() {
@@ -146,7 +162,17 @@ export class TemplateEditorComponent implements OnInit {
   }
 
   private toggleLayoutSidebar(value: boolean) {
+    if ( value === true ) {
+      this.button_side = false;
+    }
     this.layout_side = value;
+  }
+
+  private toggleButtonSidebar(value: boolean) {
+    if ( value === true) {
+      this.layout_side = false;
+    }
+    this.button_side = value;
   }
 
 

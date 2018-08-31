@@ -88,7 +88,7 @@ export class TextEditComponent implements OnInit {
   }
 
   public get value(): string {
-    return this._value
+    return this._value;
   }
 
   public set value(value: string) {

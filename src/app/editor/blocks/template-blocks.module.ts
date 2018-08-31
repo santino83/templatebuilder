@@ -8,6 +8,7 @@ import {HeadingEditorDirective} from '../directives/editors/heading-editor.direc
 import {BlockBackgroundDirective} from '../directives/block-background.directive';
 import {ParagraphEditorDirective} from '../directives/editors/paragraph-editor.directive';
 import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
+import {AnchorEditorDirective} from '../directives/editors/anchor-editor.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
     MediumEditorDirective,
     HeadingEditorDirective,
     ParagraphEditorDirective,
+    AnchorEditorDirective,
     BlockBackgroundDirective,
     /** pipes **/
     SanitizeHtmlPipe

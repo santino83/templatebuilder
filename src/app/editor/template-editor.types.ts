@@ -25,7 +25,7 @@ export interface BlockInfo {
 
   metadata: BlockMetadata;
 
-  params?: { [key: string]: string };
+  params?: { [key: string]: any };
 
 }
 
@@ -34,8 +34,8 @@ export interface BlockMetadata {
 }
 
 export interface BlockMetadataValue {
-  type: 'text' | 'image' | 'background';
-  def?: string;
+  type: 'text' | 'image' | 'background' | 'anchor';
+  def?: any;
 }
 
 export class BlockParamsBag {

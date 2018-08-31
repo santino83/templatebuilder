@@ -8,15 +8,16 @@ import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {SidebarModule} from 'ng-sidebar';
 import {BgEditComponent} from './components/bg-edit.component';
 import {ColorPickerModule} from 'ngx-color-picker';
-import {LayoutService} from './services/layout.service';
 import {EditorService} from './services/editor.service';
 import {FormsModule} from '@angular/forms';
+import {ButtonEditComponent} from './components/button-edit.component';
 
 @NgModule({
   declarations: [
     TemplateEditorComponent,
     MenuComponent,
     BgEditComponent,
+    ButtonEditComponent,
     BlockRendererDirective
   ],
   exports: [
@@ -32,7 +33,6 @@ import {FormsModule} from '@angular/forms';
   ],
   providers: [
     EditorService,
-    LayoutService
   ],
 })
 export class TemplateEditorModule {

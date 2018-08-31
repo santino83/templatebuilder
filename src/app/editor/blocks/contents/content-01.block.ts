@@ -12,6 +12,8 @@ import {EditorService} from '../../services/editor.service';
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
             <h1 [param]="getFullParam('title')"></h1>
+            <a class="btn" [param]="getFullParam('btn')"></a>
+            <a class="btn" [param]="getFullParam('btn2')"></a>
           </div>
         </div>
       </div>
@@ -32,7 +34,25 @@ export class Content01Block extends TemplateBlock {
       title: {type: 'text', def: 'Title'},
       bgColor: {type: 'background', def: '#99ffcc'},
       bgImage: {type: 'image', def: ''},
-      pulsante: {type: 'text', def: 'Google'}
+
+      btn2: {type: 'text', def: {text: 'Google',
+          link: 'http://google.it',
+          style: {
+            color: '#ffffff',
+            bgColor: '#528bff',
+            borderColor: '#528bff',
+            borderStyle: 'solid',
+            borderWidth: '1' }}},
+
+      btn: {type: 'text', def: {text: 'Google',
+          link: 'http://google.it',
+          style: {
+            color: '#ffffff',
+            bgColor: '#528bff',
+            borderColor: '#528bff',
+            borderStyle: 'solid',
+            borderWidth: '1' }}}
+
     }
   };
 
