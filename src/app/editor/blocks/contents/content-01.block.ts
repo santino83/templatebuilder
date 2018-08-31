@@ -52,7 +52,6 @@ export class Content01Block extends TemplateBlock {
             borderColor: '#528bff',
             borderStyle: 'solid',
             borderWidth: '1' }}}
-
     }
   };
 

@@ -9,7 +9,6 @@ import {TemplateBlock} from '../blocks/template.block';
     .cont-style {
       margin: 0px 10px 10px 10px;
     }
-    
     .input {
       margin-top: 10px;
       margin-bottom: 10px;
@@ -26,6 +25,7 @@ import {TemplateBlock} from '../blocks/template.block';
     <div class="container" class="cont-style">
       <h3 class="text-center">Cambia Bottone</h3>
       <div class="row">
+        
         <div class="col-sm">
           <p class="text">Testo:</p>
           <p class="text">Link:</p>
@@ -35,25 +35,35 @@ import {TemplateBlock} from '../blocks/template.block';
           <p class="text">BorderWidth:</p>
           <p class="text">BorderType:</p>
         </div>
+        
         <div class="col-sm">
           <input type="text" class="input" [(ngModel)]="text"><br>
+          
           <input type="text" class="input" [(ngModel)]="link"><br>
-          <input class="input" [value]="textColor"
-                            [(colorPicker)]="textColor"
-                            [cpWidth]="'auto'"
-                            [cpPosition]="'bottom'"
-                            [style.background]="textColor"><br>
-          <input class="input" [value]="bgColor"
-                          [(colorPicker)]="bgColor"
-                          [cpWidth]="'auto'"
-                          [cpPosition]="'bottom'"
-                          [style.background]="bgColor"/><br>
-          <input class="input" [value]="borderColor"
-                          [(colorPicker)]="borderColor"
-                          [cpWidth]="'auto'"
-                          [cpPosition]="'bottom'"
-                          [style.background]="borderColor"/><br>
+          
+          <input class="input" 
+                 [value]="textColor"
+                 [(colorPicker)]="textColor"
+                 [cpWidth]="'auto'"
+                 [cpPosition]="'bottom'"
+                 [style.background]="textColor"><br>
+          
+          <input class="input" 
+                 [value]="bgColor"
+                 [(colorPicker)]="bgColor"
+                 [cpWidth]="'auto'"
+                 [cpPosition]="'bottom'"
+                 [style.background]="bgColor"/><br>
+          
+          <input class="input" 
+                 [value]="borderColor"
+                 [(colorPicker)]="borderColor"
+                 [cpWidth]="'auto'"
+                 [cpPosition]="'bottom'"
+                 [style.background]="borderColor"/><br>
+          
           <input class="input" type="number" [(ngModel)]="borderWidth"><br>
+          
           <select class="input" [(ngModel)]="borderStyle">
             <option value="dotted">Dotted</option>
             <option value="dashed">Dashed</option>
@@ -72,21 +82,22 @@ export class ButtonEditComponent implements OnInit, DoCheck {
   private block: TemplateBlock;
   private name: string;
 
-  private text: string;
-  private link: string;
-  private textColor = '';
-  private bgColor = '';
-  private borderColor = '';
-  private borderStyle: string;
-  private borderWidth: string;
+  private text: string | '';
+  private link: string | '';
+  private textColor: string | '';
+  private bgColor: string | '';
+  private borderColor: string | '';
+  private borderStyle: string | '';
+  private borderWidth: string | '';
 
   public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
     this.editor
       .elementName$
-      .subscribe( name => {
+      .subscribe(name => {
         this.name = name;
+
         this.editor
           .blockStream$
           .subscribe(block => {
@@ -103,8 +114,14 @@ export class ButtonEditComponent implements OnInit, DoCheck {
   }
 
   public ngDoCheck() {
+
     if (!this.block) { return; }
-    this.block.setParam(this.name, {text: this.text, link: this.link, style: {
+
+    this.block.setParam(this.name,
+      {
+      text: this.text,
+      link: this.link,
+      style: {
         color: this.textColor,
         bgColor: this.bgColor,
         borderColor: this.borderColor,
@@ -112,7 +129,6 @@ export class ButtonEditComponent implements OnInit, DoCheck {
         borderWidth: this.borderWidth
       }});
   }
-
 
 
 }
