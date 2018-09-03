@@ -21,7 +21,7 @@ export abstract class AbstractEditorDirective implements OnInit {
     this.componentRef = this.view.createComponent(factory);
 
     this.componentRef.instance.name = this.param.name;
-    this.componentRef.instance.value = this.param.value;
+    this.componentRef.instance.value = this.param.object.value;
     this.componentRef.instance.toolbar = this.toolbar;
 
     this.renderer.appendChild(

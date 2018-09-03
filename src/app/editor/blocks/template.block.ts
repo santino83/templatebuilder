@@ -1,20 +1,22 @@
-import {BlockInfo, BlockParamsBag} from '../template-editor.types';
+import {BlockInfo, Parameter, Parameters} from '../template-editor.types';
 import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {BlockBackgroundDirective} from '../directives/block-background.directive';
+import {ObjectUtils} from '../deprecated/template-editor.utils';
 
 export abstract class TemplateBlock implements AfterViewInit {
 
-  private params: BlockParamsBag;
+  public params: Parameters;
 
-  private readonly _info: BlockInfo;
+  protected readonly _info: BlockInfo;
 
   @ViewChild(BlockBackgroundDirective) private bgDirective: BlockBackgroundDirective;
 
   protected constructor(info: BlockInfo,
                         private editor: EditorService) {
     this._info = info;
-    this.initFromMetadata();
+    this.params = ObjectUtils.deepClone(this.info.metadata);
+    console.log(this.params);
   }
 
   public get info() {
@@ -31,42 +33,38 @@ export abstract class TemplateBlock implements AfterViewInit {
     this.editor.setBlock(this);
   }
 
-  public setParams(params: { [key: string]: string }) {
-    if (!this.params) {
-      this.params = new BlockParamsBag();
-    }
-
-    this.params.setParams(params);
+  public getParam(paramName: string): any {
+    return this.params[paramName];
   }
 
-  public getParam(paramName: string): any {
-    return this.params.getParam(paramName);
+  public getParamValue(paramName: string, elem: string): any {
+    return this.params[paramName][elem];
   }
 
   public getFullParam(paramName: string): any {
     return {
       name: paramName,
-      value: this.params.getParam(paramName)
+      object: this.params[paramName]
     };
   }
 
   public getParams(): any {
-    return this.params.getParams();
+    return this.params;
   }
 
-  public setParam(paramName: string, paramValue: any) {
-    this.params.setParam(paramName, paramValue);
+  public setParam(paramName: string, paramElem: string, paramValue: any) {
+    this.params[paramName][paramElem] = paramValue;
+  }
+
+  public setParams(params: Parameters) {
+    if (!this.params) {
+      this.params = {};
+    }
+
+    this.params = params;
   }
 
   public ngAfterViewInit(): void {
     this.bgDirective.setInstance(this);
   }
-
-  protected initFromMetadata(): void {
-    this.params = new BlockParamsBag();
-    for (const property in this.info.metadata) {
-      this.params.setParam(property, this.info.metadata[property].def || '');
-    }
-  }
-
 }

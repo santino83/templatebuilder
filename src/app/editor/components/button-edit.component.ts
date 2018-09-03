@@ -1,6 +1,7 @@
 import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {TemplateBlock} from '../blocks/template.block';
+import {Parameter} from '../template-editor.types';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -102,13 +103,13 @@ export class ButtonEditComponent implements OnInit, DoCheck {
           .blockStream$
           .subscribe(block => {
             this.block = block;
-            this.text = block.getParam(name).text;
-            this.link = block.getParam(name).link;
-            this.textColor = block.getParam(name).style.color;
-            this.bgColor = block.getParam(name).style.bgColor;
-            this.borderColor = block.getParam(name).style.bgColor;
-            this.borderStyle = block.getParam(name).style.borderStyle;
-            this.borderWidth = block.getParam(name).style.borderWidth;
+            this.text = block.getParamValue(name, 'value');
+            this.link = block.getParamValue(name, 'link');
+            this.textColor = block.getParamValue(name, 'style').color;
+            this.bgColor = block.getParamValue(name, 'style').bgColor;
+            this.borderColor = block.getParamValue(name, 'style').bgColor;
+            this.borderStyle = block.getParamValue(name, 'style').borderStyle;
+            this.borderWidth = block.getParamValue(name, 'style').borderWidth;
           });
       });
   }
@@ -117,17 +118,15 @@ export class ButtonEditComponent implements OnInit, DoCheck {
 
     if (!this.block) { return; }
 
-    this.block.setParam(this.name,
-      {
-      text: this.text,
-      link: this.link,
-      style: {
-        color: this.textColor,
-        bgColor: this.bgColor,
-        borderColor: this.borderColor,
-        borderStyle: this.borderStyle,
-        borderWidth: this.borderWidth
-      }});
+    this.block.setParam(this.name, 'value', this.text);
+    this.block.setParam(this.name, 'link', this.link);
+    this.block.setParam(this.name, 'style', {
+      color: this.textColor,
+      bgColor: this.bgColor,
+      borderColor: this.borderColor,
+      borderStyle: this.borderStyle,
+      borderWidth: this.borderWidth
+    });
   }
 
 

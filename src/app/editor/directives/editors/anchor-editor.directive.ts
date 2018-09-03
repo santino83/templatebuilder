@@ -18,15 +18,15 @@ export class AnchorEditorDirective implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if ( this.param && changes.param ) {
-      this.elRef.nativeElement.innerHTML = this.param.value.text;
-      this.elRef.nativeElement.href = this.param.value.link;
+      this.elRef.nativeElement.innerHTML = this.param.object.value;
+      this.elRef.nativeElement.href = this.param.object.link;
 
       this.elRef.nativeElement.style =
-      'color:' + this.param.value.style.color + ';' +
-      'background-color:' + this.param.value.style.bgColor + ';' +
-      'border-color:' + this.param.value.style.borderColor + ';' +
-      'border-style:' + this.param.value.style.borderStyle + ';' +
-      'border-width:' + this.param.value.style.borderWidth + 'px;';
+      'color:' + this.param.object.style.color + ';' +
+      'background-color:' + this.param.object.style.bgColor + ';' +
+      'border-color:' + this.param.object.style.borderColor + ';' +
+      'border-style:' + this.param.object.style.borderStyle + ';' +
+      'border-width:' + this.param.object.style.borderWidth + 'px;';
     }
   }
 

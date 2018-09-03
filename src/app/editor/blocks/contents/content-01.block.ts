@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
-import {BlockInfo, CATEGORY_CONTENT} from '../../template-editor.types';
+import {Background, BlockInfo, Button, CATEGORY_CONTENT, Text, ElementType} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {EditorService} from '../../services/editor.service';
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
             <h1 [param]="getFullParam('title')"></h1>
-            <a class="btn" [param]="getFullParam('btn')"></a>
+            <a class="btn" [param]="getFullParam('btn1')"></a>
             <a class="btn" [param]="getFullParam('btn2')"></a>
           </div>
         </div>
@@ -31,32 +31,15 @@ export class Content01Block extends TemplateBlock {
     description: Content01Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {
-      title: {type: 'text', def: 'Title'},
-      bgColor: {type: 'background', def: '#99ffcc'},
-      bgImage: {type: 'image', def: ''},
-
-      btn2: {type: 'text', def: {text: 'Google',
-          link: 'http://google.it',
-          style: {
-            color: '#ffffff',
-            bgColor: '#528bff',
-            borderColor: '#528bff',
-            borderStyle: 'solid',
-            borderWidth: '1' }}},
-
-      btn: {type: 'text', def: {text: 'Google',
-          link: 'http://google.it',
-          style: {
-            color: '#ffffff',
-            bgColor: '#528bff',
-            borderColor: '#528bff',
-            borderStyle: 'solid',
-            borderWidth: '1' }}}
+      title: new Text( ElementType.TITLE, 'Title'),
+      bgColor: new Background(ElementType.BGCOLOR, '#99ffcc'),
+      bgImage: new Background(ElementType.BGIMAGE, ''),
+      btn1: new Button(ElementType.BUTTON, 'Google', 'http://google.it'),
+      btn2: new Button(ElementType.BUTTON, 'Google', 'http://google.it')
     }
   };
 
   constructor(editor: EditorService) {
     super(Content01Block.INFO, editor);
   }
-
 }

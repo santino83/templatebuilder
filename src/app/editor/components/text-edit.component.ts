@@ -67,7 +67,7 @@ export class TextEditComponent implements OnInit {
       return;
     }
 
-    this.block.setParam(this._name, this._value);
+    this.block.setParam(this._name, 'value', this._value);
     this.preValue = this._value;
     this._editing = false;
     this.editor.unlock();

@@ -3,6 +3,15 @@ import {TemplateBlock} from './blocks/template.block';
 
 export const CATEGORY_CONTENT = 'contents';
 
+export enum ElementType {
+  TITLE = 'title',
+  SUBTITLE = 'subtitle',
+  PARAGRAPH = 'paragraph',
+  BGCOLOR = 'background-color',
+  BGIMAGE = 'background-image',
+  BUTTON = 'button'
+}
+
 export interface BlockDescriptor {
 
   type: Type<TemplateBlock>;
@@ -23,44 +32,60 @@ export interface BlockInfo {
 
   categories?: string[];
 
-  metadata: BlockMetadata;
+  metadata: Parameters;
 
-  params?: { [key: string]: any };
+  params?: Parameters;
 
 }
 
-export interface BlockMetadata {
-  [key: string]: BlockMetadataValue;
+export interface Parameters {
+  [key: string]: Parameter;
 }
 
-export interface BlockMetadataValue {
-  type: 'text' | 'image' | 'background' | 'anchor';
-  def?: any;
+export abstract class Parameter {
+  type: ElementType;
+  value: any;
+  style?: {};
+
+  protected constructor(type: ElementType, value: string) {
+    this.type = type;
+    this.value = value;
+  }
 }
 
-export class BlockParamsBag {
+export class Text extends Parameter {
+  constructor(type: ElementType, value: string) {
+    super(type, value);
+  }
+}
 
-  private params: Map<string, any> = new Map<string, any>();
+export class Background extends Parameter {
+  constructor(type: ElementType, value: string) {
+    super(type, value);
+  }
+}
 
-  public getParams(): { [key: string]: any } {
-    const obj = {};
-    this.params.forEach((value, key) => obj[key] = value);
-    return obj;
+export class Button extends Parameter {
+
+  private _link: string;
+
+  constructor(type: ElementType, value: string, link: string) {
+    super(type, value);
+    this._link = link;
+    this.style = {
+      color: '#ffffff',
+      bgColor: '#528bff',
+      borderColor: '#528bff',
+      borderStyle: 'solid',
+      borderWidth: '1'
+    };
   }
 
-  public getParam(key: string, def?: any): string {
-    return this.params.has(key) ? this.params.get(key) : def || '';
+  public get link(): string {
+    return this._link;
   }
 
-  public setParam(key: string, value: any): BlockParamsBag {
-    this.params.set(key, value);
-    return this;
-  }
-
-  public setParams(params: { [key: string]: any }): BlockParamsBag {
-    for (const key in params) {
-      this.setParam(key, params[key]);
-    }
-    return this;
+  public set link(link: string) {
+    this._link = link;
   }
 }

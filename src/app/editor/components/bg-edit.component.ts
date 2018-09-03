@@ -42,18 +42,18 @@ export class BgEditComponent implements OnInit, DoCheck {
       this.editor.blockStream$.subscribe(
        block => {
          this.blockToEdit = block;
-         this.color = block.getParam('bgColor');
+         this.color = block.getParamValue('bgColor', 'value');
        });
   }
 
   public ngDoCheck() {
-    if (this.blockToEdit && this.color !== this.blockToEdit.getParam('bgColor')) {
-      this.blockToEdit.setParam('bgColor', this.color);
+    if (this.blockToEdit) {
+      this.blockToEdit.setParam('bgColor', 'value', this.color);
     }
   }
 
   public setImage() {
-    this.blockToEdit.setParam('bgImage', this.imageUrl);
+    this.blockToEdit.setParam('bgImage', 'value', this.imageUrl);
   }
 
 
