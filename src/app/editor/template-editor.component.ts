@@ -92,7 +92,7 @@ export class TemplateEditorComponent implements OnInit {
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
     const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
-    info.params = blockToDuplicate.getParams();
+    info.params = ObjectUtils.deepClone(blockToDuplicate.getParams());
     this.models.splice(start, 0, info);
   }
 
