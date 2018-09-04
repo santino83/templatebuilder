@@ -14,6 +14,11 @@ import {SidebarService} from '../../services/sidebar.service';
         [name]="paramName" 
         *ngSwitchCase="typeEnum.BUTTON">
       </template-button-sidebar>
+
+      <template-link-sidebar
+        [name]="paramName"
+        *ngSwitchCase="typeEnum.LINK">
+      </template-link-sidebar>
     </div>
   `
 })

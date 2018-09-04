@@ -11,8 +11,11 @@ export class AnchorDirective implements OnChanges {
   @Input() protected param: any;
 
   @HostListener('dblclick') setElement() {
-    console.log(this.param.name);
-    this.sidebar.set(SidebarType.BUTTON, this.param.name);
+    console.log(this.param.object);
+    this.param.object.type === 'button' ?
+      this.sidebar.set(SidebarType.BUTTON, this.param.name)
+      :
+      this.sidebar.set(SidebarType.LINK, this.param.name);
   }
 
   public constructor(private elRef: ElementRef,

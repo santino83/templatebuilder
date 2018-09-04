@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
-import {Background, BlockInfo, Button, CATEGORY_CONTENT, Text, ElementType} from '../../template-editor.types';
+import {Background, BlockInfo, Button, Link, CATEGORY_CONTENT, Text, ElementType} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
 
 @Component({
@@ -14,6 +14,7 @@ import {EditorService} from '../../services/editor.service';
             <h1 [param]="getFullParam('title')"></h1>
             <a class="btn" [param]="getFullParam('btn1')"></a>
             <a class="btn" [param]="getFullParam('btn2')"></a>
+            <a [param]="getFullParam('lnk1')"></a>
           </div>
         </div>
       </div>
@@ -35,7 +36,8 @@ export class Content01Block extends TemplateBlock {
       bgColor: new Background( ElementType.BG_COLOR, '#99ffcc'),
       bgImage: new Background( ElementType.BG_IMAGE, ''),
       btn1: new Button( ElementType.BUTTON, 'Google', 'http://google.it'),
-      btn2: new Button( ElementType.BUTTON, 'Google', 'http://google.it')
+      btn2: new Button( ElementType.BUTTON, 'Google', 'http://google.it'),
+      lnk1: new Link( ElementType.LINK, 'A Link', 'http://google.com')
     }
   };
 

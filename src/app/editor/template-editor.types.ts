@@ -9,12 +9,14 @@ export enum ElementType {
   PARAGRAPH = 'paragraph',
   BG_COLOR = 'background-color',
   BG_IMAGE = 'background-image',
-  BUTTON = 'button'
+  BUTTON = 'button',
+  LINK = 'link'
 }
 
 export enum SidebarType {
   BACKGROUND,
-  BUTTON
+  BUTTON,
+  LINK
 }
 
 export interface BlockDescriptor {
@@ -80,7 +82,7 @@ export class Background extends Parameter {
   }
 }
 
-export class Button extends Parameter {
+export class Link extends Parameter {
 
   private _link: string;
 
@@ -89,10 +91,7 @@ export class Button extends Parameter {
     this._link = link;
     this.style = {
       color: '#ffffff',
-      bgColor: '#528bff',
-      borderColor: '#528bff',
-      borderStyle: 'solid',
-      borderWidth: '1'
+      bgColor: '#000000',
     };
   }
 
@@ -104,3 +103,18 @@ export class Button extends Parameter {
     this._link = link;
   }
 }
+
+export class Button extends Link {
+
+  constructor(type: ElementType, value: string, link: string) {
+    super(type, value, link);
+    this.style = {
+      color: '#ffffff',
+      bgColor: '#528bff',
+      borderColor: '#528bff',
+      borderStyle: 'solid',
+      borderWidth: '1'
+    };
+  }
+}
+

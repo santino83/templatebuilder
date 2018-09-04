@@ -1,16 +1,16 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
 import {TemplateBlock} from '../../blocks/template.block';
-import {Parameter} from '../../template-editor.types';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'template-button-sidebar',
+  selector: 'template-link-sidebar',
   styleUrls: ['shared/button-link.css'],
   template: `
-    <!-- RIVISTA PERCHE AL 90% UGUALE A LINK, DA METTERE IN SHARED -->
+    <!-- RIVISTA PERCHE INCLUSA DENTRO BUTTON -->
+    
     <div class="container" class="cont-style">
-      <h3 class="text-center">Cambia Bottone</h3>
+      <h3 class="text-center">Cambia Link</h3>
       <div class="row">
         
         <div class="col-sm">
@@ -18,9 +18,6 @@ import {Parameter} from '../../template-editor.types';
           <p class="text">Link:</p>
           <p class="text">ColoreTesto:</p>
           <p class="text">BgColor:</p>
-          <p class="text">BorderColor:</p>
-          <p class="text">BorderWidth:</p>
-          <p class="text">BorderType:</p>
         </div>
         
         <div class="col-sm">
@@ -42,42 +39,20 @@ import {Parameter} from '../../template-editor.types';
                  [cpPosition]="'bottom'"
                  [style.background]="bgColor"/><br>
           
-          <input class="input" 
-                 [value]="borderColor"
-                 [(colorPicker)]="borderColor"
-                 [cpWidth]="'auto'"
-                 [cpPosition]="'bottom'"
-                 [style.background]="borderColor"/><br>
-          
-          <input class="input" type="number" [(ngModel)]="borderWidth"><br>
-          
-          <select class="input" [(ngModel)]="borderStyle">
-            <option value="dotted">Dotted</option>
-            <option value="dashed">Dashed</option>
-            <option value="solid">Solid</option>
-            <option value="inset">Inset</option>
-            <option value="outset">Outset</option>
-            <option value="none">None</option>
-          </select>
-          
         </div>
       </div>
     </div>
   `
 })
-export class ButtonComponent implements OnInit, DoCheck, OnChanges {
+export class LinkComponent implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
   @Input() name: string;
-  private element: Parameter;
 
   private text: string | '';
   private link: string | '';
   private textColor: string | '';
   private bgColor: string | '';
-  private borderColor: string | '';
-  private borderStyle: string | '';
-  private borderWidth: string | '';
 
   public constructor(private editor: EditorService) {}
 
@@ -100,13 +75,10 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
     if (!this.block) { return; }
 
     this.block.setParam(this.name, 'value', this.text);
-    this.block.setParam(this.name, 'link', this.link); //wrong da usare l'oggetto.set(link);
+    this.block.setParam(this.name, 'link', this.link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
       bgColor: this.bgColor,
-      borderColor: this.borderColor,
-      borderStyle: this.borderStyle,
-      borderWidth: this.borderWidth
     });
   }
 
@@ -115,9 +87,6 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
     this.link = this.block.getParamValue(this.name, 'link');
     this.textColor = this.block.getParamValue(this.name, 'style').color;
     this.bgColor = this.block.getParamValue(this.name, 'style').bgColor;
-    this.borderColor = this.block.getParamValue(this.name, 'style').borderColor;
-    this.borderStyle = this.block.getParamValue(this.name, 'style').borderStyle;
-    this.borderWidth = this.block.getParamValue(this.name, 'style').borderWidth;
   }
 
 

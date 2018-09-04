@@ -13,6 +13,7 @@ import {FormsModule} from '@angular/forms';
 import {ButtonComponent} from './components/sidebar/button.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {SidebarService} from './services/sidebar.service';
+import {LinkComponent} from './components/sidebar/link.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {SidebarService} from './services/sidebar.service';
     MenuComponent,
     BackgroundComponent,
     ButtonComponent,
+    LinkComponent,
     SidebarComponent,
     BlockRendererDirective
   ],
