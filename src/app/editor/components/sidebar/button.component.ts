@@ -1,11 +1,12 @@
 import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
-import {EditorService} from '../services/editor.service';
-import {TemplateBlock} from '../blocks/template.block';
-import {Parameter} from '../template-editor.types';
+import {EditorService} from '../../services/editor.service';
+import {TemplateBlock} from '../../blocks/template.block';
+import {Parameter} from '../../template-editor.types';
+import {SidebarService} from '../../services/sidebar.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'template-button-edit',
+  selector: 'template-button-sidebar',
   styles: [`
     .cont-style {
       margin: 0px 10px 10px 10px;
@@ -78,7 +79,7 @@ import {Parameter} from '../template-editor.types';
       </div>
   `
 })
-export class ButtonEditComponent implements OnInit, DoCheck {
+export class ButtonComponent implements OnInit, DoCheck {
 
   private block: TemplateBlock;
   private name: string;
@@ -91,10 +92,11 @@ export class ButtonEditComponent implements OnInit, DoCheck {
   private borderStyle: string | '';
   private borderWidth: string | '';
 
-  public constructor(private editor: EditorService) {}
+  public constructor(private editor: EditorService,
+                     private sidebar: SidebarService) {}
 
   public ngOnInit() {
-    this.editor
+    this.sidebar
       .elementName$
       .subscribe(name => {
         this.name = name;

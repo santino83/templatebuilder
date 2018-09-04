@@ -6,18 +6,21 @@ import {MenuComponent} from './components/menu.component';
 import {NgxDnDModule} from '@swimlane/ngx-dnd';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {SidebarModule} from 'ng-sidebar';
-import {BgEditComponent} from './components/bg-edit.component';
+import {BackgroundComponent} from './components/sidebar/background.component';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {EditorService} from './services/editor.service';
 import {FormsModule} from '@angular/forms';
-import {ButtonEditComponent} from './components/button-edit.component';
+import {ButtonComponent} from './components/sidebar/button.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {SidebarService} from './services/sidebar.service';
 
 @NgModule({
   declarations: [
     TemplateEditorComponent,
     MenuComponent,
-    BgEditComponent,
-    ButtonEditComponent,
+    BackgroundComponent,
+    ButtonComponent,
+    SidebarComponent,
     BlockRendererDirective
   ],
   exports: [
@@ -33,6 +36,7 @@ import {ButtonEditComponent} from './components/button-edit.component';
   ],
   providers: [
     EditorService,
+    SidebarService
   ],
 })
 export class TemplateEditorModule {

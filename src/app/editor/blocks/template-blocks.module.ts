@@ -4,11 +4,11 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TextEditComponent} from '../components/text-edit.component';
 import {MediumEditorDirective} from 'angular2-medium-editor';
-import {HeadingEditorDirective} from '../directives/editors/heading-editor.directive';
+import {HeaderDirective} from '../directives/editors/header.directive';
 import {BlockBackgroundDirective} from '../directives/block-background.directive';
-import {ParagraphEditorDirective} from '../directives/editors/paragraph-editor.directive';
+import {ParagraphDirective} from '../directives/editors/paragraph.directive';
 import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
-import {AnchorEditorDirective} from '../directives/editors/anchor-editor.directive';
+import {AnchorDirective} from '../directives/editors/anchor.directive';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,9 @@ import {AnchorEditorDirective} from '../directives/editors/anchor-editor.directi
     Content01Block,
     /** directives **/
     MediumEditorDirective,
-    HeadingEditorDirective,
-    ParagraphEditorDirective,
-    AnchorEditorDirective,
+    HeaderDirective,
+    ParagraphDirective,
+    AnchorDirective,
     BlockBackgroundDirective,
     /** pipes **/
     SanitizeHtmlPipe

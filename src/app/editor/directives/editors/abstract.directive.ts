@@ -1,7 +1,7 @@
 import {ComponentFactoryResolver, ComponentRef, Input, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
 import {TextEditComponent} from '../../components/text-edit.component';
 
-export abstract class AbstractEditorDirective implements OnInit {
+export abstract class AbstractDirective implements OnInit {
 
   @Input() protected param: any;
 

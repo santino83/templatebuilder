@@ -1,19 +1,21 @@
 import {Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
+import {SidebarType} from '../../template-editor.types';
+import {SidebarService} from '../../services/sidebar.service';
 
 @Directive({
   selector: 'a'
 })
-export class AnchorEditorDirective implements OnChanges {
+export class AnchorDirective implements OnChanges {
 
   @Input() protected param: any;
 
   @HostListener('dblclick') setElm() {
-    this.editor.setElementName(this.param.name);
+    this.sidebar.setElementName(this.param.name);
+    this.sidebar.setSidebar(SidebarType.BUTTON);
   }
 
   public constructor(private elRef: ElementRef,
-                     private editor: EditorService) {}
+                     private sidebar: SidebarService) {}
 
 
   public ngOnChanges(changes: SimpleChanges): void {

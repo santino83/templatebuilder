@@ -5,20 +5,19 @@ import {
   Renderer2,
   ViewContainerRef
 } from '@angular/core';
-import {AbstractEditorDirective} from './abstract-editor.directive';
+import {AbstractDirective} from './abstract.directive';
 
 @Directive({
-  selector: ` [
-    h1,h2,h3,h4,h5,h6,
-  `
+  selector: 'p'
 })
-export class HeadingEditorDirective extends AbstractEditorDirective implements OnInit {
+export class ParagraphDirective extends AbstractDirective implements OnInit {
 
   protected toolbar = {
     'toolbar': {
       'buttons': [
-        'bold', 'italic', 'underline',
-        'justifyLeft', 'justifyCenter', 'justifyRight'
+        'bold', 'italic', 'underline', 'strikethrough',
+        'justifyLeft', 'justifyCenter', 'justifyRight',
+        'h2', 'h3', 'h4',
       ]
     }
   };

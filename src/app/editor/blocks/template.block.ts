@@ -16,7 +16,6 @@ export abstract class TemplateBlock implements AfterViewInit {
                         private editor: EditorService) {
     this._info = info;
     this.params = ObjectUtils.deepClone(this.info.metadata);
-    console.log(this.params);
   }
 
   public get info() {
@@ -61,7 +60,7 @@ export abstract class TemplateBlock implements AfterViewInit {
       this.params = {};
     }
 
-    this.params = params;
+    this.params = ObjectUtils.deepClone(params);
   }
 
   public ngAfterViewInit(): void {

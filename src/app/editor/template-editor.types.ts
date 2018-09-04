@@ -7,9 +7,14 @@ export enum ElementType {
   TITLE = 'title',
   SUBTITLE = 'subtitle',
   PARAGRAPH = 'paragraph',
-  BGCOLOR = 'background-color',
-  BGIMAGE = 'background-image',
+  BG_COLOR = 'background-color',
+  BG_IMAGE = 'background-image',
   BUTTON = 'button'
+}
+
+export enum SidebarType {
+  BACKGROUND,
+  BUTTON
 }
 
 export interface BlockDescriptor {

@@ -1,10 +1,10 @@
 import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
-import {TemplateBlock} from '../blocks/template.block';
-import {EditorService} from '../services/editor.service';
+import {TemplateBlock} from '../../blocks/template.block';
+import {EditorService} from '../../services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'template-bg-edit',
+  selector: 'template-background-sidebar',
   styles: [`
     .cont-style {
       margin: 0px 10px 10px 10px;
@@ -30,7 +30,7 @@ import {EditorService} from '../services/editor.service';
     </div>
   `
 })
-export class BgEditComponent implements OnInit, DoCheck {
+export class BackgroundComponent implements OnInit, DoCheck {
 
   private blockToEdit: TemplateBlock;
   private color: string;
