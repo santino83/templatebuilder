@@ -32,10 +32,10 @@ export class Content01Block extends TemplateBlock {
     categories: [CATEGORY_CONTENT],
     metadata: {
       title: new Text( ElementType.TITLE, 'Title'),
-      bgColor: new Background(ElementType.BG_COLOR, '#99ffcc'),
-      bgImage: new Background(ElementType.BG_IMAGE, ''),
-      btn1: new Button(ElementType.BUTTON, 'Google', 'http://google.it'),
-      btn2: new Button(ElementType.BUTTON, 'Google', 'http://google.it')
+      bgColor: new Background( ElementType.BG_COLOR, '#99ffcc'),
+      bgImage: new Background( ElementType.BG_IMAGE, ''),
+      btn1: new Button( ElementType.BUTTON, 'Google', 'http://google.it'),
+      btn2: new Button( ElementType.BUTTON, 'Google', 'http://google.it')
     }
   };
 

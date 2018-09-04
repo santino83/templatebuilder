@@ -11,6 +11,7 @@ export class AnchorDirective implements OnChanges {
   @Input() protected param: any;
 
   @HostListener('dblclick') setElement() {
+    console.log(this.param.name);
     this.sidebar.set(SidebarType.BUTTON, this.param.name);
   }
 
@@ -21,16 +22,18 @@ export class AnchorDirective implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if ( this.param && changes.param ) {
+
       this.elRef.nativeElement.innerHTML = this.param.object.value;
       this.elRef.nativeElement.href = this.param.object.link;
 
-      /** needing better code for doing this */
-      this.elRef.nativeElement.style =
-      'color:' + this.param.object.style.color + ';' +
-      'background-color:' + this.param.object.style.bgColor + ';' +
-      'border-color:' + this.param.object.style.borderColor + ';' +
-      'border-style:' + this.param.object.style.borderStyle + ';' +
-      'border-width:' + this.param.object.style.borderWidth + 'px;';
+      this.elRef.nativeElement.style.color = this.param.object.style.color;
+      this.elRef.nativeElement.style.backgroundColor = this.param.object.style.bgColor;
+
+      if ( this.param.object.type = 'button') {
+        this.elRef.nativeElement.style.borderColor = this.param.object.style.borderColor;
+        this.elRef.nativeElement.style.borderStyle = this.param.object.style.borderStyle;
+        this.elRef.nativeElement.style.borderWidth = this.param.object.style.borderWidth + 'px';
+      }
     }
   }
 

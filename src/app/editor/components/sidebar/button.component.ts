@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
 import {TemplateBlock} from '../../blocks/template.block';
 
@@ -78,7 +78,7 @@ import {TemplateBlock} from '../../blocks/template.block';
     </div>
   `
 })
-export class ButtonComponent implements OnInit, DoCheck {
+export class ButtonComponent implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
   @Input() name: string;
@@ -98,18 +98,17 @@ export class ButtonComponent implements OnInit, DoCheck {
       .blockStream$
       .subscribe(obj => {
         this.block = obj.block;
-        this.text = this.block.getParamValue(this.name, 'value');
-        this.link = this.block.getParamValue(this.name, 'link');
-        this.textColor = this.block.getParamValue(this.name, 'style').color;
-        this.bgColor = this.block.getParamValue(this.name, 'style').bgColor;
-        this.borderColor = this.block.getParamValue(this.name, 'style').bgColor;
-        this.borderStyle = this.block.getParamValue(this.name, 'style').borderStyle;
-        this.borderWidth = this.block.getParamValue(this.name, 'style').borderWidth;
+        this.initValues();
       });
   }
 
-  public ngDoCheck() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.block && changes.name) {
+      this.initValues();
+    }
+  }
 
+  public ngDoCheck() {
     if (!this.block) { return; }
 
     this.block.setParam(this.name, 'value', this.text);
@@ -122,6 +121,17 @@ export class ButtonComponent implements OnInit, DoCheck {
       borderWidth: this.borderWidth
     });
   }
+
+  public initValues() {
+    this.text = this.block.getParamValue(this.name, 'value');
+    this.link = this.block.getParamValue(this.name, 'link');
+    this.textColor = this.block.getParamValue(this.name, 'style').color;
+    this.bgColor = this.block.getParamValue(this.name, 'style').bgColor;
+    this.borderColor = this.block.getParamValue(this.name, 'style').borderColor;
+    this.borderStyle = this.block.getParamValue(this.name, 'style').borderStyle;
+    this.borderWidth = this.block.getParamValue(this.name, 'style').borderWidth;
+  }
+
 
 
 }
