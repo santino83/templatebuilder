@@ -29,7 +29,7 @@ export abstract class TemplateBlock implements AfterViewInit {
 
   @HostListener('dblclick', ['$event'])
   setBlock() {
-    this.editor.setBlock(this);
+    this.editor.set(this);
   }
 
   public getParam(paramName: string): any {

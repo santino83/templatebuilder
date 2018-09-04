@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {TemplateBlock} from '../blocks/template.block';
 
@@ -35,7 +35,7 @@ export class TextEditComponent implements OnInit {
     this.preValue = this._value;
     this.editor
       .blockStream$
-      .subscribe(block => this.block = block);
+      .subscribe(obj => this.block = obj.block);
   }
 
   @HostListener('document:click', ['$event'])

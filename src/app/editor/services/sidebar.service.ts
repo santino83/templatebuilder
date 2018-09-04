@@ -1,28 +1,27 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {SidebarType} from '../template-editor.types';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {SidebarEvent, SidebarType} from '../template-editor.types';
 
 @Injectable()
 export class SidebarService {
+  public selected: EventEmitter<SidebarEvent> = new EventEmitter<SidebarEvent>();
 
-  private elementNameSource = new ReplaySubject<string>(1);
-  private readonly elementNameStream = this.elementNameSource.asObservable();
-
-  public selected: EventEmitter<SidebarType> = new EventEmitter<SidebarType>();
-
-  public setSidebar(content: SidebarType) {
-    this.selected.next(content);
+  public set(type: SidebarType, paramName?: string) {
+    if (paramName) {
+      this.selected.next({
+        type: type,
+        paramName: paramName
+      });
+    } else {
+        this.selected.next({
+          type: type
+        });
+      }
   }
 
-  public unsetSidebar() {
-    this.selected.next(undefined);
-  }
-
-  get elementName$(){
-    return this.elementNameStream;
-  }
-
-  public setElementName(name: string): void {
-    this.elementNameSource.next(name);
+  public unset() {
+    this.selected.next({
+      type: undefined,
+      paramName: undefined
+    });
   }
 }

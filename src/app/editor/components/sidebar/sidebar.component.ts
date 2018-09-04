@@ -5,21 +5,34 @@ import {SidebarService} from '../../services/sidebar.service';
 @Component({
   selector: 'template-sidebar',
   template: `
-    <div [ngSwitch]="content">
-      <template-background-sidebar *ngSwitchCase="type.BACKGROUND"></template-background-sidebar>
-      <template-button-sidebar *ngSwitchCase="type.BUTTON"></template-button-sidebar>
+    <div [ngSwitch]="type">
+      <template-background-sidebar
+        *ngSwitchCase="typeEnum.BACKGROUND">
+      </template-background-sidebar>
+      
+      <template-button-sidebar 
+        [name]="paramName" 
+        *ngSwitchCase="typeEnum.BUTTON">
+      </template-button-sidebar>
     </div>
   `
 })
 export class SidebarComponent implements OnInit {
-  private type = SidebarType;
-  private content: SidebarType;
+  private typeEnum = SidebarType;
+  private type: SidebarType;
+  private paramName: string;
 
   public constructor(private sidebar: SidebarService) {}
 
   public ngOnInit() {
     this.sidebar
         .selected
-        .subscribe(cont => this.content = cont);
+        .subscribe(obj => {
+            this.type = obj.type;
+            if (obj.paramName) {
+              this.paramName = obj.paramName;
+            }
+          }
+        );
   }
 }

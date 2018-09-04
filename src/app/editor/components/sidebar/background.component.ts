@@ -32,7 +32,7 @@ import {EditorService} from '../../services/editor.service';
 })
 export class BackgroundComponent implements OnInit, DoCheck {
 
-  private blockToEdit: TemplateBlock;
+  private block: TemplateBlock;
   private color: string;
   private imageUrl: string;
 
@@ -40,20 +40,20 @@ export class BackgroundComponent implements OnInit, DoCheck {
 
   public ngOnInit() {
       this.editor.blockStream$.subscribe(
-       block => {
-         this.blockToEdit = block;
-         this.color = block.getParamValue('bgColor', 'value');
+       obj => {
+         this.block = obj.block;
+         this.color = this.block.getParamValue('bgColor', 'value');
        });
   }
 
   public ngDoCheck() {
-    if (this.blockToEdit) {
-      this.blockToEdit.setParam('bgColor', 'value', this.color);
+    if (this.block) {
+      this.block.setParam('bgColor', 'value', this.color);
     }
   }
 
   public setImage() {
-    this.blockToEdit.setParam('bgImage', 'value', this.imageUrl);
+    this.block.setParam('bgImage', 'value', this.imageUrl);
   }
 
 

@@ -43,6 +43,16 @@ export interface BlockInfo {
 
 }
 
+export interface BlockEvent {
+  block: TemplateBlock;
+  param?: Parameter;
+}
+
+export interface SidebarEvent {
+  type: SidebarType;
+  paramName?: string;
+}
+
 export interface Parameters {
   [key: string]: Parameter;
 }

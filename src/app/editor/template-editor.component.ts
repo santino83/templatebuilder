@@ -31,7 +31,7 @@ import {SidebarService} from './services/sidebar.service';
           <em class="fa fa-bars"></em>
         </button>
 
-        <button class="btn btn-layout" *ngIf="sidebarSelected" (click)="sidebar.unsetSidebar()" title="chiudi pannello">
+        <button class="btn btn-layout" *ngIf="sidebarSelected" (click)="sidebar.unset()" title="chiudi pannello">
           <em class="fa fa-remove"></em>
         </button>
 
@@ -82,7 +82,7 @@ export class TemplateEditorComponent implements OnInit {
 
     this.sidebar
         .selected
-        .subscribe((cont) => this.sidebarSelected = cont !== undefined);
+        .subscribe((obj) => this.sidebarSelected = obj.type !== undefined);
   }
 
   private toggleBlocksSidebar() {
@@ -93,13 +93,12 @@ export class TemplateEditorComponent implements OnInit {
     const start = this.models.indexOf(model) + 1;
     const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
     info.params = blockToDuplicate.getParams();
-    console.log(info);
     this.models.splice(start, 0, info);
   }
 
   public editBackground(block: TemplateBlock) {
-    this.editor.setBlock(block);
-    this.sidebar.setSidebar(SidebarType.BACKGROUND);
+    this.editor.set(block);
+    this.sidebar.set(SidebarType.BACKGROUND);
   }
 
   private remove(model: BlockInfo) {

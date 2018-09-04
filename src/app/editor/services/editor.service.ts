@@ -1,11 +1,12 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {TemplateBlock} from '../blocks/template.block';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {BlockEvent, Parameter} from '../template-editor.types';
 
 @Injectable()
 export class EditorService {
 
-  private blockSource = new ReplaySubject<TemplateBlock>(1);
+  private blockSource = new ReplaySubject<BlockEvent>(1);
   private readonly blockStream = this.blockSource.asObservable();
 
   private editing: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -18,8 +19,11 @@ export class EditorService {
     return this.editing;
   }
 
-  public setBlock(block: TemplateBlock): void {
-    this.blockSource.next(block);
+  public set(block: TemplateBlock, param?: Parameter): void {
+    if (param) {
+      this.blockSource.next({block, param});
+    }
+    this.blockSource.next({block});
   }
 
   public getBlock(): any {
