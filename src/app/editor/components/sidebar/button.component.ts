@@ -36,11 +36,11 @@ import {Parameter} from '../../template-editor.types';
                  [style.background]="textColor"><br>
           
           <input class="input" 
-                 [value]="bgColor"
-                 [(colorPicker)]="bgColor"
+                 [value]="backgroundColor"
+                 [(colorPicker)]="backgroundColor"
                  [cpWidth]="'auto'"
                  [cpPosition]="'bottom'"
-                 [style.background]="bgColor"/><br>
+                 [style.background]="backgroundColor"/><br>
           
           <input class="input" 
                  [value]="borderColor"
@@ -74,7 +74,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
   private text: string | '';
   private link: string | '';
   private textColor: string | '';
-  private bgColor: string | '';
+  private backgroundColor: string | '';
   private borderColor: string | '';
   private borderStyle: string | '';
   private borderWidth: string | '';
@@ -103,7 +103,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
     this.block.setParam(this.name, 'link', this.link); //wrong da usare l'oggetto.set(link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
-      bgColor: this.bgColor,
+      backgroundColor: this.backgroundColor,
       borderColor: this.borderColor,
       borderStyle: this.borderStyle,
       borderWidth: this.borderWidth
@@ -114,7 +114,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
     this.text = this.block.getParamValue(this.name, 'value');
     this.link = this.block.getParamValue(this.name, 'link');
     this.textColor = this.block.getParamValue(this.name, 'style').color;
-    this.bgColor = this.block.getParamValue(this.name, 'style').bgColor;
+    this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor;
     this.borderColor = this.block.getParamValue(this.name, 'style').borderColor;
     this.borderStyle = this.block.getParamValue(this.name, 'style').borderStyle;
     this.borderWidth = this.block.getParamValue(this.name, 'style').borderWidth;

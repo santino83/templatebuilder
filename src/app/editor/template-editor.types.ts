@@ -4,19 +4,19 @@ import {TemplateBlock} from './blocks/template.block';
 export const CATEGORY_CONTENT = 'contents';
 
 export enum ElementType {
-  TITLE = 'title',
-  SUBTITLE = 'subtitle',
-  PARAGRAPH = 'paragraph',
-  BG_COLOR = 'background-color',
-  BG_IMAGE = 'background-image',
-  BUTTON = 'button',
-  LINK = 'link'
+  TITLE = 'TITLE',
+  SUBTITLE = 'SUBTITLE',
+  PARAGRAPH = 'PARAGRAPH',
+  BG_COLOR = 'BACKGROUND-COLOR',
+  BG_IMAGE = 'BACKGROUND-IMAGE',
+  BUTTON = 'BUTTON',
+  LINK = 'LINK'
 }
 
 export enum SidebarType {
-  BACKGROUND,
-  BUTTON,
-  LINK
+  BACKGROUND = 'BACKGROUND',
+  BUTTON = 'BUTTON',
+  LINK = 'LINK'
 }
 
 export interface BlockDescriptor {
@@ -67,6 +67,7 @@ export abstract class Parameter {
   protected constructor(type: ElementType, value: string) {
     this.type = type;
     this.value = value;
+    this.style = {};
   }
 }
 
@@ -89,10 +90,6 @@ export class Link extends Parameter {
   constructor(type: ElementType, value: string, link: string) {
     super(type, value);
     this._link = link;
-    this.style = {
-      color: '#ffffff',
-      bgColor: '#000000',
-    };
   }
 
   public get link(): string {
@@ -110,7 +107,7 @@ export class Button extends Link {
     super(type, value, link);
     this.style = {
       color: '#ffffff',
-      bgColor: '#528bff',
+      backgroundColor: '#528bff',
       borderColor: '#528bff',
       borderStyle: 'solid',
       borderWidth: '1'

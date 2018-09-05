@@ -17,9 +17,9 @@ export class BlockBackgroundDirective implements DoCheck {
       return;
     }
 
-    this.elRef.nativeElement.style.backgroundColor = this.instance.getParamValue('bgColor', 'value');
+    this.elRef.nativeElement.style.backgroundColor = this.instance.getParamValue('backgroundColor', 'value');
 
-    this.elRef.nativeElement.style.backgroundImage = 'url(' + this.instance.getParamValue('bgImage', 'value') + ')';
+    this.elRef.nativeElement.style.backgroundImage = 'url(' + this.instance.getParamValue('backgroundImage', 'value') + ')';
   }
 
   public setInstance(instance: TemplateBlock): void {

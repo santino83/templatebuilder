@@ -33,11 +33,11 @@ import {TemplateBlock} from '../../blocks/template.block';
                  [style.background]="textColor"><br>
           
           <input class="input" 
-                 [value]="bgColor"
-                 [(colorPicker)]="bgColor"
+                 [value]="backgroundColor"
+                 [(colorPicker)]="backgroundColor"
                  [cpWidth]="'auto'"
                  [cpPosition]="'bottom'"
-                 [style.background]="bgColor"/><br>
+                 [style.background]="backgroundColor"/><br>
           
         </div>
       </div>
@@ -52,7 +52,7 @@ export class LinkComponent implements OnInit, DoCheck, OnChanges {
   private text: string | '';
   private link: string | '';
   private textColor: string | '';
-  private bgColor: string | '';
+  private backgroundColor: string | '';
 
   public constructor(private editor: EditorService) {}
 
@@ -78,15 +78,15 @@ export class LinkComponent implements OnInit, DoCheck, OnChanges {
     this.block.setParam(this.name, 'link', this.link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
-      bgColor: this.bgColor,
+      backgroundColor: this.backgroundColor,
     });
   }
 
   public initValues() {
     this.text = this.block.getParamValue(this.name, 'value');
     this.link = this.block.getParamValue(this.name, 'link');
-    this.textColor = this.block.getParamValue(this.name, 'style').color;
-    this.bgColor = this.block.getParamValue(this.name, 'style').bgColor;
+    this.textColor = this.block.getParamValue(this.name, 'style').color || '';
+    this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor || '';
   }
 
 

@@ -11,8 +11,7 @@ export class AnchorDirective implements OnChanges {
   @Input() protected param: any;
 
   @HostListener('dblclick') setElement() {
-    console.log(this.param.object);
-    this.param.object.type === 'button' ?
+    this.param.object.type === SidebarType.BUTTON ?
       this.sidebar.set(SidebarType.BUTTON, this.param.name)
       :
       this.sidebar.set(SidebarType.LINK, this.param.name);
@@ -29,14 +28,12 @@ export class AnchorDirective implements OnChanges {
       this.elRef.nativeElement.innerHTML = this.param.object.value;
       this.elRef.nativeElement.href = this.param.object.link;
 
-      this.elRef.nativeElement.style.color = this.param.object.style.color;
-      this.elRef.nativeElement.style.backgroundColor = this.param.object.style.bgColor;
-
-      if ( this.param.object.type = 'button') {
-        this.elRef.nativeElement.style.borderColor = this.param.object.style.borderColor;
-        this.elRef.nativeElement.style.borderStyle = this.param.object.style.borderStyle;
-        this.elRef.nativeElement.style.borderWidth = this.param.object.style.borderWidth + 'px';
+      for (const prop of Object.keys(this.param.object.style)) {
+        this.elRef.nativeElement.style[prop] = this.param.object.style[prop];
       }
+
+      /* porcata da levare */
+      this.elRef.nativeElement.style.borderWidth = this.param.object.style.borderWidth + 'px';
     }
   }
 

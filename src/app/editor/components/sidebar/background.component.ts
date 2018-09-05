@@ -42,18 +42,18 @@ export class BackgroundComponent implements OnInit, DoCheck {
       this.editor.blockStream$.subscribe(
        obj => {
          this.block = obj.block;
-         this.color = this.block.getParamValue('bgColor', 'value');
+         this.color = this.block.getParamValue('backgroundColor', 'value');
        });
   }
 
   public ngDoCheck() {
     if (this.block) {
-      this.block.setParam('bgColor', 'value', this.color);
+      this.block.setParam('backgroundColor', 'value', this.color);
     }
   }
 
   public setImage() {
-    this.block.setParam('bgImage', 'value', this.imageUrl);
+    this.block.setParam('backgroundImage', 'value', this.imageUrl);
   }
 
 
