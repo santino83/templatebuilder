@@ -9,6 +9,7 @@ export enum ElementType {
   PARAGRAPH = 'PARAGRAPH',
   BG_COLOR = 'BACKGROUND-COLOR',
   BG_IMAGE = 'BACKGROUND-IMAGE',
+  IMAGE = 'IMAGE',
   BUTTON = 'BUTTON',
   LINK = 'LINK'
 }
@@ -16,6 +17,7 @@ export enum ElementType {
 export enum SidebarType {
   BACKGROUND = 'BACKGROUND',
   BUTTON = 'BUTTON',
+  IMAGE = 'IMAGE',
   LINK = 'LINK'
 }
 
@@ -78,6 +80,12 @@ export class Text extends Parameter {
 }
 
 export class Background extends Parameter {
+  constructor(type: ElementType, value: string) {
+    super(type, value);
+  }
+}
+
+export class Image extends Parameter {
   constructor(type: ElementType, value: string) {
     super(type, value);
   }

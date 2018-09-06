@@ -4,17 +4,14 @@ import {SidebarService} from '../../services/sidebar.service';
 import {EditorService} from '../../services/editor.service';
 
 @Directive({
-  selector: 'a'
+  selector: 'img'
 })
-export class AnchorDirective implements OnChanges {
+export class ImageDirective implements OnChanges {
 
   @Input() protected param: any;
 
   @HostListener('dblclick') setElement() {
-    this.param.object.type === SidebarType.BUTTON ?
-      this.sidebar.set(SidebarType.BUTTON, this.param.name)
-      :
-      this.sidebar.set(SidebarType.LINK, this.param.name);
+    this.sidebar.set(SidebarType.IMAGE);
   }
 
   public constructor(private eRef: ElementRef,
@@ -23,16 +20,10 @@ export class AnchorDirective implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if ( this.param && changes.param ) {
-
-      this.eRef.nativeElement.innerHTML = this.param.object.value;
-      this.eRef.nativeElement.href = this.param.object.link;
-
       for (const prop of Object.keys(this.param.object.style)) {
         this.eRef.nativeElement.style[prop] = this.param.object.style[prop];
       }
 
-      /* porcata da levare */
-      this.eRef.nativeElement.style.borderWidth = this.param.object.style.borderWidth + 'px';
     }
   }
 

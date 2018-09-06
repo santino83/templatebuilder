@@ -9,6 +9,7 @@ import {BlockBackgroundDirective} from '../directives/block-background.directive
 import {ParagraphDirective} from '../directives/editors/paragraph.directive';
 import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
 import {AnchorDirective} from '../directives/editors/anchor.directive';
+import {ImageDirective} from '../directives/editors/image.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {AnchorDirective} from '../directives/editors/anchor.directive';
     ParagraphDirective,
     AnchorDirective,
     BlockBackgroundDirective,
+    ImageDirective,
     /** pipes **/
     SanitizeHtmlPipe
   ],
