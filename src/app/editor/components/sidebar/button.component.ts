@@ -69,7 +69,6 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
   @Input() name: string;
-  private element: Parameter;
 
   private text: string | '';
   private link: string | '';
@@ -90,7 +89,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.block && changes.name) {
       this.initValues();
     }
@@ -98,8 +97,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
 
   public ngDoCheck() {
     if (!this.block) { return; }
-
-    this.block.setParam(this.name, 'value', this.text);
+    this.block.setParam(this.name, 'text', this.text);
     this.block.setParam(this.name, 'link', this.link); //wrong da usare l'oggetto.set(link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
@@ -111,7 +109,7 @@ export class ButtonComponent implements OnInit, DoCheck, OnChanges {
   }
 
   public initValues() {
-    this.text = this.block.getParamValue(this.name, 'value');
+    this.text = this.block.getParamValue(this.name, 'text');
     this.link = this.block.getParamValue(this.name, 'link');
     this.textColor = this.block.getParamValue(this.name, 'style').color;
     this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor;

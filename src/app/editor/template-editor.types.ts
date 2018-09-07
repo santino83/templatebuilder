@@ -1,5 +1,6 @@
 import {Type} from '@angular/core/src/type';
 import {TemplateBlock} from './blocks/template.block';
+import {environment} from '../../environments/environment.prod';
 
 export const CATEGORY_CONTENT = 'contents';
 
@@ -63,56 +64,71 @@ export interface Parameters {
 
 export abstract class Parameter {
   type: ElementType;
-  value: any;
   style?: {};
 
-  protected constructor(type: ElementType, value: string) {
+  protected constructor(type: ElementType) {
     this.type = type;
-    this.value = value;
     this.style = {};
   }
 }
 
 export class Text extends Parameter {
+
+  value: string;
+
   constructor(type: ElementType, value: string) {
-    super(type, value);
+    super(type);
+    this.value = value;
   }
 }
 
 export class Background extends Parameter {
+
+  value: string;
+
   constructor(type: ElementType, value: string) {
-    super(type, value);
+    super(type);
+    this.value = value;
   }
 }
 
 export class Image extends Parameter {
-  constructor(type: ElementType, value: string) {
-    super(type, value);
+
+  src: string;
+
+  constructor(type: ElementType, src: string) {
+    super(type);
+    this.src = environment.imgsPath + src;
+  }
+
+  public width(width: string): Image {
+    this.style['width'] = width;
+    return this;
+  }
+
+  public height(height: string): Image {
+    this.style['height'] = height;
+    return this;
   }
 }
 
 export class Link extends Parameter {
 
-  private _link: string;
+  text: string;
 
-  constructor(type: ElementType, value: string, link: string) {
-    super(type, value);
-    this._link = link;
-  }
+  link: string;
 
-  public get link(): string {
-    return this._link;
-  }
-
-  public set link(link: string) {
-    this._link = link;
+  constructor(type: ElementType, text: string, link: string) {
+    super(type);
+    this.text = text;
+    this.link = link;
   }
 }
 
 export class Button extends Link {
 
-  constructor(type: ElementType, value: string, link: string) {
-    super(type, value, link);
+  constructor(type: ElementType, text: string, link: string) {
+    super(type, text, link);
     this.style = {
       color: '#ffffff',
       backgroundColor: '#528bff',

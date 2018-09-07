@@ -24,7 +24,7 @@ export class AnchorDirective implements OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     if ( this.param && changes.param ) {
 
-      this.eRef.nativeElement.innerHTML = this.param.object.value;
+      this.eRef.nativeElement.innerHTML = this.param.object.text;
       this.eRef.nativeElement.href = this.param.object.link;
 
       for (const prop of Object.keys(this.param.object.style)) {

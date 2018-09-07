@@ -72,18 +72,19 @@ export class LinkComponent implements OnInit, DoCheck, OnChanges {
   }
 
   public ngDoCheck() {
-    if (!this.block) { return; }
+    if (this.block) {
 
-    this.block.setParam(this.name, 'value', this.text);
-    this.block.setParam(this.name, 'link', this.link);
-    this.block.setParam(this.name, 'style', {
-      color: this.textColor,
-      backgroundColor: this.backgroundColor,
-    });
+      this.block.setParam(this.name, 'text', this.text);
+      this.block.setParam(this.name, 'link', this.link);
+      this.block.setParam(this.name, 'style', {
+        color: this.textColor,
+        backgroundColor: this.backgroundColor,
+      });
+    }
   }
 
   public initValues() {
-    this.text = this.block.getParamValue(this.name, 'value');
+    this.text = this.block.getParamValue(this.name, 'text');
     this.link = this.block.getParamValue(this.name, 'link');
     this.textColor = this.block.getParamValue(this.name, 'style').color || '';
     this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor || '';

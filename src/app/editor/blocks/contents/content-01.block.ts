@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
-import {Background, BlockInfo, Button, Link, CATEGORY_CONTENT, Text, ElementType} from '../../template-editor.types';
+import {Background, BlockInfo, Button, CATEGORY_CONTENT, Text, ElementType, Image} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
 
 @Component({
@@ -13,23 +13,22 @@ import {EditorService} from '../../services/editor.service';
           <div class="col-12 col-md-8 col-lg-6 text-center">
             <h1 [param]="getFullParam('title')"></h1>
             <p class="text-h3" [param]="getFullParam('p1')"></p>
-            <a class="btn" [param]="getFullParam('a1')"></a>
+            <a class="btn" [param]="getFullParam('b1')"></a>
           </div>
         </div>
 
         <div class="row pt-5 pb-3">
           <div class="col-12 text-center">
-            <p [param]="getFullParam('p2')" style="font-weight: bold"></p>
+            <p [param]="getFullParam('p2')" class="font-weight-bold"></p>
           </div>
         </div>
         <div class="row">
           <div class="col-12 text-center">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/adobe.svg">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/discovery.svg">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/ebay.svg">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/samsung.svg">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/orange.svg">
-            <img alt="image" height="30" class="ml-3 mr-3 mb-2 mt-2" src="assets/imgs/froala/customers/salesforce.svg">
+            <img [param]="getFullParam('img1')" class="ml-3 mr-3 mb-2 mt-2">
+            <img [param]="getFullParam('img2')" class="ml-3 mr-3 mb-2 mt-2">
+            <img [param]="getFullParam('img3')" class="ml-3 mr-3 mb-2 mt-2">
+            <img [param]="getFullParam('img4')" class="ml-3 mr-3 mb-2 mt-2">
+            <img [param]="getFullParam('img5')" class="ml-3 mr-3 mb-2 mt-2">
           </div>
         </div>
       </div>
@@ -54,13 +53,19 @@ export class Content01Block extends TemplateBlock {
       far from the countries Vokalia and Consonantia, 
       there live the blind texts`),
 
-      a1: new Link(ElementType.LINK, 'Download', 'https://www.froala.com'),
+      b1: new Button(ElementType.BUTTON, 'Download', 'https://www.froala.com'),
 
       p2: new Text(ElementType.PARAGRAPH, 'Fortune 100 companies are using our products'),
 
       backgroundColor: new Background( ElementType.BG_COLOR, '#ffffaa'),
 
       backgroundImage: new Background( ElementType.BG_IMAGE, ''),
+
+      img1: new Image(ElementType.IMAGE, 'customers/adobe.svg').height('30'),
+      img2: new Image(ElementType.IMAGE, 'customers/ebay.svg').height('30'),
+      img3: new Image(ElementType.IMAGE, 'customers/samsung.svg').height('30'),
+      img4: new Image(ElementType.IMAGE, 'customers/orange.svg').height('30'),
+      img5: new Image(ElementType.IMAGE, 'customers/salesforce.svg').height('30')
     }
   };
 

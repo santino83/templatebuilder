@@ -1,7 +1,7 @@
-import {BlockInfo, Parameter, Parameters} from '../template-editor.types';
+import {BlockInfo, Parameters} from '../template-editor.types';
 import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {EditorService} from '../services/editor.service';
-import {BlockBackgroundDirective} from '../directives/block-background.directive';
+import {BackgroundDirective} from '../directives/editors/background.directive';
 import {ObjectUtils} from '../deprecated/template-editor.utils';
 
 export abstract class TemplateBlock implements AfterViewInit {
@@ -10,7 +10,7 @@ export abstract class TemplateBlock implements AfterViewInit {
 
   protected readonly _info: BlockInfo;
 
-  @ViewChild(BlockBackgroundDirective) private bgDirective: BlockBackgroundDirective;
+  @ViewChild(BackgroundDirective) private bgDirective: BackgroundDirective;
 
   protected constructor(info: BlockInfo,
                         private editor: EditorService) {

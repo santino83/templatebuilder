@@ -14,6 +14,7 @@ import {ButtonComponent} from './components/sidebar/button.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {SidebarService} from './services/sidebar.service';
 import {LinkComponent} from './components/sidebar/link.component';
+import {ImageComponent} from './components/sidebar/image.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {LinkComponent} from './components/sidebar/link.component';
     ButtonComponent,
     LinkComponent,
     SidebarComponent,
+    ImageComponent,
     BlockRendererDirective
   ],
   exports: [

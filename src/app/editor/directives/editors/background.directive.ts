@@ -1,10 +1,10 @@
 import {Directive, DoCheck, ElementRef} from '@angular/core';
-import {TemplateBlock} from '../blocks/template.block';
+import {TemplateBlock} from '../../blocks/template.block';
 
 @Directive({
   selector: 'section'
 })
-export class BlockBackgroundDirective implements DoCheck {
+export class BackgroundDirective implements DoCheck {
 
   private instance: TemplateBlock;
 
