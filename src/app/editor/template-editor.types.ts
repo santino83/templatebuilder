@@ -63,40 +63,29 @@ export interface Parameters {
 }
 
 export abstract class Parameter {
-  type: ElementType;
-  style?: {};
-
-  protected constructor(type: ElementType) {
-    this.type = type;
-    this.style = {};
-  }
+  protected constructor(protected type: ElementType,
+                        protected style: {} = {}) {}
 }
 
 export class Text extends Parameter {
-
-  value: string;
-
-  constructor(type: ElementType, value: string) {
+  constructor(type: ElementType,
+              public value: string) {
     super(type);
-    this.value = value;
   }
 }
 
 export class Background extends Parameter {
-
-  value: string;
-
-  constructor(type: ElementType, value: string) {
+  constructor(type: ElementType,
+              public value: string) {
     super(type);
-    this.value = value;
   }
 }
 
 export class Image extends Parameter {
-
-  src: string;
-
-  constructor(type: ElementType, src: string) {
+  constructor(type: ElementType,
+              public src: string,
+              public alt: string = '',
+              public align: string = '') {
     super(type);
     this.src = environment.imgsPath + src;
   }
@@ -113,15 +102,10 @@ export class Image extends Parameter {
 }
 
 export class Link extends Parameter {
-
-  text: string;
-
-  link: string;
-
-  constructor(type: ElementType, text: string, link: string) {
+  constructor(type: ElementType,
+              public text: string,
+              public link: string) {
     super(type);
-    this.text = text;
-    this.link = link;
   }
 }
 

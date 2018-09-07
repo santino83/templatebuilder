@@ -5,26 +5,17 @@ import {TemplateBlocksModule} from './blocks/template-blocks.module';
 import {MenuComponent} from './components/menu.component';
 import {NgxDnDModule} from '@swimlane/ngx-dnd';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
-import {SidebarModule} from 'ng-sidebar';
-import {BackgroundComponent} from './components/sidebar/background.component';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {EditorService} from './services/editor.service';
 import {FormsModule} from '@angular/forms';
-import {ButtonComponent} from './components/sidebar/button.component';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {SidebarService} from './services/sidebar.service';
-import {LinkComponent} from './components/sidebar/link.component';
-import {ImageComponent} from './components/sidebar/image.component';
+import {TemplateSidebarModule} from './components/sidebar/template-sidebar.module';
+import {SidebarModule} from 'ng-sidebar';
 
 @NgModule({
   declarations: [
     TemplateEditorComponent,
     MenuComponent,
-    BackgroundComponent,
-    ButtonComponent,
-    LinkComponent,
-    SidebarComponent,
-    ImageComponent,
     BlockRendererDirective
   ],
   exports: [
@@ -35,7 +26,7 @@ import {ImageComponent} from './components/sidebar/image.component';
     CommonModule,
     NgxDnDModule,
     TemplateBlocksModule,
-    ColorPickerModule,
+    TemplateSidebarModule,
     SidebarModule.forRoot()
   ],
   providers: [
