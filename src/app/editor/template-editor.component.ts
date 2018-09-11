@@ -10,30 +10,7 @@ import {SidebarService} from './services/sidebar.service';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-editor',
   styleUrls: ['./template-editor.component.css'],
-  template: `
-    <p-dialog width="800" 
-              height="800"
-              responsive="true"
-              modal="true"
-              [(visible)]="popup">
-      <p-header>
-        Aggiungi o modifica media
-      </p-header>
-      <p-tabView>
-        <p-tabPanel header="Carica file">
-          Content 1
-        </p-tabPanel>
-        <p-tabPanel header="Libreria media">
-          Content 2
-        </p-tabPanel>
-        <p-tabPanel header="Inserisci da URL">
-          Content 3
-        </p-tabPanel>
-      </p-tabView>
-      <p-footer>
-        //buttons
-      </p-footer>
-    </p-dialog>
+  template: `    
     <ng-sidebar-container class="sidebar-container">
       <ng-sidebar class="sidebar"
                   [(opened)]="blocks_side"
@@ -56,9 +33,6 @@ import {SidebarService} from './services/sidebar.service';
         <button class="btn btn-layout" *ngIf="sidebarSelected" (click)="sidebar.unset()" title="chiudi pannello">
           <em class="fa fa-remove"></em>
         </button>
-
-        <button (click)="popup = true">test</button>
-
 
         <h1 class="text-center">Trascina i blocchi qui sotto</h1>
         <div class="template-editor">
@@ -86,12 +60,10 @@ import {SidebarService} from './services/sidebar.service';
 })
 export class TemplateEditorComponent implements OnInit {
 
-  private popup: boolean;
-
   @ViewChildren(BlockRendererDirective)
   private rendered: QueryList<BlockRendererDirective>;
 
-  private blocks_side = false;
+  private blocks_side = true;
   private models: BlockInfo[] = [];
   private moves = true;
 

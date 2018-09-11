@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
-import {TabViewModule} from 'primeng/primeng';
+import {InputTextModule, TabViewModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import {TabViewModule} from 'primeng/primeng';
     BrowserAnimationsModule,
     ButtonModule,
     DialogModule,
-    TabViewModule
+    TabViewModule,
+    InputTextModule
   ],
   exports: [
     FormsModule,
@@ -24,7 +25,9 @@ import {TabViewModule} from 'primeng/primeng';
     BrowserAnimationsModule,
     DialogModule,
     ButtonModule,
-    TabViewModule
+    TabViewModule,
+    InputTextModule
+
   ],
 })
 export class TemplateSharedModule {

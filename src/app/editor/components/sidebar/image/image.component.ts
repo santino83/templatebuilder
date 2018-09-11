@@ -1,11 +1,12 @@
-import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
-import {TemplateBlock} from '../../blocks/template.block';
+import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {EditorService} from '../../../services/editor.service';
+import {TemplateBlock} from '../../../blocks/template.block';
+import {ModalComponent} from './modal.component';
 
 @Component({
   selector: 'template-image-sidebar',
   template: `
-    <button type="button" (click)="onSelect()" pButton icon="pi pi-info-circle" label="Show"></button>
+    <button type="button" (click)="onSelection()" pButton icon="pi pi-info-circle" label="Imposta immagine"></button>
     <br>
     alt
     <input type="text" class="form-control" [(ngModel)]="alt">
@@ -22,19 +23,10 @@ import {TemplateBlock} from '../../blocks/template.block';
     <br>
     height
     <input type="text" class="form-control" [(ngModel)]="height">
-
-    <p-dialog [width]="300" [(visible)]="popup">
-      <p-header>
-        Header content here
-      </p-header>
-      Content
-      <p-footer>
-        //buttons
-      </p-footer>
-    </p-dialog>
+    <template-modal-image-sidebar #modal (imageSelected)="setImage($event)"></template-modal-image-sidebar>
   `
 })
-export class ImageComponent implements OnInit, OnChanges, DoCheck{
+export class ImageComponent implements OnInit, OnChanges, DoCheck {
 
   @Input() name: string;
 
@@ -50,7 +42,7 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
 
   private height: string;
 
-  private popup = false;
+  @ViewChild('modal') modal: ModalComponent;
 
   public constructor(private editor: EditorService) {}
 
@@ -82,6 +74,10 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
     });
   }
 
+  private setImage(path: string): void {
+    this.src = path;
+  }
+
   private initValues() {
     this.src = this.block.getParamValue(this.name, 'src');
     this.alt = this.block.getParamValue(this.name, 'alt');
@@ -90,8 +86,8 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
     this.height = this.block.getParamValue(this.name, 'style').height || '';
   }
 
-  private onSelect() {
-    this.popup = true;
+  private onSelection() {
+    this.modal.open(this.src);
   }
 
 
