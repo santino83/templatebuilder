@@ -8,7 +8,6 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "resources",
         "assets",
         "favicon.ico"
       ],
@@ -20,7 +19,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": ["app","template"],
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/primeicons/primeicons.css",
+        "../node_modules/primeng/resources/themes/nova-light/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
 
   public ngOnInit() {
     this.sidebar
-        .selected
+        .selected$
         .subscribe(obj => {
             this.type = obj.type;
             if (obj.paramName) {

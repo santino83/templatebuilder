@@ -1,13 +1,11 @@
 import {NgModule} from '@angular/core';
-import {SidebarModule} from 'ng-sidebar';
 import {ImageComponent} from './image.component';
 import {SidebarComponent} from './sidebar.component';
 import {LinkComponent} from './link.component';
 import {ButtonComponent} from './button.component';
 import {BackgroundComponent} from './background.component';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 import {ColorPickerModule} from 'ngx-color-picker';
+import {TemplateSharedModule} from '../../shared/template-shared.module';
 
 @NgModule({
   declarations: [
@@ -21,9 +19,8 @@ import {ColorPickerModule} from 'ngx-color-picker';
     SidebarComponent
   ],
   imports: [
-    FormsModule,
-    CommonModule,
-    ColorPickerModule
+    ColorPickerModule,
+    TemplateSharedModule
   ],
 })
 export class TemplateSidebarModule {

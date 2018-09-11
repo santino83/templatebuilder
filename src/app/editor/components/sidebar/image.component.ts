@@ -5,9 +5,7 @@ import {TemplateBlock} from '../../blocks/template.block';
 @Component({
   selector: 'template-image-sidebar',
   template: `
-    <br>
-    src
-    <input type="text" class="form-control" [(ngModel)]="src">
+    <button type="button" (click)="onSelect()" pButton icon="pi pi-info-circle" label="Show"></button>
     <br>
     alt
     <input type="text" class="form-control" [(ngModel)]="alt">
@@ -24,6 +22,16 @@ import {TemplateBlock} from '../../blocks/template.block';
     <br>
     height
     <input type="text" class="form-control" [(ngModel)]="height">
+
+    <p-dialog [width]="300" [(visible)]="popup">
+      <p-header>
+        Header content here
+      </p-header>
+      Content
+      <p-footer>
+        //buttons
+      </p-footer>
+    </p-dialog>
   `
 })
 export class ImageComponent implements OnInit, OnChanges, DoCheck{
@@ -42,6 +50,8 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
 
   private height: string;
 
+  private popup = false;
+
   public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
@@ -53,7 +63,7 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.block && changes.name) {
       this.initValues();
     }
@@ -78,6 +88,10 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck{
     this.align = this.block.getParamValue(this.name, 'align');
     this.width = this.block.getParamValue(this.name, 'style').width || '';
     this.height = this.block.getParamValue(this.name, 'style').height || '';
+  }
+
+  private onSelect() {
+    this.popup = true;
   }
 
 
