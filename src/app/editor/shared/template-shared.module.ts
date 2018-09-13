@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule, TabViewModule} from 'primeng/primeng';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {InputTextModule, TabViewModule} from 'primeng/primeng';
   imports: [
     FormsModule,
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
     DialogModule,
@@ -22,6 +24,7 @@ import {InputTextModule, TabViewModule} from 'primeng/primeng';
   exports: [
     FormsModule,
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     DialogModule,
     ButtonModule,

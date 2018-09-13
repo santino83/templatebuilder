@@ -10,7 +10,6 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent
   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
     NgxDnDModule,
     TemplateEditorModule,

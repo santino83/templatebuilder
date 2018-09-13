@@ -7,9 +7,10 @@ import {BackgroundComponent} from './background.component';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {TemplateSharedModule} from '../../shared/template-shared.module';
 import {ModalComponent} from './image/modal.component';
-import {LibraryPanel} from './image/panels/library.panel';
+import {LibraryPanel} from './image/panels/library/library.panel';
 import {UploadPanel} from './image/panels/upload.panel';
 import {UrlPanel} from './image/panels/url.panel';
+import {ImageClickableDirective} from './image/panels/library/image-clickable.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {UrlPanel} from './image/panels/url.panel';
     ModalComponent,
     LibraryPanel,
     UploadPanel,
-    UrlPanel
+    UrlPanel,
+    ImageClickableDirective
   ],
   exports: [
     SidebarComponent

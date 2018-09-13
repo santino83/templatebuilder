@@ -1,6 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../../environments/environment.prod';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'template-url-panel',
@@ -11,6 +9,7 @@ import {environment} from '../../../../../../environments/environment.prod';
           <input type="text" 
                  pInputText 
                  placeholder="URL"
+                 
                  [(ngModel)]="src">
           <button 
             pButton 
@@ -29,6 +28,7 @@ export class UrlPanel {
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
   private confirm(): void {
+
     this.selected.emit(this.src);
   }
 }
