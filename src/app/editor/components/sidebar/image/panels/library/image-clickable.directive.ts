@@ -7,7 +7,9 @@ export class ImageClickableDirective {
 
   @Output() clicked: EventEmitter<ElementRef> = new EventEmitter<ElementRef>();
 
-  public constructor(private eRef: ElementRef) {}
+  public constructor(private eRef: ElementRef) {
+    this.eRef.nativeElement.style.cursor = 'pointer';
+  }
 
   @HostListener('click')
   onClick(): void {

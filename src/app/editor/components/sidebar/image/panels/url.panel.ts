@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'template-url-panel',
@@ -9,7 +9,6 @@ import {Component, EventEmitter, Output} from '@angular/core';
           <input type="text" 
                  pInputText 
                  placeholder="URL"
-                 
                  [(ngModel)]="src">
           <button 
             pButton 
@@ -23,12 +22,11 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class UrlPanel {
 
-  private src: string;
+  @Input() private src: string;
 
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
   private confirm(): void {
-
     this.selected.emit(this.src);
   }
 }

@@ -1,29 +1,30 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'template-modal-image-sidebar',
   template: `
     <p-dialog modal="true"
               width="700"
-              [(visible)]="popup">
+              [(visible)]="active">
       <p-header>
-        Aggiungi o modifica media
+        Add or edit media
       </p-header>
       <p-tabView>
         <div style="height:400px">
           
-          <p-tabPanel header="Carica file">
+          <p-tabPanel header="Upload">
             <template-upload-panel></template-upload-panel>
           </p-tabPanel>
           
-          <p-tabPanel header="Libreria media">
+          <p-tabPanel header="Library">
             <template-library-panel
               (selected)="select($event)">
             </template-library-panel>
           </p-tabPanel>
           
-          <p-tabPanel header="Inserisci da URL">
+          <p-tabPanel header="Insert by URL">
             <template-url-panel
+              [src]="src"
               (selected)="select($event)">
             </template-url-panel>
           </p-tabPanel>
@@ -43,7 +44,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ModalComponent {
 
-  private popup = false;
+  private active = false;
 
   private src: string;
 
@@ -63,12 +64,12 @@ export class ModalComponent {
   }
 
   public open(src): void {
-    this.popup = true;
+    this.active = true;
     this.select(src);
   }
 
   public close(): void {
-    this.popup = false;
+    this.active = false;
     this.unselect();
   }
 }

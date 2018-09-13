@@ -6,7 +6,7 @@ import {ModalComponent} from './modal.component';
 @Component({
   selector: 'template-image-sidebar',
   template: `
-    <button type="button" (click)="onSelection()" pButton icon="pi pi-info-circle" label="Imposta immagine"></button>
+    <button type="button" (click)="onSelection()" pButton icon="pi pi-info-circle" label="Change image"></button>
     <br>
     alt
     <input type="text" class="form-control" [(ngModel)]="alt">

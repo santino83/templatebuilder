@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'template-library-panel',
@@ -8,7 +8,6 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angul
               <img
                 imgClickable
                 (clicked)="onSelection($event,src)"
-                style="cursor:pointer"
                 width="100"
                 height="100"
                 [src]="src">
@@ -21,21 +20,29 @@ export class LibraryPanel implements OnInit {
 
   private images: string[] = [];
 
-  private element: ElementRef;
+  private current: ElementRef;
 
   public onSelection(element: ElementRef, src: string): void {
-    if (this.element === element) {
-      this.element.nativeElement.style.border = '';
-      this.element = undefined;
-      this.selected.emit('');
-      return;
-    } else if (this.element) {
-        this.element.nativeElement.style.border = '';
-    } else {
-      this.element = element;
-      this.element.nativeElement.style.border = '3px solid #0080ff';
+
+    if (!this.current) {
+      this.current = element;
+      this.setBorder('3px solid #0080ff');
+
+    } else if (this.current && this.current !== element) {
+      this.setBorder('');
+      this.current = element;
+      this.setBorder('3px solid #0080ff');
+
+    } else if ( this.current === element) {
+      this.setBorder('');
+      this.current = undefined;
     }
+
     this.selected.emit(src);
+  }
+
+  private setBorder(value: string): void {
+    this.current.nativeElement.style.border = value;
   }
 
   public ngOnInit(): void {

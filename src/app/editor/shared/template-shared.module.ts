@@ -6,10 +6,11 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule, TabViewModule} from 'primeng/primeng';
 import {BrowserModule} from '@angular/platform-browser';
+import {ClickableDirective} from './clickable.directive';
 
 @NgModule({
   declarations: [
-
+    ClickableDirective
   ],
   imports: [
     FormsModule,
@@ -19,7 +20,7 @@ import {BrowserModule} from '@angular/platform-browser';
     ButtonModule,
     DialogModule,
     TabViewModule,
-    InputTextModule
+    InputTextModule,
   ],
   exports: [
     FormsModule,
@@ -29,8 +30,8 @@ import {BrowserModule} from '@angular/platform-browser';
     DialogModule,
     ButtonModule,
     TabViewModule,
-    InputTextModule
-
+    InputTextModule,
+    ClickableDirective
   ],
 })
 export class TemplateSharedModule {
