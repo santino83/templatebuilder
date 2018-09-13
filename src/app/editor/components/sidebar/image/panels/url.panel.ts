@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../../../environments/environment.prod';
 
 @Component({
   selector: 'template-url-panel',
@@ -18,27 +19,41 @@ import {HttpClient} from '@angular/common/http';
             class="ui-button-warn" 
             (click)="confirm()"></button>
         </div>
+        <p *ngIf="error !== undefined && !error; else success" style="color:green">Image successfully selected</p>
+        <p *ngIf="error !== undefined &&  error; else success" style="color:red">Unable to read image. Please check your link.</p>
       </div>
   `
 })
 export class UrlPanel {
 
-  @Input() private src: string;
+  private src: string;
 
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
+  private error: boolean;
+
   public constructor(private http: HttpClient) {}
 
-  private confirm(): void {
+  private confirm() {
     let base64: string;
-    this.http.get(this.src, { responseType: 'blob' }).subscribe((blob) => {
+    this.http.get(this.src, { responseType: 'blob', observe: 'response' }).subscribe((response) => {
       const reader = new FileReader();
-      reader.readAsDataURL(blob);
+      reader.readAsDataURL(response.body);
       reader.onloadend = function() {
         base64 = reader.result;
-        console.log(base64);
       };
+    }, (response) => {
+      if (response.status === 404) {
+        this.error = true;
+      }
     });
-    this.selected.emit(this.src);
+    setTimeout(() => {
+      if (this.error) {
+        this.selected.emit(environment.defaultImage);
+      } else {
+        this.selected.emit(this.src);
+        this.error = false;
+      }
+    }, 300);
   }
 }

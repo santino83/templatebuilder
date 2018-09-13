@@ -24,7 +24,6 @@ import {Component, EventEmitter, Output} from '@angular/core';
           
           <p-tabPanel header="Insert by URL">
             <template-url-panel
-              [src]="src"
               (selected)="select($event)">
             </template-url-panel>
           </p-tabPanel>
