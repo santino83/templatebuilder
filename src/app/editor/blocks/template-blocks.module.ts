@@ -12,6 +12,7 @@ import {AnchorDirective} from '../directives/editors/anchor.directive';
 import {ImageDirective} from '../directives/editors/image.directive';
 import {SharedModule} from 'primeng/shared';
 import {TemplateSharedModule} from '../shared/template-shared.module';
+import {QuillModule} from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {TemplateSharedModule} from '../shared/template-shared.module';
     TextEditComponent
   ],
   imports: [
-    TemplateSharedModule
+    TemplateSharedModule,
+    QuillModule
   ]
 })
 export class TemplateBlocksModule {

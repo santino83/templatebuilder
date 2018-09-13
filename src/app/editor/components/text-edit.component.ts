@@ -6,12 +6,26 @@ import {TemplateBlock} from '../blocks/template.block';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
+  styles: [`
+  .ql-container, .ql-editor{
+    font-size: unset !important;
+    padding: unset !important;
+    text-align: unset !important;
+    white-space: unset !important;
+    tab-size: unset !important;
+    line-height: unset !important;
+  }
+  .ql-editor h1 {
+    font-size: 2.75rem !important;
+  }
+    
+  `],
   template: `
     <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
     <div class="form-group" *ngIf="_editing">
-      <medium-editor [(editorModel)]="_value"
-                     [editorOptions]="_toolbar">
-      </medium-editor>
+      
+      <quill-editor [(ngModel)]="_value" theme="bubble"></quill-editor>
+      
     </div>
   `
 })
