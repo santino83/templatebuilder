@@ -12,14 +12,14 @@ import {EditorService} from '../../services/editor.service';
         <div class="row justify-content-center">
           <div class="col-12 col-md-8 col-lg-6 text-center">
             <h1 [param]="getFullParam('title')"></h1>
-            <p class="text-h3" [param]="getFullParam('p1')"></p>
+            <p [param]="getFullParam('p1')"></p>
             <a class="btn" [param]="getFullParam('b1')"></a>
           </div>
         </div>
 
         <div class="row pt-5 pb-3">
           <div class="col-12 text-center">
-            <p [param]="getFullParam('p2')" class="font-weight-bold"></p>
+            <p [param]="getFullParam('p2')"></p>
           </div>
         </div>
         <div class="row">

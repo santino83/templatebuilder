@@ -14,9 +14,14 @@ import {TemplateBlock} from '../blocks/template.block';
     white-space: unset !important;
     tab-size: unset !important;
     line-height: unset !important;
+    z-index: 9999 !important;
   }
   .ql-editor h1 {
     font-size: 2.75rem !important;
+  }
+
+  .ql-editor h2 {
+    font-size: 2rem !important;
   }
     
   `],
@@ -24,7 +29,7 @@ import {TemplateBlock} from '../blocks/template.block';
     <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
     <div class="form-group" *ngIf="_editing">
       
-      <quill-editor [(ngModel)]="_value" theme="bubble"></quill-editor>
+      <quill-editor [(ngModel)]="_value" [modules]="_toolbar" theme="bubble"></quill-editor>
       
     </div>
   `

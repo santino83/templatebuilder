@@ -13,13 +13,13 @@ import {AbstractDirective} from './abstract.directive';
 export class ParagraphDirective extends AbstractDirective implements OnInit {
 
   protected toolbar = {
-    'toolbar': {
-      'buttons': [
-        'bold', 'italic', 'underline', 'strikethrough',
-        'justifyLeft', 'justifyCenter', 'justifyRight',
-        'h2', 'h3', 'h4',
-      ]
-    }
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'color': [] }, { 'background': [] }],
+      ['clean'],
+    ]
   };
 
   public constructor(cfr: ComponentFactoryResolver,

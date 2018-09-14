@@ -11,7 +11,7 @@ import {SidebarService} from './services/sidebar.service';
   selector: 'template-editor',
   styleUrls: ['./template-editor.component.css'],
   template: `    
-    <ng-sidebar-container class="sidebar-container">
+    <ng-sidebar-container class="sidebar-container" style="z-index: 0;">
       <ng-sidebar class="sidebar"
                   [(opened)]="blocks_side"
                   mode="push"
