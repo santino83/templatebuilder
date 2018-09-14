@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
-import {InputTextModule, TabViewModule} from 'primeng/primeng';
+import {FileUploadModule, InputTextModule, TabViewModule} from 'primeng/primeng';
 import {BrowserModule} from '@angular/platform-browser';
 import {ClickableDirective} from './clickable.directive';
 
@@ -21,6 +21,7 @@ import {ClickableDirective} from './clickable.directive';
     DialogModule,
     TabViewModule,
     InputTextModule,
+    FileUploadModule
   ],
   exports: [
     FormsModule,
@@ -31,7 +32,8 @@ import {ClickableDirective} from './clickable.directive';
     ButtonModule,
     TabViewModule,
     InputTextModule,
-    ClickableDirective
+    FileUploadModule,
+    ClickableDirective,
   ],
 })
 export class TemplateSharedModule {

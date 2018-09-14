@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../../environments/environment.prod';
 
 @Component({
   selector: 'template-url-panel',
@@ -19,14 +18,16 @@ import {environment} from '../../../../../../environments/environment.prod';
             class="ui-button-warn" 
             (click)="confirm()"></button>
         </div>
-        <p *ngIf="error !== undefined && !error; else success" style="color:green">Image successfully selected</p>
-        <p *ngIf="error !== undefined &&  error; else success" style="color:red">Unable to read image. Please check your link.</p>
+        <div *ngIf="error !== undefined">
+          <p *ngIf="error; else success" style="color:red">Unable to read image. Please check your link.</p>
+          <ng-template #success><p style="color:green">Image successfully selected</p></ng-template>
+        </div>
       </div>
   `
 })
 export class UrlPanel {
 
-  private src: string;
+  private src = '';
 
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -35,25 +36,24 @@ export class UrlPanel {
   public constructor(private http: HttpClient) {}
 
   private confirm() {
-    let base64: string;
-    this.http.get(this.src, { responseType: 'blob', observe: 'response' }).subscribe((response) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(response.body);
-      reader.onloadend = function() {
-        base64 = reader.result;
-      };
-    }, (response) => {
-      if (response.status === 404) {
+    this.http
+      .get(this.src, { observe: 'response' })
+      .subscribe(() => {},
+      (response) => {
+      if (response.status === 404 || this.src === '') {
         this.error = true;
       }
     });
+
     setTimeout(() => {
-      if (this.error) {
-        this.selected.emit(environment.defaultImage);
-      } else {
+      if (!this.error) {
         this.selected.emit(this.src);
         this.error = false;
       }
-    }, 300);
+    }, 1000);
+
+    setTimeout(() => {
+      this.error = undefined;
+    }, 2000);
   }
 }
