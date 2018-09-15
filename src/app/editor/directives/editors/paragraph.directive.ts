@@ -15,7 +15,7 @@ export class ParagraphDirective extends AbstractDirective implements OnInit {
   protected toolbar = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
       [{ 'color': [] }, { 'background': [] }],
       ['clean'],

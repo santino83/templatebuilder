@@ -6,7 +6,7 @@ import {TemplateBlock} from '../blocks/template.block';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
-  styles: [`
+  styles: [`    
   .ql-container, .ql-editor{
     font-size: unset !important;
     padding: unset !important;
