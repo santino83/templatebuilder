@@ -19,11 +19,18 @@ import {TemplateBlock} from '../blocks/template.block';
   .ql-editor h1 {
     font-size: 2.75rem !important;
   }
-
   .ql-editor h2 {
     font-size: 2rem !important;
   }
-    
+  .ql-editor h3 {
+    font-size: 1.125rem !important;
+  }
+  .ql-editor h5 {
+    font-size: 0.9rem !important;
+  }
+  .ql-editor h6 {
+    font-size: 0.75rem !important;
+  }
   `],
   template: `
     <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
