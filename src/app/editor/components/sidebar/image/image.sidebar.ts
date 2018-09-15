@@ -26,7 +26,7 @@ import {ModalComponent} from './modal.component';
     <template-modal-image-sidebar #modal (imageSelected)="setImage($event)"></template-modal-image-sidebar>
   `
 })
-export class ImageComponent implements OnInit, OnChanges, DoCheck {
+export class ImageSidebar implements OnInit, OnChanges, DoCheck {
 
   @Input() name: string;
 

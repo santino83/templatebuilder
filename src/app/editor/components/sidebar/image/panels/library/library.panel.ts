@@ -1,11 +1,11 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
-
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 @Component({
   selector: 'template-library-panel',
   template: `
             <span
               *ngFor="let src of images">
               <img
+                #img
                 imgClickable
                 (clicked)="onSelection($event,src)"
                 width="100"
@@ -14,15 +14,34 @@ import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core
             </span>
   `
 })
-export class LibraryPanel implements OnInit {
+export class LibraryPanel implements OnInit, AfterViewInit {
 
-  @Output() selected: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChildren('img') imgs: QueryList<ElementRef>;
+
+  @Input() private src: string;
+
+  @Output() private selected: EventEmitter<string> = new EventEmitter<string>();
 
   private images: string[] = [];
 
   private current: ElementRef;
 
-  public onSelection(element: ElementRef, src: string): void {
+  public ngOnInit(): void {
+    for (let i = 0; i < 10; i++) {
+      this.images.push('https://picsum.photos/200/30' + i);
+    }
+  }
+
+  public ngAfterViewInit(): void {
+
+    for (const eRef of this.imgs.toArray()) {
+      if (eRef.nativeElement.currentSrc === this.src) {
+        this.onSelection(eRef);
+      }
+    }
+  }
+
+  private onSelection( element: ElementRef, src?: string): void {
 
     if (!this.current) {
       this.current = element;
@@ -38,16 +57,13 @@ export class LibraryPanel implements OnInit {
       this.current = undefined;
     }
 
-    this.selected.emit(src);
+    if (this.src) {
+      this.src = src;
+      this.selected.emit(src);
+    }
   }
 
   private setBorder(value: string): void {
     this.current.nativeElement.style.border = value;
-  }
-
-  public ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      this.images.push('https://picsum.photos/200/30' + i);
-    }
   }
 }

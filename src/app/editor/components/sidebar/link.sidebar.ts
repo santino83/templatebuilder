@@ -44,7 +44,7 @@ import {TemplateBlock} from '../../blocks/template.block';
     </div>
   `
 })
-export class LinkComponent implements OnInit, DoCheck, OnChanges {
+export class LinkSidebar implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
   @Input() name: string;

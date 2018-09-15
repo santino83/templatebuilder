@@ -16,14 +16,16 @@ import {Component, EventEmitter, Output} from '@angular/core';
             <template-upload-panel></template-upload-panel>
           </p-tabPanel>
           
-          <p-tabPanel header="Library">
+          <p-tabPanel selected="true" header="Library">
             <template-library-panel
+              [src]="src"
               (selected)="select($event)">
             </template-library-panel>
           </p-tabPanel>
           
           <p-tabPanel header="Insert by URL">
             <template-url-panel
+              [src]="src"
               (selected)="select($event)">
             </template-url-panel>
           </p-tabPanel>

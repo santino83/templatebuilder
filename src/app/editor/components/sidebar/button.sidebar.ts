@@ -65,7 +65,7 @@ import {Parameter} from '../../template-editor.types';
     </div>
   `
 })
-export class ButtonComponent implements OnInit, DoCheck, OnChanges {
+export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
   @Input() name: string;

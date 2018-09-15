@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -27,7 +27,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UrlPanel {
 
-  private src = '';
+  @Input() private src = '';
 
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
