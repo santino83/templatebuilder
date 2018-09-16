@@ -87,7 +87,7 @@ export class Image extends Parameter {
               public alt: string = '',
               public align: string = '') {
     super(type);
-    this.src = environment.imgsPath + src;
+    this.src = src;
   }
 
   public width(width: string): Image {

@@ -51,14 +51,6 @@ export class ModalComponent {
 
   @Output() imageSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  private select(src: string): void {
-    this.src = src;
-  }
-
-  private unselect(): void {
-    this.src = '';
-  }
-
   private onSelection(): void {
     this.imageSelected.emit(this.src);
     this.close();
@@ -71,6 +63,9 @@ export class ModalComponent {
 
   public close(): void {
     this.active = false;
-    this.unselect();
+  }
+
+  private select(src: string): void {
+    this.src = src;
   }
 }

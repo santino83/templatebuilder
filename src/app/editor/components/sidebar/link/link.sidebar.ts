@@ -1,11 +1,11 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
-import {TemplateBlock} from '../../blocks/template.block';
+import {EditorService} from '../../../services/editor.service';
+import {TemplateBlock} from '../../../blocks/template.block';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-link-sidebar',
-  styleUrls: ['shared/button-link.css'],
+  styleUrls: ['button-link.css'],
   template: `
     <!-- RIVISTA PERCHE INCLUSA DENTRO BUTTON -->
     

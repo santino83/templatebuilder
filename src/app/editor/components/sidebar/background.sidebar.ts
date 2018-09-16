@@ -33,7 +33,9 @@ import {EditorService} from '../../services/editor.service';
 export class BackgroundSidebar implements OnInit, DoCheck {
 
   private block: TemplateBlock;
+
   private color: string;
+
   private imageUrl: string;
 
   public constructor(private editor: EditorService) {}

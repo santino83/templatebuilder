@@ -1,5 +1,5 @@
 import {ComponentFactoryResolver, ComponentRef, Input, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
-import {TextEditComponent} from '../../components/text-edit.component';
+import {TextEditComponent} from '../../../components/text-edit.component';
 
 export abstract class AbstractDirective implements OnInit {
 

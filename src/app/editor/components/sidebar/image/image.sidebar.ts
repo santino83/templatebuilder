@@ -90,5 +90,4 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
     this.modal.open(this.src);
   }
 
-
 }

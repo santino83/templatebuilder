@@ -1,24 +1,41 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 @Component({
   selector: 'template-library-panel',
   template: `
-            <span
-              *ngFor="let src of images">
-              <img
-                #img
-                imgClickable
-                (clicked)="onSelection($event,src)"
-                width="100"
-                height="100"
-                [src]="src">
-            </span>
+    <span
+      *ngFor="let src of images">
+      <img
+        #img
+        imgClickable
+        (clicked)="onSelection($event,src)"
+        width="100"
+        height="100"
+        [src]="src">
+    </span>
   `
 })
-export class LibraryPanel implements OnInit, AfterViewInit {
+export class LibraryPanel implements OnInit {
 
   @ViewChildren('img') imgs: QueryList<ElementRef>;
 
-  @Input() private src: string;
+  @Input()
+  set src(value: string) {
+    if (!this.imgs) return;
+    for (const eRef of this.imgs.toArray()) {
+      if (eRef.nativeElement.src === value) {
+        this.onSelection(eRef);
+      }
+    }
+  }
 
   @Output() private selected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -32,16 +49,7 @@ export class LibraryPanel implements OnInit, AfterViewInit {
     }
   }
 
-  public ngAfterViewInit(): void {
-
-    for (const eRef of this.imgs.toArray()) {
-      if (eRef.nativeElement.currentSrc === this.src) {
-        this.onSelection(eRef);
-      }
-    }
-  }
-
-  private onSelection( element: ElementRef, src?: string): void {
+  private onSelection(element: ElementRef, src?: string): void {
 
     if (!this.current) {
       this.current = element;
@@ -57,8 +65,7 @@ export class LibraryPanel implements OnInit, AfterViewInit {
       this.current = undefined;
     }
 
-    if (this.src) {
-      this.src = src;
+    if (src) {
       this.selected.emit(src);
     }
   }

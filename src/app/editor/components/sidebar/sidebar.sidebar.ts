@@ -28,8 +28,11 @@ import {SidebarService} from '../../services/sidebar.service';
   `
 })
 export class SidebarSidebar implements OnInit {
+
   private typeEnum = SidebarType;
+
   private type: SidebarType;
+
   private paramName: string;
 
   public constructor(private sidebar: SidebarService) {}

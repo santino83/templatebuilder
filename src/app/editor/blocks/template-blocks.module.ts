@@ -4,9 +4,9 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TextEditComponent} from '../components/text-edit.component';
 import {MediumEditorDirective} from 'angular2-medium-editor';
-import {HeaderDirective} from '../directives/editors/header.directive';
+import {HeaderDirective} from '../directives/editors/text/header.directive';
 import {BackgroundDirective} from '../directives/editors/background.directive';
-import {ParagraphDirective} from '../directives/editors/paragraph.directive';
+import {ParagraphDirective} from '../directives/editors/text/paragraph.directive';
 import {SanitizeHtmlPipe} from '../pipes/sanitize-html.pipe';
 import {AnchorDirective} from '../directives/editors/anchor.directive';
 import {ImageDirective} from '../directives/editors/image.directive';
@@ -15,18 +15,18 @@ import {TemplateSharedModule} from '../shared/template-shared.module';
 
 @NgModule({
   declarations: [
-    /** components **/
+    /** components */
     TextEditComponent,
     /** blocks **/
     Content01Block,
-    /** directives **/
+    /** directives */
     MediumEditorDirective,
     HeaderDirective,
     ParagraphDirective,
     AnchorDirective,
     BackgroundDirective,
     ImageDirective,
-    /** pipes **/
+    /** pipes */
     SanitizeHtmlPipe
   ],
   exports: [

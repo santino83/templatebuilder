@@ -19,7 +19,8 @@ import {EditorService} from '../../services/editor.service';
 
         <div class="row pt-5 pb-3">
           <div class="col-12 text-center">
-            <p [param]="getFullParam('p2')" class="font-weight-bold"></p>
+            <p [param]="getFullParam('p2')" class="font-weight-bold">
+            </p>
           </div>
         </div>
         <div class="row">
@@ -61,11 +62,11 @@ export class Content01Block extends TemplateBlock {
 
       backgroundImage: new Background( ElementType.BG_IMAGE, ''),
 
-      img1: new Image(ElementType.IMAGE, 'customers/adobe.svg').height('30'),
-      img2: new Image(ElementType.IMAGE, 'customers/ebay.svg').height('30'),
-      img3: new Image(ElementType.IMAGE, 'customers/samsung.svg').height('30'),
-      img4: new Image(ElementType.IMAGE, 'customers/orange.svg').height('30'),
-      img5: new Image(ElementType.IMAGE, 'customers/salesforce.svg').height('30')
+      img1: new Image(ElementType.IMAGE, 'https://picsum.photos/200/300').height('60').width('60'),
+      img2: new Image(ElementType.IMAGE, 'https://picsum.photos/200/301').height('60').width('60'),
+      img3: new Image(ElementType.IMAGE, 'https://picsum.photos/200/302').height('60').width('60'),
+      img4: new Image(ElementType.IMAGE, 'https://picsum.photos/200/303').height('60').width('60'),
+      img5: new Image(ElementType.IMAGE, 'https://picsum.photos/200/304').height('60').width('60')
     }
   };
 
