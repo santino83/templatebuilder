@@ -1,6 +1,7 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
 import {TemplateBlock} from '../../blocks/template.block';
+import {Link, Parameter} from '../../template-editor.types';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -47,6 +48,7 @@ import {TemplateBlock} from '../../blocks/template.block';
 export class LinkComponent implements OnInit, DoCheck, OnChanges {
 
   private block: TemplateBlock;
+  private button: Parameter;
   @Input() name: string;
 
   private text: string | '';
@@ -61,6 +63,7 @@ export class LinkComponent implements OnInit, DoCheck, OnChanges {
       .blockStream$
       .subscribe(obj => {
         this.block = obj.block;
+        this.button = this.block.getParam(this.name);
         this.initValues();
       });
   }
@@ -72,22 +75,23 @@ export class LinkComponent implements OnInit, DoCheck, OnChanges {
   }
 
   public ngDoCheck() {
-    if (this.block) {
+    if (!this.block || !(this.button instanceof Link)) return;
 
-      this.block.setParam(this.name, 'text', this.text);
-      this.block.setParam(this.name, 'link', this.link);
-      this.block.setParam(this.name, 'style', {
-        color: this.textColor,
-        backgroundColor: this.backgroundColor,
-      });
-    }
+    this.block.setParam(this.name, 'text', this.text);
+    this.block.setParam(this.name, 'link', this.link);
+    this.block.setParam(this.name, 'style', {
+      color: this.textColor,
+      backgroundColor: this.backgroundColor,
+    });
   }
 
   public initValues() {
-    this.text = this.block.getParamValue(this.name, 'text');
-    this.link = this.block.getParamValue(this.name, 'link');
-    this.textColor = this.block.getParamValue(this.name, 'style').color || '';
-    this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor || '';
+    if ( !this.link || !(this.button instanceof Link)) return;
+
+    this.text = this.button['text'];
+    this.link = this.button['link'];
+    this.textColor = this.button['style']['color'];
+    this.backgroundColor = this.button['style']['backgroundColor'];
   }
 
 

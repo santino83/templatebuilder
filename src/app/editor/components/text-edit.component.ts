@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {TemplateBlock} from '../blocks/template.block';
+import {SidebarService} from '../services/sidebar.service';
 
 
 @Component({
@@ -63,7 +64,8 @@ export class TextEditComponent implements OnInit {
   private _editing = false;
 
   public constructor(private editor: EditorService,
-                     public eRef: ElementRef) {
+                     public eRef: ElementRef,
+                     private sidebar: SidebarService){
   }
 
   public ngOnInit() {
@@ -93,6 +95,7 @@ export class TextEditComponent implements OnInit {
       return;
     }
 
+    this.sidebar.unset();
     this._editing = true;
     this.editor.lock();
   }

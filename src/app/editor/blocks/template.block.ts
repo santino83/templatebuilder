@@ -1,8 +1,9 @@
-import {BlockInfo, Parameters} from '../template-editor.types';
+import {BlockInfo, Button, Parameter, Parameters} from '../template-editor.types';
 import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {BackgroundDirective} from '../directives/editors/background.directive';
 import {ObjectUtils} from '../deprecated/template-editor.utils';
+import {forEach} from '@angular/router/src/utils/collection';
 
 export abstract class TemplateBlock implements AfterViewInit {
 
@@ -15,8 +16,9 @@ export abstract class TemplateBlock implements AfterViewInit {
   protected constructor(info: BlockInfo,
                         private editor: EditorService) {
     this._info = info;
-    this.params = ObjectUtils.deepClone(this.info.metadata);
+    this.setParams(this.info.metadata);
   }
+
 
   public get info() {
     return this._info;
@@ -32,7 +34,7 @@ export abstract class TemplateBlock implements AfterViewInit {
     this.editor.set(this);
   }
 
-  public getParam(paramName: string): any {
+  public getParam(paramName: string): Parameter {
     return this.params[paramName];
   }
 
@@ -55,12 +57,14 @@ export abstract class TemplateBlock implements AfterViewInit {
     this.params[paramName][paramElem] = paramValue;
   }
 
-  public setParams(params: Parameters) {
+  public setParams(obj: Object) {
     if (!this.params) {
       this.params = {};
     }
 
-    this.params = ObjectUtils.deepClone(params);
+    for (const key in obj) {
+      this.params[key] = obj[key];
+    }
   }
 
   public ngAfterViewInit(): void {
