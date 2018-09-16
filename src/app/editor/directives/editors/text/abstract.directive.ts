@@ -1,7 +1,7 @@
 import {ComponentFactoryResolver, ComponentRef, Input, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
 import {TextEditComponent} from '../../../components/text-edit.component';
 
-export abstract class AbstractDirective implements OnInit {
+export abstract class AbstractDirective implements OnInit{
 
   @Input() protected param: any;
 
@@ -10,9 +10,9 @@ export abstract class AbstractDirective implements OnInit {
   protected toolbar: {};
 
   protected constructor(protected cfr: ComponentFactoryResolver,
-                     protected view: ViewContainerRef,
-                     protected renderer: Renderer2,
-                     toolbar: {}) {
+                        protected view: ViewContainerRef,
+                        protected renderer: Renderer2,
+                        toolbar: {}) {
     this.toolbar = toolbar;
   }
 

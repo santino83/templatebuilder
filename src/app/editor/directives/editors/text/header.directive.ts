@@ -15,12 +15,11 @@ import {AbstractDirective} from './abstract.directive';
 export class HeaderDirective extends AbstractDirective implements OnInit {
 
   protected toolbar = {
-    'toolbar': {
-      'buttons': [
-        'bold', 'italic', 'underline',
-        'justifyLeft', 'justifyCenter', 'justifyRight'
-      ]
-    }
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      ['clean'],
+    ]
   };
 
   public constructor(cfr: ComponentFactoryResolver,

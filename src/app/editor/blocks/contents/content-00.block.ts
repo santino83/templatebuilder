@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {Background, BlockInfo, Button, CATEGORY_CONTENT, Text, ElementType, Image} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
+
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-blocks-content-00',
@@ -15,7 +16,8 @@ import {EditorService} from '../../services/editor.service';
             <a class="btn" [param]="getFullParam('b1')"></a>
           </div>
         </div>
-         <div class="row pt-5 pb-3">
+
+        <div class="row pt-5 pb-3">
           <div class="col-12 text-center">
             <p [param]="getFullParam('p2')"></p>
           </div>
@@ -34,6 +36,7 @@ import {EditorService} from '../../services/editor.service';
   `
 })
 export class Content00Block extends TemplateBlock {
+
   public static readonly ID: string = 'Content00Block';
   public static readonly NAME: string = 'Content 00 Block';
   public static readonly DESCRIPTION: string = 'Simple content block';
@@ -44,21 +47,28 @@ export class Content00Block extends TemplateBlock {
     categories: [CATEGORY_CONTENT],
     metadata: {
       title: new Text( ElementType.TITLE, 'Call to Action'),
+
       p1: new Text(ElementType.PARAGRAPH, `
       Far far away, behind the word mountains, 
       far from the countries Vokalia and Consonantia, 
       there live the blind texts`),
+
       b1: new Button(ElementType.BUTTON, 'Download', 'https://www.froala.com'),
+
       p2: new Text(ElementType.PARAGRAPH, 'Fortune 100 companies are using our products'),
+
       backgroundColor: new Background( ElementType.BG_COLOR, '#ffffaa'),
+
       backgroundImage: new Background( ElementType.BG_IMAGE, ''),
-      img1: new Image(ElementType.IMAGE, 'https://picsum.photos/200/300').height('30'),
-      img2: new Image(ElementType.IMAGE, 'https://picsum.photos/200/301').height('30'),
-      img3: new Image(ElementType.IMAGE, 'https://picsum.photos/200/302').height('30'),
-      img4: new Image(ElementType.IMAGE, 'https://picsum.photos/200/303').height('30'),
-      img5: new Image(ElementType.IMAGE, 'https://picsum.photos/200/304').height('30')
+
+      img1: new Image(ElementType.IMAGE, 'customers/adobe.svg').height('30'),
+      img2: new Image(ElementType.IMAGE, 'customers/ebay.svg').height('30'),
+      img3: new Image(ElementType.IMAGE, 'customers/samsung.svg').height('30'),
+      img4: new Image(ElementType.IMAGE, 'customers/orange.svg').height('30'),
+      img5: new Image(ElementType.IMAGE, 'customers/salesforce.svg').height('30')
     }
   };
+
   constructor(editor: EditorService) {
     super(Content00Block.INFO, editor);
   }

@@ -2,6 +2,10 @@ import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsu
 import {EditorService} from '../../../services/editor.service';
 import {TemplateBlock} from '../../../blocks/template.block';
 import {Parameter} from '../../../template-editor.types';
+import {EditorService} from '../../../services/editor.service';
+import {TemplateBlock} from '../../../blocks/template.block';
+import {Button, Parameter} from '../../../template-editor.types';
+import {SidebarService} from '../../../services/sidebar.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -67,8 +71,10 @@ import {Parameter} from '../../../template-editor.types';
 })
 export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
-  private block: TemplateBlock;
   @Input() name: string;
+
+  private block: TemplateBlock;
+  private button: Parameter;
 
   private text: string | '';
   private link: string | '';
@@ -78,13 +84,15 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
   private borderStyle: string | '';
   private borderWidth: string | '';
 
-  public constructor(private editor: EditorService) {}
+  public constructor(private editor: EditorService,
+                     private sidebar: SidebarService) {}
 
   public ngOnInit() {
     this.editor
       .blockStream$
       .subscribe(obj => {
         this.block = obj.block;
+        this.button = this.block.getParam(this.name);
         this.initValues();
       });
   }
@@ -96,9 +104,10 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
   }
 
   public ngDoCheck() {
-    if (!this.block) { return; }
+    if (!this.block || !(this.button instanceof Button)) return;
+
     this.block.setParam(this.name, 'text', this.text);
-    this.block.setParam(this.name, 'link', this.link); //wrong da usare l'oggetto.set(link);
+    this.block.setParam(this.name, 'link', this.link);  // wrong da usare l'oggetto.set(link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
       backgroundColor: this.backgroundColor,
@@ -109,13 +118,15 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
   }
 
   public initValues() {
-    this.text = this.block.getParamValue(this.name, 'text');
-    this.link = this.block.getParamValue(this.name, 'link');
-    this.textColor = this.block.getParamValue(this.name, 'style').color;
-    this.backgroundColor = this.block.getParamValue(this.name, 'style').backgroundColor;
-    this.borderColor = this.block.getParamValue(this.name, 'style').borderColor;
-    this.borderStyle = this.block.getParamValue(this.name, 'style').borderStyle;
-    this.borderWidth = this.block.getParamValue(this.name, 'style').borderWidth;
+    if ( !this.button || !(this.button instanceof Button)) return;
+
+    this.text = this.button['text'];
+    this.link = this.button['link'];
+    this.textColor = this.button['style']['color'];
+    this.backgroundColor = this.button['style']['backgroundColor'];
+    this.borderColor = this.button['style']['borderColor'];
+    this.borderStyle = this.button['style']['borderStyle'];
+    this.borderWidth = this.button['style']['borderWidth'];
   }
 
 

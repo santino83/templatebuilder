@@ -2,6 +2,7 @@ import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} 
 import {EditorService} from '../../../services/editor.service';
 import {TemplateBlock} from '../../../blocks/template.block';
 import {ModalComponent} from './modal.component';
+import {Link} from '../../../template-editor.types';
 
 @Component({
   selector: 'template-image-sidebar',
@@ -62,7 +63,7 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
   }
 
   public ngDoCheck() {
-    if (!this.block) { return; }
+    if (!this.block || !(this.block.getParam(this.name) instanceof Image)) return;
 
     this.block.setParam(this.name, 'src', this.src);
     this.block.setParam(this.name, 'alt', this.alt);
@@ -79,6 +80,8 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
   }
 
   private initValues() {
+    if ( !this.block.getParam(this.name) || !(this.block.getParam(this.name) instanceof Image)) return;
+
     this.src = this.block.getParamValue(this.name, 'src');
     this.alt = this.block.getParamValue(this.name, 'alt');
     this.align = this.block.getParamValue(this.name, 'align');
