@@ -31,6 +31,15 @@ import {TemplateBlock} from '../blocks/template.block';
   .ql-editor h6 {
     font-size: 0.75rem !important;
   }
+  .ql-align-right {  /*da rivedere perche l'align di ngx-quill usa queste classi, serve un interprete prima di inviare a backend oppure definire le classi  */
+    text-align: right;
+  }
+  .ql-align-left {
+    text-align: left;
+  }
+  .ql-align-center {
+    text-align: center;
+  }
   `],
   template: `
     <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
