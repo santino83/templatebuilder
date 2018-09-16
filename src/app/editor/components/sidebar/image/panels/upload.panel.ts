@@ -3,9 +3,8 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'template-upload-panel',
   template: `
-    Content 1
+    <p-fileUpload mode="basic"></p-fileUpload>
   `
 })
 export class UploadPanel {
-
 }

@@ -16,8 +16,9 @@ import {Component, EventEmitter, Output} from '@angular/core';
             <template-upload-panel></template-upload-panel>
           </p-tabPanel>
           
-          <p-tabPanel header="Library">
+          <p-tabPanel selected="true" header="Library">
             <template-library-panel
+              [src]="src"
               (selected)="select($event)">
             </template-library-panel>
           </p-tabPanel>
@@ -50,14 +51,6 @@ export class ModalComponent {
 
   @Output() imageSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  private select(src: string): void {
-    this.src = src;
-  }
-
-  private unselect(): void {
-    this.src = '';
-  }
-
   private onSelection(): void {
     this.imageSelected.emit(this.src);
     this.close();
@@ -70,6 +63,9 @@ export class ModalComponent {
 
   public close(): void {
     this.active = false;
-    this.unselect();
+  }
+
+  private select(src: string): void {
+    this.src = src;
   }
 }

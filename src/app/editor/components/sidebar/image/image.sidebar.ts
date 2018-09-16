@@ -27,7 +27,7 @@ import {Link} from '../../../template-editor.types';
     <template-modal-image-sidebar #modal (imageSelected)="setImage($event)"></template-modal-image-sidebar>
   `
 })
-export class ImageComponent implements OnInit, OnChanges, DoCheck {
+export class ImageSidebar implements OnInit, OnChanges, DoCheck {
 
   @Input() name: string;
 
@@ -92,6 +92,5 @@ export class ImageComponent implements OnInit, OnChanges, DoCheck {
   private onSelection() {
     this.modal.open(this.src);
   }
-
 
 }

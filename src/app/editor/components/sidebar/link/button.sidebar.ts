@@ -1,13 +1,16 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
-import {TemplateBlock} from '../../blocks/template.block';
-import {Button, Link, Parameter} from '../../template-editor.types';
-import {SidebarService} from '../../services/sidebar.service';
+import {EditorService} from '../../../services/editor.service';
+import {TemplateBlock} from '../../../blocks/template.block';
+import {Parameter} from '../../../template-editor.types';
+import {EditorService} from '../../../services/editor.service';
+import {TemplateBlock} from '../../../blocks/template.block';
+import {Button, Parameter} from '../../../template-editor.types';
+import {SidebarService} from '../../../services/sidebar.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-button-sidebar',
-  styleUrls: ['shared/button-link.css'],
+  styleUrls: ['button-link.css'],
   template: `
     <!-- RIVISTA PERCHE AL 90% UGUALE A LINK, DA METTERE IN SHARED -->
     <div class="container" class="cont-style">
@@ -66,7 +69,7 @@ import {SidebarService} from '../../services/sidebar.service';
     </div>
   `
 })
-export class ButtonComponent implements OnInit, DoCheck, OnChanges {
+export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
   @Input() name: string;
 

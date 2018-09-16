@@ -30,10 +30,12 @@ import {EditorService} from '../../services/editor.service';
     </div>
   `
 })
-export class BackgroundComponent implements OnInit, DoCheck {
+export class BackgroundSidebar implements OnInit, DoCheck {
 
   private block: TemplateBlock;
+
   private color: string;
+
   private imageUrl: string;
 
   public constructor(private editor: EditorService) {}

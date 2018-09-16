@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {ImageComponent} from './image/image.component';
-import {SidebarComponent} from './sidebar.component';
-import {LinkComponent} from './link.component';
-import {ButtonComponent} from './button.component';
-import {BackgroundComponent} from './background.component';
+import {ImageSidebar} from './image/image.sidebar';
+import {SidebarSidebar} from './sidebar.sidebar';
+import {LinkSidebar} from './link/link.sidebar';
+import {ButtonSidebar} from './link/button.sidebar';
+import {BackgroundSidebar} from './background.sidebar';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {TemplateSharedModule} from '../../shared/template-shared.module';
 import {ModalComponent} from './image/modal.component';
@@ -14,19 +14,23 @@ import {ImageClickableDirective} from './image/panels/library/image-clickable.di
 
 @NgModule({
   declarations: [
-    BackgroundComponent,
-    ButtonComponent,
-    LinkComponent,
-    SidebarComponent,
-    ImageComponent,
+    /** sidebars */
+    BackgroundSidebar,
+    ButtonSidebar,
+    LinkSidebar,
+    SidebarSidebar,
+    ImageSidebar,
+    /** components */
     ModalComponent,
+    /** panels */
     LibraryPanel,
     UploadPanel,
     UrlPanel,
+    /** directives */
     ImageClickableDirective
   ],
   exports: [
-    SidebarComponent
+    SidebarSidebar
   ],
   imports: [
     ColorPickerModule,
