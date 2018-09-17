@@ -58,16 +58,12 @@ export class Content00Block extends TemplateBlock {
 
       backgroundImage: new Background( ElementType.BG_IMAGE, ''),
 
-<<<<<<< HEAD
       img1: new Image(ElementType.IMAGE, 'https://picsum.photos/200/300').height('30').width('60'),
       img2: new Image(ElementType.IMAGE, 'https://picsum.photos/200/301').height('30').width('60'),
       img3: new Image(ElementType.IMAGE, 'https://picsum.photos/200/302').height('30').width('60'),
       img4: new Image(ElementType.IMAGE, 'https://picsum.photos/200/303').height('30').width('60'),
       img5: new Image(ElementType.IMAGE, 'https://picsum.photos/200/304').height('30').width('60')
-=======
-      img1: new Image(ElementType.IMAGE, 'https://picsum.photos/200/300').height('30'),
-      img2: new Image(ElementType.IMAGE, 'https://picsum.photos/200/301').height('30'),
->>>>>>> contents-blocks
+
     }
   };
 
