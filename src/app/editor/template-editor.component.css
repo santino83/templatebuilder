@@ -50,7 +50,9 @@
 }
 
 .ng-sidebar {
-  background-color: rgb(219, 227, 245)
+  background-color: rgb(219, 227, 245);
+  border-right: 1px solid rgba(136, 132, 138, 0.46);
+  border-left:  1px solid rgba(136, 132, 138, 0.46);
 }
 
 .ng-blocks-sidebar {
@@ -67,7 +69,12 @@
   padding: 5px !important;
 }
 
+.prova {
+  border: 5px solid red;
+}
+
 .ngx-dnd-item {
   padding: unset !important;
 }
+
 
