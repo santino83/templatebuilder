@@ -2,7 +2,7 @@ import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} 
 import {EditorService} from '../../../services/editor.service';
 import {TemplateBlock} from '../../../blocks/template.block';
 import {ModalComponent} from './modal.component';
-import {Link} from '../../../template-editor.types';
+import {Image, Parameter} from '../../../template-editor.types';
 
 @Component({
   selector: 'template-image-sidebar',
@@ -43,6 +43,8 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
 
   private height: string;
 
+  private image: Parameter;
+
   @ViewChild('modal') modal: ModalComponent;
 
   public constructor(private editor: EditorService) {}
@@ -52,6 +54,7 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
       .blockStream$
       .subscribe(obj => {
         this.block = obj.block;
+        this.image = this.block.getParam(this.name)
         this.initValues();
       });
   }
@@ -63,7 +66,7 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
   }
 
   public ngDoCheck() {
-    if (!this.block || !(this.block.getParam(this.name) instanceof Image)) return;
+    if (!this.block || !(this.image instanceof Image)) return;
 
     this.block.setParam(this.name, 'src', this.src);
     this.block.setParam(this.name, 'alt', this.alt);
@@ -80,13 +83,13 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
   }
 
   private initValues() {
-    if ( !this.block.getParam(this.name) || !(this.block.getParam(this.name) instanceof Image)) return;
+    if ( !this.block.getParam(this.name) || !(this.image instanceof Image)) return;
 
     this.src = this.block.getParamValue(this.name, 'src');
     this.alt = this.block.getParamValue(this.name, 'alt');
     this.align = this.block.getParamValue(this.name, 'align');
-    this.width = this.block.getParamValue(this.name, 'style').width || '';
-    this.height = this.block.getParamValue(this.name, 'style').height || '';
+    this.width = this.block.getParamValue(this.name, 'style').width;
+    this.height = this.block.getParamValue(this.name, 'style').height;
   }
 
   private onSelection() {
