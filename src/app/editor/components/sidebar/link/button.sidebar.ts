@@ -1,9 +1,6 @@
 import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../../../services/editor.service';
 import {TemplateBlock} from '../../../blocks/template.block';
-import {Parameter} from '../../../template-editor.types';
-import {EditorService} from '../../../services/editor.service';
-import {TemplateBlock} from '../../../blocks/template.block';
 import {Button, Parameter} from '../../../template-editor.types';
 import {SidebarService} from '../../../services/sidebar.service';
 
