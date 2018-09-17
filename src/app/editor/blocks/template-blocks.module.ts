@@ -10,6 +10,7 @@ import {ImageDirective} from '../directives/editors/image.directive';
 import {TemplateSharedModule} from '../shared/template-shared.module';
 import {QuillModule} from 'ngx-quill';
 import {Content01Block} from './contents/content-01.block';
+import {Content02Block} from './contents/content-02.block';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {Content01Block} from './contents/content-01.block';
     /** blocks **/
     Content00Block,
     Content01Block,
+    Content02Block,
     /** directives */
     HeaderDirective,
     ParagraphDirective,
@@ -31,6 +33,7 @@ import {Content01Block} from './contents/content-01.block';
   entryComponents: [
     Content00Block,
     Content01Block,
+    Content02Block,
     TextEditComponent
   ],
   imports: [
