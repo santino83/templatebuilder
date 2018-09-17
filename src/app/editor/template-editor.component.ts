@@ -89,6 +89,11 @@ export class TemplateEditorComponent implements OnInit {
     this.models.splice(start, 0, info);
   }
 
+  public toggleBlocksSidebar() {
+    this.blocks_side = !this.blocks_side;
+  }
+
+
   public editBackground(block: TemplateBlock) {
     this.editor.set(block);
     this.sidebar.set(SidebarType.BACKGROUND);

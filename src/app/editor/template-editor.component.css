@@ -50,9 +50,24 @@
 }
 
 .ng-sidebar {
-  background-color: whitesmoke;
+  background-color: rgb(219, 227, 245)
+}
+
+.ng-blocks-sidebar {
+  background-color: rgb(219, 227, 245)
 }
 
 .sidebar-container {
   height: 100vh !important;
 }
+
+.ngx-dnd-container {
+  background-color: rgb(219, 227, 245) !important;
+  border: unset !important;
+  padding: 5px !important;
+}
+
+.ngx-dnd-item {
+  padding: unset !important;
+}
+
