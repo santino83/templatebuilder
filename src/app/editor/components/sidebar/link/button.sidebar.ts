@@ -81,8 +81,7 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
   private borderStyle: string | '';
   private borderWidth: string | '';
 
-  public constructor(private editor: EditorService,
-                     private sidebar: SidebarService) {}
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
     this.editor
@@ -102,9 +101,10 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
   public ngDoCheck() {
     if (!this.block || !(this.button instanceof Button)) return;
+    console.log(this.button);
 
     this.block.setParam(this.name, 'text', this.text);
-    this.block.setParam(this.name, 'link', this.link);  // wrong da usare l'oggetto.set(link);
+    this.block.setParam(this.name, 'link', this.link);
     this.block.setParam(this.name, 'style', {
       color: this.textColor,
       backgroundColor: this.backgroundColor,

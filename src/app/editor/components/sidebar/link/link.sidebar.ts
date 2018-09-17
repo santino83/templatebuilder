@@ -51,10 +51,10 @@ export class LinkSidebar implements OnInit, DoCheck, OnChanges {
   private button: Parameter;
   @Input() name: string;
 
-  private text: string | '';
-  private link: string | '';
-  private textColor: string | '';
-  private backgroundColor: string | '';
+  private text: string;
+  private link: string;
+  private textColor: string;
+  private backgroundColor: string;
 
   public constructor(private editor: EditorService) {}
 
@@ -86,12 +86,12 @@ export class LinkSidebar implements OnInit, DoCheck, OnChanges {
   }
 
   public initValues() {
-    if ( !this.link || !(this.button instanceof Link)) return;
+    if ( !this.button || !(this.button instanceof Link)) return;
 
     this.text = this.button['text'];
     this.link = this.button['link'];
-    this.textColor = this.button['style']['color'];
-    this.backgroundColor = this.button['style']['backgroundColor'];
+    this.textColor = this.button['style']['color'] || '';
+    this.backgroundColor = this.button['style']['backgroundColor'] || '';
   }
 
 

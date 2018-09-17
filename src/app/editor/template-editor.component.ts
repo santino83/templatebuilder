@@ -82,14 +82,10 @@ export class TemplateEditorComponent implements OnInit {
         .subscribe((obj) => this.sidebarSelected = obj.type !== undefined);
   }
 
-  private toggleBlocksSidebar() {
-    this.blocks_side = !this.blocks_side;
-  }
-
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
-    const info: BlockInfo = ObjectUtils.deepClone(blockToDuplicate.info);
-    info.params = ObjectUtils.deepClone(blockToDuplicate.getParams());
+    const info: BlockInfo = ObjectUtils.clone(blockToDuplicate.info);
+    info.params = ObjectUtils.clone(blockToDuplicate.getParams());
     this.models.splice(start, 0, info);
   }
 

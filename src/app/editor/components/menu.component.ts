@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {Content00Block} from '../blocks/contents/content-00.block';
-import {Content01Block} from '../blocks/contents/content-01.block';
+import {BLOCKS} from '../blocks';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -21,6 +20,8 @@ export class MenuComponent {
   public models = [];
 
   public constructor() {
-    this.models.push(Content00Block.INFO, Content01Block.INFO);
+    BLOCKS.forEach( (value: object, key: string) => {
+      this.models.push(value['info']);
+    });
   }
 }

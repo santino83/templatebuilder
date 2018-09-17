@@ -26,9 +26,6 @@ import {EditorService} from '../../services/editor.service';
           <div class="col-12 text-center">
             <img [param]="getFullParam('img1')" class="ml-3 mr-3 mb-2 mt-2">
             <img [param]="getFullParam('img2')" class="ml-3 mr-3 mb-2 mt-2">
-            <img [param]="getFullParam('img3')" class="ml-3 mr-3 mb-2 mt-2">
-            <img [param]="getFullParam('img4')" class="ml-3 mr-3 mb-2 mt-2">
-            <img [param]="getFullParam('img5')" class="ml-3 mr-3 mb-2 mt-2">
           </div>
         </div>
       </div>
@@ -61,11 +58,8 @@ export class Content00Block extends TemplateBlock {
 
       backgroundImage: new Background( ElementType.BG_IMAGE, ''),
 
-      img1: new Image(ElementType.IMAGE, 'customers/adobe.svg').height('30'),
-      img2: new Image(ElementType.IMAGE, 'customers/ebay.svg').height('30'),
-      img3: new Image(ElementType.IMAGE, 'customers/samsung.svg').height('30'),
-      img4: new Image(ElementType.IMAGE, 'customers/orange.svg').height('30'),
-      img5: new Image(ElementType.IMAGE, 'customers/salesforce.svg').height('30')
+      img1: new Image(ElementType.IMAGE, 'https://picsum.photos/200/300').height('30'),
+      img2: new Image(ElementType.IMAGE, 'https://picsum.photos/200/301').height('30'),
     }
   };
 
