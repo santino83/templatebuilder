@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Content00Block} from './contents/content-00.block';
 import {TextEditComponent} from '../components/text-edit.component';
-import {MediumEditorDirective} from 'angular2-medium-editor';
 import {HeaderDirective} from '../directives/editors/text/header.directive';
 import {BackgroundDirective} from '../directives/editors/background.directive';
 import {ParagraphDirective} from '../directives/editors/text/paragraph.directive';
@@ -20,7 +19,6 @@ import {Content01Block} from './contents/content-01.block';
     Content00Block,
     Content01Block,
     /** directives */
-    MediumEditorDirective,
     HeaderDirective,
     ParagraphDirective,
     AnchorDirective,

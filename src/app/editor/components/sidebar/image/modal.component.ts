@@ -3,9 +3,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 @Component({
   selector: 'template-modal-image-sidebar',
   template: `
-    <p-dialog modal="true"
-              width="700"
-              [(visible)]="active">
+    <p-dialog width="700" [(visible)]="active">
       <p-header>
         Add or edit media
       </p-header>
