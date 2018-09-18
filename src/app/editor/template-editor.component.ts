@@ -3,7 +3,7 @@ import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {BlockInfo, SidebarType} from './template-editor.types';
 import {EditorService} from './services/editor.service';
 import {TemplateBlock} from './blocks/template.block';
-import {ObjectUtils} from './deprecated/template-editor.utils';
+import {Utils} from './shared/utils';
 import {SidebarService} from './services/sidebar.service';
 
 @Component({
@@ -74,7 +74,7 @@ export class TemplateEditorComponent implements OnInit {
 
   public ngOnInit() {
     this.editor
-        .editing$
+        .editing
         .subscribe(val => this.moves = !val);
 
     this.sidebar
@@ -84,8 +84,8 @@ export class TemplateEditorComponent implements OnInit {
 
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
     const start = this.models.indexOf(model) + 1;
-    const info: BlockInfo = ObjectUtils.clone(blockToDuplicate.info);
-    info.params = ObjectUtils.clone(blockToDuplicate.getParams());
+    const info: BlockInfo = Utils.clone(blockToDuplicate.info);
+    info.params = Utils.clone(blockToDuplicate.getParams());
     this.models.splice(start, 0, info);
   }
 

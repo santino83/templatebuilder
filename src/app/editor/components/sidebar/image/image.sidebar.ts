@@ -51,7 +51,7 @@ export class ImageSidebar implements OnInit, OnChanges, DoCheck {
 
   public ngOnInit() {
     this.editor
-      .blockStream$
+      .blockStream
       .subscribe(obj => {
         this.block = obj.block;
         this.image = this.block.getParam(this.name)

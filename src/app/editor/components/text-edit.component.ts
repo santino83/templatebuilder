@@ -71,7 +71,7 @@ export class TextEditComponent implements OnInit {
   public ngOnInit() {
     this.preValue = this._value;
     this.editor
-      .blockStream$
+      .blockStream
       .subscribe(obj => this.block = obj.block);
   }
 

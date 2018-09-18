@@ -23,12 +23,12 @@ export class Content01Block extends TemplateBlock {
 
   public static readonly ID: string = 'Content01Block';
   public static readonly NAME: string = 'Content 01 Block';
-  public static readonly IMAGE: string = '../../assets/imgs/blocks/contents/1.jpg';
+  public static readonly THUMBNAIL: string = '../../assets/imgs/blocks/contents/1.jpg';
   public static readonly DESCRIPTION: string = 'Content block just one title';
   public static readonly INFO: BlockInfo = {
     id: Content01Block.ID,
     name: Content01Block.NAME,
-    image: Content01Block.IMAGE,
+    thumbnail: Content01Block.THUMBNAIL,
     description: Content01Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {

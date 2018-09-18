@@ -1,6 +1,5 @@
 import {Type} from '@angular/core/src/type';
 import {TemplateBlock} from './blocks/template.block';
-import {environment} from '../../environments/environment.prod';
 
 export const CATEGORY_CONTENT = 'contents';
 
@@ -36,7 +35,7 @@ export interface BlockInfo {
 
   name: string;
 
-  image?: string;
+  thumbnail?: string;
 
   description?: string;
 

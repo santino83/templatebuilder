@@ -1,6 +1,6 @@
 import * as cloneDeep from 'lodash/cloneDeep';
 
-export class ObjectUtils {
+export class Utils {
 
   public static deepClone(obj: any): any {
     return JSON.parse(JSON.stringify(obj));

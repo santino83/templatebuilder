@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ImageSidebar} from './image/image.sidebar';
-import {SidebarSidebar} from './sidebar.sidebar';
+import {MainSidebar} from './main.sidebar';
 import {LinkSidebar} from './link/link.sidebar';
 import {ButtonSidebar} from './link/button.sidebar';
 import {BackgroundSidebar} from './background.sidebar';
@@ -18,7 +18,7 @@ import {ImageClickableDirective} from './image/panels/library/image-clickable.di
     BackgroundSidebar,
     ButtonSidebar,
     LinkSidebar,
-    SidebarSidebar,
+    MainSidebar,
     ImageSidebar,
     /** components */
     ModalComponent,
@@ -30,7 +30,7 @@ import {ImageClickableDirective} from './image/panels/library/image-clickable.di
     ImageClickableDirective
   ],
   exports: [
-    SidebarSidebar
+    MainSidebar
   ],
   imports: [
     ColorPickerModule,

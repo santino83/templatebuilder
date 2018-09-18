@@ -7,17 +7,9 @@ import {BlockEvent, Parameter} from '../template-editor.types';
 export class EditorService {
 
   private blockSource = new ReplaySubject<BlockEvent>(1);
-  private readonly blockStream = this.blockSource.asObservable();
+  public readonly blockStream = this.blockSource.asObservable();
 
-  private editing: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  get blockStream$() {
-    return this.blockStream;
-  }
-
-  get editing$() {
-    return this.editing;
-  }
+  private editing$: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public set(block: TemplateBlock, param?: Parameter): void {
     if (param) {
@@ -26,15 +18,19 @@ export class EditorService {
     this.blockSource.next({block});
   }
 
-  public getBlock(): any {
-    return this.blockSource._getNow();
-  }
-
   public lock(): void {
-    this.editing.next(true);
+    this.editing$.next(true);
   }
 
   public unlock(): void {
-    this.editing.next(false);
+    this.editing$.next(false);
+  }
+
+  public get editing() {
+    return this.editing$;
+  }
+
+  public getBlock(): any {
+    return this.blockSource._getNow();
   }
 }

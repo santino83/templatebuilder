@@ -27,7 +27,7 @@ import {SidebarService} from '../../services/sidebar.service';
     </div>
   `
 })
-export class SidebarSidebar implements OnInit {
+export class MainSidebar implements OnInit {
 
   private typeEnum = SidebarType;
 

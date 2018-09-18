@@ -85,7 +85,7 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
   public ngOnInit() {
     this.editor
-      .blockStream$
+      .blockStream
       .subscribe(obj => {
         this.block = obj.block;
         this.button = this.block.getParam(this.name);
@@ -101,7 +101,6 @@ export class ButtonSidebar implements OnInit, DoCheck, OnChanges {
 
   public ngDoCheck() {
     if (!this.block || !(this.button instanceof Button)) return;
-    console.log(this.button);
 
     this.block.setParam(this.name, 'text', this.text);
     this.block.setParam(this.name, 'link', this.link);

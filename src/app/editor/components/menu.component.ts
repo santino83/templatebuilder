@@ -33,7 +33,6 @@ export class MenuComponent {
 
   public constructor() {
     BLOCKS.forEach( (value: object, key: string) => {
-      console.log(value);
       this.models.push(value['info']);
     });
   }

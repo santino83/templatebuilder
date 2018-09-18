@@ -2,7 +2,7 @@ import {BlockInfo, Button, Parameter, Parameters} from '../template-editor.types
 import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {EditorService} from '../services/editor.service';
 import {BackgroundDirective} from '../directives/editors/background.directive';
-import {ObjectUtils} from '../deprecated/template-editor.utils';
+import {Utils} from '../shared/utils';
 
 
 export abstract class TemplateBlock implements AfterViewInit {
@@ -63,7 +63,7 @@ export abstract class TemplateBlock implements AfterViewInit {
     }
 
     for (const key in obj) {
-      this.params[key] = ObjectUtils.clone(obj[key]);
+      this.params[key] = Utils.clone(obj[key]);
     }
   }
 

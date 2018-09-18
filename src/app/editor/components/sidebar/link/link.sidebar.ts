@@ -60,7 +60,7 @@ export class LinkSidebar implements OnInit, DoCheck, OnChanges {
 
   public ngOnInit() {
     this.editor
-      .blockStream$
+      .blockStream
       .subscribe(obj => {
         this.block = obj.block;
         this.button = this.block.getParam(this.name);
