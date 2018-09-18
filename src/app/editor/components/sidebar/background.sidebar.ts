@@ -9,6 +9,9 @@ import {EditorService} from '../../services/editor.service';
     .cont-style {
       margin: 0px 10px 10px 10px;
     }
+    .color-picker{
+      margin: 0% 0% 0% 18%
+    }
   `],
   template: `
     <div class="container">

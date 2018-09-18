@@ -55,6 +55,10 @@
   border-left:  1px solid rgba(136, 132, 138, 0.46);
 }
 
+.ng-sidebar--right{
+  width: 400px !important;
+}
+
 .ng-blocks-sidebar {
   background-color: rgb(219, 227, 245)
 }
@@ -75,6 +79,16 @@
 
 .ngx-dnd-item {
   padding: unset !important;
+}
+
+.btn-action {
+  padding: 0px 3px 0px 3px;
+  font-size: 23px;
+}
+
+.btn-action:hover{
+  cursor: pointer;
+  font-size: 26px;
 }
 
 

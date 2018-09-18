@@ -32,8 +32,10 @@ export class Content03Block extends TemplateBlock {
     description: Content03Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {
+      /* LAYOUT AND COLOR */
       backgroundColor: new Background( ElementType.BG_COLOR, '#ffffff'),
 
+      /* TITLE AND PARAGRAPH */
       text: new Text( ElementType.PARAGRAPH,
         'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, here live the blind texts. ' +
         'Separated they live right at the coast of the Semantics, a large language ocean.'),

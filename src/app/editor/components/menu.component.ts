@@ -17,7 +17,7 @@ import {BLOCKS} from '../blocks';
                        [dropZones]="['builder-target']">
       <ng-template let-item="model">
         <div *ngIf="item.image">
-          <img [src]="item.image" width="300px" height="57px">
+          <img [src]="item.image" width="400px" height="auto">
         </div>
         <div *ngIf="!item.image">
           {{ item.name }} - {{ item.description }}
@@ -32,9 +32,8 @@ export class MenuComponent {
   public models = [];
 
   public constructor() {
-    BLOCKS.forEach( (value: object, key: string) => {
-      console.log(value);
-      this.models.push(value['info']);
+    BLOCKS.forEach( (value: any, key: string) => {
+      this.models.push(value.info);
     });
   }
 }

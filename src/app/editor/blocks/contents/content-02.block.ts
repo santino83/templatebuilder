@@ -44,7 +44,6 @@ export class Content02Block extends TemplateBlock {
       /* BUTTONS AND LINK */
       link: new Link( ElementType.LINK, 'Bookmarksgrove', 'http://#' )
 
-      /* IMAGES */
     }
   };
 
