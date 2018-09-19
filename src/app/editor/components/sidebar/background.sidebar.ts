@@ -15,8 +15,8 @@ import {Background, BlockEvent} from '../../template-editor.types';
       <div class="row cont-style">
         <div class="text-center">
           <h3> LAYOUT OPTIONS </h3>
-          <span [(colorPicker)]="color"
-                [style.background]="color"
+          <span [(colorPicker)]="bgColor.value"
+                [style.background]="bgColor.value"
                 [cpOutputFormat]="'rgba'"
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
@@ -29,10 +29,10 @@ import {Background, BlockEvent} from '../../template-editor.types';
     </div>
   `
 })
-export class BackgroundSidebar implements OnChanges {
+export class BackgroundSidebar{
 
-  @Input() set event(event: BlockEvent | BlockEvent) {
-    this.block = event.block;
+  @Input() set event(block: TemplateBlock) {
+    this.block = block;
     this.bgColor = this.block.getParam('backgroundColor') as Background;
     this.bgImage = this.block.getParam('backgroundImage') as Background;
   }
@@ -45,11 +45,6 @@ export class BackgroundSidebar implements OnChanges {
 
   private bgImage: Background;
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.color) {
-      this.bgColor.value = this.color;
-    }
-  }
 }
 
 

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Directive, DoCheck, ElementRef, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TemplateBlock} from '../../blocks/template.block';
 import {Background, BlockEvent} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
@@ -6,7 +6,7 @@ import {EditorService} from '../../services/editor.service';
 @Directive({
   selector: 'section'
 })
-export class BackgroundDirective implements OnInit, OnChanges {
+export class BackgroundDirective implements DoCheck {
 
   private block: TemplateBlock;
 
@@ -15,23 +15,20 @@ export class BackgroundDirective implements OnInit, OnChanges {
   private bgImage: Background;
 
   public constructor(private editor: EditorService,
-                     private eRef: ElementRef) {}
-
-  public ngOnInit(): void {
-    this.editor
-      .blockStream
-      .subscribe((event: BlockEvent) => {
-        this.block = event.block;
-        this.bgColor = this.block.getParam('backgroundColor') as Background;
-        this.bgImage = this.block.getParam('backgroundImage') as Background;
-      });
+                     private eRef: ElementRef) {
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
-    if (changes.bgColor) {
-      this.eRef.nativeElement.style.backgroundColor = this.bgColor.value;
-    }else if (changes.bgImage) {
-      this.eRef.nativeElement.style.backgroundImage = 'url(' + this.bgImage.value + ')';
-    }
+
+  ngDoCheck(): void {
+    if (!this.block) return;
+    this.eRef.nativeElement.style.backgroundColor = this.bgColor.value;
+    this.eRef.nativeElement.style.backgroundImage = 'url(' + this.bgImage.value + ')';
+  }
+
+  public setBlock(block: TemplateBlock) {
+    this.block = block;
+    this.bgColor = this.block.getParam('backgroundColor') as Background;
+    this.bgImage = this.block.getParam('backgroundImage') as Background;
+    this.ngDoCheck();
   }
 }

@@ -1,10 +1,10 @@
 import {BlockEvent, BlockInfo, Parameter, Parameters} from '../template-editor.types';
-import {HostListener, ViewChild} from '@angular/core';
+import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
 import {BackgroundDirective} from '../directives/editors/background.directive';
 import {Utils} from '../shared/utils';
 
 
-export abstract class TemplateBlock {
+export abstract class TemplateBlock implements AfterViewInit{
 
   public params: Parameters;
 
@@ -68,5 +68,9 @@ export abstract class TemplateBlock {
     for (const key in obj) {
       this.params[key] = Utils.clone(obj[key]);
     }
+  }
+
+  public ngAfterViewInit() {
+    this.bgDirective.setBlock(this);
   }
 }

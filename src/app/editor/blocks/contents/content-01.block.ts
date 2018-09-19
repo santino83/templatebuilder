@@ -33,6 +33,7 @@ export class Content01Block extends TemplateBlock {
     metadata: {
       /* LAYOUT AND COLOR */
       backgroundColor: new Background( ElementType.BG_COLOR, '#ffffff'),
+      backgroundImage: new Background( ElementType.BG_IMAGE, ''),
 
       /* TITLE AND PARAGRAPH */
       title: new Text( ElementType.TITLE, 'Sample Title'),

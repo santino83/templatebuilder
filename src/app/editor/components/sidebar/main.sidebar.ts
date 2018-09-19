@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {BlockEvent, Parameter, SidebarType} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
+import {TemplateBlock} from '../../blocks/template.block';
 
 @Component({
   selector: 'template-sidebar',
   template: `
     <div [ngSwitch]="type">
       <template-background-sidebar
-        [event]="event"
+        [event]="block"
         *ngSwitchCase="typeEnum.BACKGROUND">
       </template-background-sidebar>
       
@@ -32,6 +33,8 @@ export class MainSidebar implements OnInit {
 
   private typeEnum = SidebarType;
 
+  private block: TemplateBlock;
+
   private type: SidebarType;
 
   private param: Parameter;
@@ -42,8 +45,9 @@ export class MainSidebar implements OnInit {
     this.editor
         .blockStream
         .subscribe((event: BlockEvent) => {
-            this.type = event.sidebar;
-            this.param = event.param;
+          this.block = event.block;
+          this.type = event.sidebar;
+          this.param = event.param;
           }
         );
   }
