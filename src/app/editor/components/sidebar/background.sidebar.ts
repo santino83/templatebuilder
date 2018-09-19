@@ -1,6 +1,6 @@
-import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, DoCheck, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../../blocks/template.block';
-import {EditorService} from '../../services/editor.service';
+import {Background, BlockEvent} from '../../template-editor.types';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -12,7 +12,7 @@ import {EditorService} from '../../services/editor.service';
   `],
   template: `
     <div class="container">
-      <div class="row" class="cont-style">
+      <div class="row cont-style">
         <div class="text-center">
           <h3> LAYOUT OPTIONS </h3>
           <span [(colorPicker)]="color"
@@ -21,8 +21,7 @@ import {EditorService} from '../../services/editor.service';
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
           <div>
-              <input type="text" [(ngModel)]="imageUrl"> <br>
-              <button class="btn" (click)="setImage()">Set Image</button>
+              <input type="text" [(ngModel)]="bgImage.value"> <br>
           </div>
         </div>
 
@@ -30,36 +29,27 @@ import {EditorService} from '../../services/editor.service';
     </div>
   `
 })
-export class BackgroundSidebar implements OnInit, DoCheck {
+export class BackgroundSidebar implements OnChanges {
+
+  @Input() set event(event: BlockEvent | BlockEvent) {
+    this.block = event.block;
+    this.bgColor = this.block.getParam('backgroundColor') as Background;
+    this.bgImage = this.block.getParam('backgroundImage') as Background;
+  }
 
   private block: TemplateBlock;
 
   private color: string;
 
-  private imageUrl: string;
+  private bgColor: Background;
 
-  public constructor(private editor: EditorService) {}
+  private bgImage: Background;
 
-  public ngOnInit() {
-      this.editor.blockStream$.subscribe(
-       obj => {
-         this.block = obj.block;
-         this.color = this.block.getParamValue('backgroundColor', 'value');
-       });
-  }
-
-  public ngDoCheck() {
-    if (this.block) {
-      this.block.setParam('backgroundColor', 'value', this.color);
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.color) {
+      this.bgColor.value = this.color;
     }
   }
-
-  public setImage() {
-    this.block.setParam('backgroundImage', 'value', this.imageUrl);
-  }
-
-
-
 }
 
 

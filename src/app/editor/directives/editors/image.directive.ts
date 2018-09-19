@@ -1,6 +1,5 @@
 import {Directive, ElementRef, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
-import {SidebarType} from '../../template-editor.types';
-import {SidebarService} from '../../services/sidebar.service';
+import {BlockEvent, Image} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
 
 @Directive({
@@ -8,15 +7,21 @@ import {EditorService} from '../../services/editor.service';
 })
 export class ImageDirective implements OnInit, OnChanges {
 
-  @Input() protected param: any;
+  private _input: BlockEvent | BlockEvent;
+
+  private param: Image;
+
+  @Input() set input(input: BlockEvent | BlockEvent) {
+    this._input = input;
+    this.param = input.param as Image;
+  }
 
   @HostListener('dblclick') setElement() {
-    this.sidebar.set(SidebarType.IMAGE, this.param.name);
+    this.editor.select(this._input);
   }
 
   public constructor(private eRef: ElementRef,
                      private editor: EditorService,
-                     private sidebar: SidebarService,
                      private renderer: Renderer2) {
   }
 
@@ -26,14 +31,12 @@ export class ImageDirective implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if ( this.param && changes.param ) {
-      this.renderer.setAttribute(this.eRef.nativeElement, 'src', this.param.object.src);
-      this.renderer.setAttribute(this.eRef.nativeElement, 'alt', this.param.object.alt);
-      this.renderer.setAttribute(this.eRef.nativeElement, 'align', this.param.object.align);
-      this.eRef.nativeElement.style.width = this.param.object.style.width + 'px';
-      this.eRef.nativeElement.style.height = this.param.object.style.height + 'px';
 
-    }
+      this.eRef.nativeElement.src = this.param.src;
+      this.eRef.nativeElement.alt = this.param.alt;
+      this.eRef.nativeElement.align = this.param.align;
+      this.eRef.nativeElement.style.width = this.param.style['width'] + 'px';
+      this.eRef.nativeElement.style.height = this.param.style['height'] + 'px';
   }
 
 }

@@ -1,27 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {SidebarType} from '../../template-editor.types';
-import {SidebarService} from '../../services/sidebar.service';
+import {BlockEvent, Parameter, SidebarType} from '../../template-editor.types';
+import {EditorService} from '../../services/editor.service';
 
 @Component({
   selector: 'template-sidebar',
   template: `
     <div [ngSwitch]="type">
       <template-background-sidebar
+        [event]="event"
         *ngSwitchCase="typeEnum.BACKGROUND">
       </template-background-sidebar>
       
       <template-button-sidebar 
-        [name]="paramName" 
+        [param]="param" 
         *ngSwitchCase="typeEnum.BUTTON">
       </template-button-sidebar>
 
       <template-link-sidebar
-        [name]="paramName"
+        [param]="param"
         *ngSwitchCase="typeEnum.LINK">
       </template-link-sidebar>
 
       <template-image-sidebar
-        [name]="paramName"
+        [param]="param"
         *ngSwitchCase="typeEnum.IMAGE">
       </template-image-sidebar>
     </div>
@@ -33,18 +34,16 @@ export class MainSidebar implements OnInit {
 
   private type: SidebarType;
 
-  private paramName: string;
+  private param: Parameter;
 
-  public constructor(private sidebar: SidebarService) {}
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
-    this.sidebar
-        .selected$
-        .subscribe(obj => {
-            this.type = obj.type;
-            if (obj.paramName) {
-              this.paramName = obj.paramName;
-            }
+    this.editor
+        .blockStream
+        .subscribe((event: BlockEvent) => {
+            this.type = event.sidebar;
+            this.param = event.param;
           }
         );
   }

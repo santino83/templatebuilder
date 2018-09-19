@@ -6,6 +6,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {AbstractDirective} from './abstract.directive';
+import {EditorService} from '../../../services/editor.service';
 
 @Directive({
   selector: 'p'
@@ -25,8 +26,9 @@ export class ParagraphDirective extends AbstractDirective implements OnInit {
 
   public constructor(cfr: ComponentFactoryResolver,
                      view: ViewContainerRef,
-                     renderer: Renderer2) {
-    super(cfr, view, renderer, toolbar);
+                     renderer: Renderer2,
+                     editor: EditorService) {
+    super(cfr, view, renderer, editor, toolbar);
   }
 
   public ngOnInit(): void {

@@ -48,13 +48,12 @@ export interface BlockInfo {
 }
 
 export interface BlockEvent {
-  block: TemplateBlock;
-  param?: Parameter;
-}
 
-export interface SidebarEvent {
-  type: SidebarType;
-  paramName?: string;
+  block: TemplateBlock;
+
+  param?: Parameter;
+
+  sidebar?: SidebarType;
 }
 
 export interface Parameters {
@@ -62,14 +61,18 @@ export interface Parameters {
 }
 
 export abstract class Parameter {
-  protected constructor(protected type: ElementType,
-                        protected style: {} = {}) {}
+
+  public sidebar: SidebarType;
+
+  protected constructor(public type: ElementType,
+                        public style: {} = {}) {}
 }
 
 export class Text extends Parameter {
   constructor(type: ElementType,
               public value: string) {
     super(type);
+    this.sidebar = undefined;
   }
 }
 
@@ -77,6 +80,7 @@ export class Background extends Parameter {
   constructor(type: ElementType,
               public value: string) {
     super(type);
+    this.sidebar = SidebarType.BACKGROUND;
   }
 }
 
@@ -86,6 +90,7 @@ export class Image extends Parameter {
               public alt: string = '',
               public align: string = '') {
     super(type);
+    this.sidebar = SidebarType.IMAGE
     this.src = src;
   }
 
@@ -105,6 +110,7 @@ export class Link extends Parameter {
               public text: string,
               public link: string) {
     super(type);
+    this.sidebar = SidebarType.LINK;
   }
 }
 
@@ -112,6 +118,7 @@ export class Button extends Link {
 
   constructor(type: ElementType, text: string, link: string) {
     super(type, text, link);
+    this.sidebar = SidebarType.BUTTON;
     this.style = {
       color: '#ffffff',
       backgroundColor: '#528bff',

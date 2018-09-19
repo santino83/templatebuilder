@@ -1,7 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import {EditorService} from '../services/editor.service';
-import {TemplateBlock} from '../blocks/template.block';
-import {SidebarService} from '../services/sidebar.service';
+import {BlockEvent, Text} from '../template-editor.types';
 
 
 @Component({
@@ -32,7 +31,8 @@ import {SidebarService} from '../services/sidebar.service';
   .ql-editor h6 {
     font-size: 0.75rem !important;
   }
-  .ql-align-right {  /*da rivedere perche l'align di ngx-quill usa queste classi, serve un interprete prima di inviare a backend oppure definire le classi  */
+  .ql-align-right {  /*da rivedere perche l'align di ngx-quill usa queste classi, 
+  serve un interprete prima di inviare a backend oppure definire le classi  */
     text-align: right;
   }
   .ql-align-left {
@@ -43,36 +43,29 @@ import {SidebarService} from '../services/sidebar.service';
   }
   `],
   template: `
-    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="_value | sanitizeHtml"></div>
+    <div class="te-et label" (dblclick)="onEdit()" *ngIf="!_editing" [innerHTML]="param.value | sanitizeHtml"></div>
     <div class="form-group" *ngIf="_editing">
       
-      <quill-editor [(ngModel)]="_value" [modules]="_toolbar" theme="bubble"></quill-editor>
+      <quill-editor [(ngModel)]="param.value" [modules]="toolbar" theme="bubble"></quill-editor>
       
     </div>
   `
 })
 export class TextEditComponent implements OnInit {
 
-  private _toolbar: {};
-  private _name: string;
-  private _value: string;
+  private param: Text;
 
   private preValue: string;
 
-  private block: TemplateBlock;
-
   private _editing = false;
 
+  public toolbar: {};
+
   public constructor(private editor: EditorService,
-                     public eRef: ElementRef,
-                     private sidebar: SidebarService){
-  }
+                     public eRef: ElementRef) {}
 
   public ngOnInit() {
-    this.preValue = this._value;
-    this.editor
-      .blockStream
-      .subscribe(obj => this.block = obj.block);
+    this.preValue = this.param.value;
   }
 
   @HostListener('document:click', ['$event'])
@@ -95,49 +88,28 @@ export class TextEditComponent implements OnInit {
       return;
     }
 
-    this.sidebar.unset();
     this._editing = true;
     this.editor.lock();
   }
 
   private onConfirm() {
-    if (!this._value || 0 === this._value.trim().length) {
+    if (!this.param || 0 === this.param.value.trim().length) {
       return;
     }
 
-    this.block.setParam(this._name, 'value', this._value);
-    this.preValue = this._value;
+    this.preValue = this.param.value;
     this._editing = false;
     this.editor.unlock();
   }
 
   private cancel(): void {
-    this._value = this.preValue;
+    this.param.value = this.preValue;
     this._editing = false;
     this.editor.unlock();
   }
 
-  public get name(): string {
-    return this._name;
-  }
-
-  public set name(name: string) {
-    this._name = name;
-  }
-
-  public get value(): string {
-    return this._value;
-  }
-
-  public set value(value: string) {
-    this._value = value;
-  }
-
-  public get toolbar(): {} {
-    return this._toolbar;
-  }
-
-  public set toolbar(toolbar: {}) {
-    this._toolbar = toolbar;
+  public set(block: BlockEvent, toolbar: {}) {
+    this.param = block.param as Text;
+    this.toolbar = toolbar;
   }
 }

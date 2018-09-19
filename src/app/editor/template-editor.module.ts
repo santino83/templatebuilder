@@ -5,7 +5,6 @@ import {MenuComponent} from './components/menu.component';
 import {NgxDnDModule} from '@swimlane/ngx-dnd';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
 import {EditorService} from './services/editor.service';
-import {SidebarService} from './services/sidebar.service';
 import {TemplateSidebarModule} from './components/sidebar/template-sidebar.module';
 import {SidebarModule} from 'ng-sidebar';
 import {TemplateSharedModule} from './shared/template-shared.module';
@@ -28,7 +27,6 @@ import {TemplateSharedModule} from './shared/template-shared.module';
   ],
   providers: [
     EditorService,
-    SidebarService
   ],
 })
 export class TemplateEditorModule {

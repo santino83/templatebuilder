@@ -16,10 +16,10 @@ import {BLOCKS} from '../blocks';
                        [copy]="true"
                        [dropZones]="['builder-target']">
       <ng-template let-item="model">
-        <div *ngIf="item.image">
-          <img [src]="item.image" width="300px" height="57px">
+        <div *ngIf="item.thumbnail">
+          <img [src]="item.thumbnail" width="300px" height="57px">
         </div>
-        <div *ngIf="!item.image">
+        <div *ngIf="!item.thumbnail">
           {{ item.name }} - {{ item.description }}
         </div>
       </ng-template>

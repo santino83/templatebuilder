@@ -1,7 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
 import {Background, BlockInfo, CATEGORY_CONTENT, Text, ElementType} from '../../template-editor.types';
-import {EditorService} from '../../services/editor.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -11,7 +10,7 @@ import {EditorService} from '../../services/editor.service';
       <div class="container">
         <div class="row justify-content-center">
           <div class="col col-md-8 text-center">
-            <h1 [param]="getFullParam('title')"></h1>
+            <h1 [input]="get('title')"></h1>
           </div>
         </div>
       </div>
@@ -44,7 +43,7 @@ export class Content01Block extends TemplateBlock {
     }
   };
 
-  constructor(editor: EditorService) {
-    super(Content01Block.INFO, editor);
+  constructor() {
+    super(Content01Block.INFO);
   }
 }

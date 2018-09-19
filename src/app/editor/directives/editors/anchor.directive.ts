@@ -1,39 +1,38 @@
-import {Directive, ElementRef, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
-import {SidebarType} from '../../template-editor.types';
-import {SidebarService} from '../../services/sidebar.service';
+import {Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
+import {BlockEvent, Link} from '../../template-editor.types';
 
 @Directive({
   selector: 'a'
 })
 export class AnchorDirective implements OnChanges {
 
-  @Input() protected param: any;
+  private _input: BlockEvent | BlockEvent;
 
-  @HostListener('dblclick') setElement() {
-    this.param.object.type === SidebarType.BUTTON ?
-      this.sidebar.set(SidebarType.BUTTON, this.param.name)
-      :
-      this.sidebar.set(SidebarType.LINK, this.param.name);
+  private param: Link;
+
+  @Input() set input(input: BlockEvent | BlockEvent) {
+    this._input = input;
+    this.param = input.param as Link;
+  }
+
+  @HostListener('dblclick') setBlock() {
+    this.editor.select(this._input);
   }
 
   public constructor(private eRef: ElementRef,
-                     private editor: EditorService,
-                     private sidebar: SidebarService) {}
+                     private editor: EditorService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if ( this.param && changes.param ) {
+      this.eRef.nativeElement.innerHTML = this.param.text;
+      this.eRef.nativeElement.href = this.param.link;
 
-      this.eRef.nativeElement.innerHTML = this.param.object.text;
-      this.eRef.nativeElement.href = this.param.object.link;
-
-      for (const prop of Object.keys(this.param.object.style)) {
-        this.eRef.nativeElement.style[prop] = this.param.object.style[prop];
+      for (const prop of Object.keys(this.param.style)) {
+        this.eRef.nativeElement.style[prop] = this.param.style[prop];
       }
 
       /* porcata da levare */
-      this.eRef.nativeElement.style.borderWidth = this.param.object.style.borderWidth + 'px';
-    }
+      this.eRef.nativeElement.style['borderWidth'] = this.param.style['borderWidth'] + 'px';
   }
 
 }

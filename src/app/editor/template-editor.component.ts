@@ -1,10 +1,9 @@
 import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {BlockRendererDirective} from './directives/block-renderer.directive';
-import {BlockInfo, SidebarType} from './template-editor.types';
+import {BlockEvent, BlockInfo, SidebarType} from './template-editor.types';
 import {EditorService} from './services/editor.service';
 import {TemplateBlock} from './blocks/template.block';
 import {Utils} from './shared/utils';
-import {SidebarService} from './services/sidebar.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -30,7 +29,7 @@ import {SidebarService} from './services/sidebar.service';
           <em class="fa fa-bars"></em>
         </button>
 
-        <button class="btn btn-layout" *ngIf="sidebarSelected" (click)="sidebar.unset()" title="chiudi pannello">
+        <button class="btn btn-layout" *ngIf="sidebarSelected" (click)="sidebarSelected = false" title="chiudi pannello">
           <em class="fa fa-remove"></em>
         </button>
 
@@ -69,17 +68,18 @@ export class TemplateEditorComponent implements OnInit {
 
   private sidebarSelected = false;
 
-  public constructor(private editor: EditorService,
-                     private sidebar: SidebarService) {}
+  public constructor(private editor: EditorService) {}
 
   public ngOnInit() {
     this.editor
         .editing
         .subscribe(val => this.moves = !val);
 
-    this.sidebar
-        .selected$
-        .subscribe((obj) => this.sidebarSelected = obj.type !== undefined);
+    this.editor
+        .blockStream
+        .subscribe((event: BlockEvent) => {
+          this.sidebarSelected = event.sidebar !== undefined;
+        });
   }
 
   public duplicate(blockToDuplicate: TemplateBlock, model: BlockInfo) {
@@ -93,10 +93,8 @@ export class TemplateEditorComponent implements OnInit {
     this.blocks_side = !this.blocks_side;
   }
 
-
   public editBackground(block: TemplateBlock) {
-    this.editor.set(block);
-    this.sidebar.set(SidebarType.BACKGROUND);
+    this.editor.select({block: block, sidebar: SidebarType.BACKGROUND} as BlockEvent);
   }
 
   private remove(model: BlockInfo) {

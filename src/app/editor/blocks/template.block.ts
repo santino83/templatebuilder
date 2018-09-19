@@ -1,11 +1,10 @@
-import {BlockInfo, Button, Parameter, Parameters} from '../template-editor.types';
-import {AfterViewInit, HostListener, ViewChild} from '@angular/core';
-import {EditorService} from '../services/editor.service';
+import {BlockEvent, BlockInfo, Parameter, Parameters} from '../template-editor.types';
+import {HostListener, ViewChild} from '@angular/core';
 import {BackgroundDirective} from '../directives/editors/background.directive';
 import {Utils} from '../shared/utils';
 
 
-export abstract class TemplateBlock implements AfterViewInit {
+export abstract class TemplateBlock {
 
   public params: Parameters;
 
@@ -13,8 +12,7 @@ export abstract class TemplateBlock implements AfterViewInit {
 
   @ViewChild(BackgroundDirective) private bgDirective: BackgroundDirective;
 
-  protected constructor(info: BlockInfo,
-                        private editor: EditorService) {
+  protected constructor(info: BlockInfo) {
     this._info = info;
     this.setParams(this.info.metadata);
   }
@@ -29,9 +27,14 @@ export abstract class TemplateBlock implements AfterViewInit {
     event.preventDefault();
   }
 
-  @HostListener('dblclick', ['$event'])
-  setBlock() {
-    this.editor.set(this);
+  public get(paramName: string) {
+    const event: BlockEvent = {block: this};
+    const param = this.params[paramName];
+
+    event.param = param;
+    event.sidebar = param.sidebar;
+
+    return event;
   }
 
   public getParam(paramName: string): Parameter {
@@ -65,9 +68,5 @@ export abstract class TemplateBlock implements AfterViewInit {
     for (const key in obj) {
       this.params[key] = Utils.clone(obj[key]);
     }
-  }
-
-  public ngAfterViewInit(): void {
-    this.bgDirective.setInstance(this);
   }
 }

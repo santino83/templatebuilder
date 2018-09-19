@@ -1,8 +1,6 @@
-import {Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {EditorService} from '../../../services/editor.service';
-import {TemplateBlock} from '../../../blocks/template.block';
+import {Component, Input, ViewChild} from '@angular/core';
 import {ModalComponent} from './modal.component';
-import {Image, Parameter} from '../../../template-editor.types';
+import {Image} from '../../../template-editor.types';
 
 @Component({
   selector: 'template-image-sidebar',
@@ -10,90 +8,35 @@ import {Image, Parameter} from '../../../template-editor.types';
     <button type="button" (click)="onSelection()" pButton icon="pi pi-info-circle" label="Change image"></button>
     <br>
     alt
-    <input type="text" class="form-control" [(ngModel)]="alt">
+    <input type="text" class="form-control" [(ngModel)]="param.alt">
     <br>
     align
-    <select [(ngModel)]="align">
+    <select [(ngModel)]="param.align">
       <option value="left">Left</option>
       <option value="center">Center</option>
       <option value="right">Right</option>
     </select>
     <br>
     width
-    <input type="text" class="form-control" [(ngModel)]="width">    
+    <input type="text" class="form-control" [(ngModel)]="param.style.width">    
     <br>
     height
-    <input type="text" class="form-control" [(ngModel)]="height">
+    <input type="text" class="form-control" [(ngModel)]="param.style.height">
     <template-modal-image-sidebar #modal (imageSelected)="setImage($event)"></template-modal-image-sidebar>
   `
 })
-export class ImageSidebar implements OnInit, OnChanges, DoCheck {
+export class ImageSidebar {
 
-  @Input() name: string;
-
-  private block: TemplateBlock;
-
-  private src: string;
-
-  private alt: string;
-
-  private align: string;
-
-  private width: string;
-
-  private height: string;
-
-  private image: Parameter;
+  @Input() param: Image;
 
   @ViewChild('modal') modal: ModalComponent;
 
-  public constructor(private editor: EditorService) {}
-
-  public ngOnInit() {
-    this.editor
-      .blockStream
-      .subscribe(obj => {
-        this.block = obj.block;
-        this.image = this.block.getParam(this.name)
-        this.initValues();
-      });
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (this.block && changes.name) {
-      this.initValues();
-    }
-  }
-
-  public ngDoCheck() {
-    if (!this.block || !(this.image instanceof Image)) return;
-
-    this.block.setParam(this.name, 'src', this.src);
-    this.block.setParam(this.name, 'alt', this.alt);
-    this.block.setParam(this.name, 'align', this.align);
-
-    this.block.setParam(this.name, 'style', {
-      width: this.width,
-      height: this.height,
-    });
-  }
-
-  private setImage(path: string): void {
-    this.src = path;
-  }
-
-  private initValues() {
-    if ( !this.block.getParam(this.name) || !(this.image instanceof Image)) return;
-
-    this.src = this.block.getParamValue(this.name, 'src');
-    this.alt = this.block.getParamValue(this.name, 'alt');
-    this.align = this.block.getParamValue(this.name, 'align');
-    this.width = this.block.getParamValue(this.name, 'style').width;
-    this.height = this.block.getParamValue(this.name, 'style').height;
-  }
-
   private onSelection() {
-    this.modal.open(this.src);
+    this.modal.open(this.param.src);
+  }
+
+  private setImage(src: string) {
+    this.param.src = src;
   }
 
 }
