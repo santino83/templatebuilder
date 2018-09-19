@@ -111,6 +111,10 @@ export class Link extends Parameter {
               public link: string) {
     super(type);
     this.sidebar = SidebarType.LINK;
+    this.style = {
+      color: '',
+      backgroundColor: '',
+    };
   }
 }
 

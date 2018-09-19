@@ -51,7 +51,7 @@ import {Button} from '../../../template-editor.types';
           
           <input class="input" type="number" [(ngModel)]="param.style.borderWidth"><br>
           
-          <select class="input" [(ngModel)]="borderStyle">
+          <select class="input" [(ngModel)]="param.style.borderStyle">
             <option value="dotted">Dotted</option>
             <option value="dashed">Dashed</option>
             <option value="solid">Solid</option>
