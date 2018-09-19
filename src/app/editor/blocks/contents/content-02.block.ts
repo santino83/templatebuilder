@@ -23,13 +23,8 @@ export class Content02Block extends TemplateBlock {
 
   public static readonly ID: string = 'Content02Block';
   public static readonly NAME: string = 'Content 02 Block';
-<<<<<<< HEAD
   public static readonly THUMBNAIL: string = '../../assets/imgs/blocks/contents/2.jpg';
   public static readonly DESCRIPTION: string = 'Content block just one title';
-=======
-  public static readonly IMAGE: string = '../../assets/imgs/blocks/contents/2.jpg';
-  public static readonly DESCRIPTION: string = 'Content block just paragraph and link';
->>>>>>> contents-blocks
   public static readonly INFO: BlockInfo = {
     id: Content02Block.ID,
     name: Content02Block.NAME,
@@ -49,11 +44,6 @@ export class Content02Block extends TemplateBlock {
       /* BUTTONS AND LINK */
       link: new Link(ElementType.LINK, 'Bookmarksgrove', 'http://#')
 
-<<<<<<< HEAD
-      /* IMAGES */
-
-=======
->>>>>>> contents-blocks
     }
   };
 

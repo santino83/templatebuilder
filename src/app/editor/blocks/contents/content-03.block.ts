@@ -1,7 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {TemplateBlock} from '../template.block';
-import {Background, BlockInfo, CATEGORY_CONTENT, ElementType, Link, Text} from '../../template-editor.types';
-import {EditorService} from '../../services/editor.service';
+import {Background, BlockInfo, CATEGORY_CONTENT, ElementType, Text} from '../../template-editor.types';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -11,7 +10,7 @@ import {EditorService} from '../../services/editor.service';
       <div class="container">
         <div class="row">
           <div class="col col-sm-10 col-md-8 text-left">
-            <p [param]="getFullParam('text')"></p>
+            <p [input]="get('text')"></p>
           </div>
         </div>
       </div>
@@ -23,12 +22,12 @@ export class Content03Block extends TemplateBlock {
 
   public static readonly ID: string = 'Content03Block';
   public static readonly NAME: string = 'Content 03 Block';
-  public static readonly IMAGE: string = '../../assets/imgs/blocks/contents/3.jpg';
+  public static readonly THUMBNAIL: string = '../../assets/imgs/blocks/contents/3.jpg';
   public static readonly DESCRIPTION: string = 'Content block with a left paragraph';
   public static readonly INFO: BlockInfo = {
     id: Content03Block.ID,
     name: Content03Block.NAME,
-    image: Content03Block.IMAGE,
+    thumbnail: Content03Block.THUMBNAIL,
     description: Content03Block.DESCRIPTION,
     categories: [CATEGORY_CONTENT],
     metadata: {
@@ -43,7 +42,7 @@ export class Content03Block extends TemplateBlock {
     }
   };
 
-  constructor(editor: EditorService) {
-    super(Content03Block.INFO, editor);
+  constructor() {
+    super(Content03Block.INFO);
   }
 }

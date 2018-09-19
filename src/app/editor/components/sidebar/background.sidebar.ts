@@ -9,13 +9,10 @@ import {Background, BlockEvent} from '../../template-editor.types';
     .cont-style {
       margin: 0px 10px 10px 10px;
     }
-    .color-picker{
-      margin: 0% 0% 0% 18%
-    }
   `],
   template: `
     <div class="container">
-      <div class="row cont-style">
+      <div class="row justify-content-center">
         <div class="text-center">
           <h3> LAYOUT OPTIONS </h3>
           <span [(colorPicker)]="bgColor.value"
@@ -23,16 +20,14 @@ import {Background, BlockEvent} from '../../template-editor.types';
                 [cpOutputFormat]="'rgba'"
                 [cpToggle]="true"
                 [cpDialogDisplay]="'inline'"></span><br>
-          <div>
-              <input type="text" [(ngModel)]="bgImage.value"> <br>
-          </div>
+        
+          <input type="text" [(ngModel)]="bgImage.value">
         </div>
-
       </div>
     </div>
   `
 })
-export class BackgroundSidebar{
+export class BackgroundSidebar {
 
   @Input() set event(block: TemplateBlock) {
     this.block = block;
@@ -41,8 +36,6 @@ export class BackgroundSidebar{
   }
 
   private block: TemplateBlock;
-
-  private color: string;
 
   private bgColor: Background;
 
