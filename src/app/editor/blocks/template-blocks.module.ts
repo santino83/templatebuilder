@@ -11,6 +11,7 @@ import {TemplateSharedModule} from '../shared/template-shared.module';
 import {QuillModule} from 'ngx-quill';
 import {Content01Block} from './contents/content-01.block';
 import {Content02Block} from './contents/content-02.block';
+import {Content03Block} from './contents/content-03.block';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {Content02Block} from './contents/content-02.block';
     Content00Block,
     Content01Block,
     Content02Block,
+    Content03Block,
     /** directives */
     HeaderDirective,
     ParagraphDirective,
@@ -34,6 +36,7 @@ import {Content02Block} from './contents/content-02.block';
     Content00Block,
     Content01Block,
     Content02Block,
+    Content03Block,
     TextEditComponent
   ],
   imports: [

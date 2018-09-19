@@ -44,9 +44,9 @@ import {Utils} from './shared/utils';
             <ng-template let-model="model" let-template="template">
               <div class="ti-tbrd" templateBlockRendererDirective #BRD="BRDirective" [info]="model">
                 <div class="action-btns">
-                  <a (click)="editBackground(BRD.getBlock())" class="btn" title="Change Background"><em class="fa fa-edit"></em></a>
-                  <a (click)="duplicate(BRD.getBlock(), model)" class="btn" title="Duplicate"><em class="fa fa-copy"></em></a>
-                  <a (click)="remove(model)" class="btn" title="Remove"><em class="fa fa-trash"></em></a>
+                  <a (click)="editBackground(BRD.getBlock())" class="btn-action" title="Change color "><em class="fa fa-edit"></em></a>
+                  <a (click)="duplicate(BRD.getBlock(), model)" class="btn-action" title="Duplicate"><em class="fa fa-copy"></em></a>
+                  <a (click)="remove(model)" class="btn-action" title="Remove"><em class="fa fa-trash"></em></a>
                 </div>
               </div>
             </ng-template>

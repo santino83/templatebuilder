@@ -7,7 +7,7 @@ import {BlockEvent, Text} from '../template-editor.types';
   encapsulation: ViewEncapsulation.None,
   selector: 'template-text-edit',
   styles: [`    
-  .ql-container, .ql-editor{
+    .ql-container, .ql-editor{
     font-size: unset !important;
     padding: unset !important;
     text-align: unset !important;
@@ -31,8 +31,12 @@ import {BlockEvent, Text} from '../template-editor.types';
   .ql-editor h6 {
     font-size: 0.75rem !important;
   }
+<<<<<<< HEAD
   .ql-align-right {  /*da rivedere perche l'align di ngx-quill usa queste classi, 
   serve un interprete prima di inviare a backend oppure definire le classi  */
+=======
+  .ql-align-right {  
+>>>>>>> contents-blocks
     text-align: right;
   }
   .ql-align-left {
