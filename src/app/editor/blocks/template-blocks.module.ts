@@ -12,6 +12,10 @@ import {QuillModule} from 'ngx-quill';
 import {Content01Block} from './contents/content-01.block';
 import {Content02Block} from './contents/content-02.block';
 import {Content03Block} from './contents/content-03.block';
+import {Content04Block} from './contents/content-04.block';
+import {Content05Block} from './contents/content-05.block';
+import {Content06Block} from './contents/content-06.block';
+import {Content07Block} from './contents/content-07.block';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import {Content03Block} from './contents/content-03.block';
     Content01Block,
     Content02Block,
     Content03Block,
+    Content04Block,
+    Content05Block,
+    Content06Block,
+    Content07Block,
     /** directives */
     HeaderDirective,
     ParagraphDirective,
@@ -37,6 +45,10 @@ import {Content03Block} from './contents/content-03.block';
     Content01Block,
     Content02Block,
     Content03Block,
+    Content04Block,
+    Content05Block,
+    Content06Block,
+    Content07Block,
     TextEditComponent
   ],
   imports: [
