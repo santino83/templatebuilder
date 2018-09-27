@@ -4,39 +4,53 @@ import {Link} from '../../../template-editor.types';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'template-link-sidebar',
-  styleUrls: ['button-link.css'],
+  styleUrls: ['../right-sidebar.css'],
   template: `
     <div class="container cont-style">
       <h3 class="text-center">Cambia Link</h3>
-      <div class="row">
-        
-        <div class="col-sm">
-          <p class="text">Testo:</p>
-          <p class="text">Link:</p>
-          <p class="text">ColoreTesto:</p>
-          <p class="text">BgColor:</p>
+
+      <div class="row justify-content-md-center">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-font"></i></span>
+          <input type="text" pInputText placeholder="Username" [(ngModel)]="param.text">
         </div>
-        
-        <div class="col-sm">
-          <input type="text" class="input" [(ngModel)]="param.text"><br>
-          
-          <input type="text" class="input" [(ngModel)]="param.link"><br>
-          
-          <input class="input" 
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-chain"></i></span>
+          <input type="text" pInputText placeholder="Username" [(ngModel)]="param.link">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-font"></i></span>
+          <input type="text"
+                 pInputText
+                 [(ngModel)]="param.style.color"
                  [value]="param.style.color"
                  [(colorPicker)]="param.style.color"
                  [cpWidth]="'auto'"
                  [cpPosition]="'bottom'"
-                 [style.background]="param.style.color"><br>
-          
-          <input class="input" 
+                 [style.background]="param.style.color">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-square"></i></span>
+          <input type="text"
+                 pInputText
+                 [(ngModel)]="param.style.backgroundColor"
                  [value]="param.style.backgroundColor"
                  [(colorPicker)]="param.style.backgroundColor"
                  [cpWidth]="'auto'"
                  [cpPosition]="'bottom'"
-                 [style.background]="param.style.backgroundColor"/><br>
+                 [style.background]="param.style.backgroundColor"/>
         </div>
       </div>
+      
     </div>
   `
 })

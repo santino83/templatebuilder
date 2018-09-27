@@ -11,6 +11,7 @@ import {LibraryPanel} from './image/panels/library/library.panel';
 import {UploadPanel} from './image/panels/upload.panel';
 import {UrlPanel} from './image/panels/url.panel';
 import {ImageClickableDirective} from './image/panels/library/image-clickable.directive';
+import {DropdownModule, MultiSelectModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {ImageClickableDirective} from './image/panels/library/image-clickable.di
   ],
   imports: [
     ColorPickerModule,
-    TemplateSharedModule
+    TemplateSharedModule,
+    DropdownModule
   ],
 })
 export class TemplateSidebarModule {
