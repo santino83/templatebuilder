@@ -4,7 +4,10 @@ import {Background, BlockEvent} from '../../template-editor.types';
 import {EditorService} from '../../services/editor.service';
 
 @Directive({
-  selector: 'section'
+  selector: ` [
+    section, footer
+   ]
+  `
 })
 export class BackgroundDirective implements DoCheck {
 

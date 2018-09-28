@@ -11,6 +11,7 @@ import {EditorService} from '../../../services/editor.service';
 @Directive({
   selector: ` [
     h1,h2,h3,h4,h5,h6,
+    ]
   `
 })
 export class HeaderDirective extends AbstractDirective implements OnInit {
