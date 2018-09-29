@@ -8,6 +8,8 @@ import {Content05Block} from './blocks/contents/content-05.block';
 import {Content06Block} from './blocks/contents/content-06.block';
 import {Content07Block} from './blocks/contents/content-07.block';
 import {Footer01Block} from './blocks/footers/footer-01.block';
+import {Content08Block} from './blocks/contents/content-08.block';
+import {Content09Block} from './blocks/contents/content-09.block';
 
 const _blocks: Map<string, BlockDescriptor> = new Map<string, BlockDescriptor>();
 
@@ -20,6 +22,8 @@ _blocks.set(Content04Block.ID, {type: Content04Block, info: Content04Block.INFO}
 _blocks.set(Content05Block.ID, {type: Content05Block, info: Content05Block.INFO});
 _blocks.set(Content06Block.ID, {type: Content06Block, info: Content06Block.INFO});
 _blocks.set(Content07Block.ID, {type: Content07Block, info: Content07Block.INFO});
+_blocks.set(Content08Block.ID, {type: Content08Block, info: Content08Block.INFO});
+_blocks.set(Content09Block.ID, {type: Content09Block, info: Content09Block.INFO});
 
 _blocks.set(Footer01Block.ID, {type: Footer01Block, info: Footer01Block.INFO});
 
